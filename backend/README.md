@@ -2,6 +2,16 @@
 
 ## Instructions to run the server
 
+### Install dependencies
+Before running the server, make sure to install the relevant packages in package.json using either of the two commands in the root folder:
+```bash
+yarn install
+
+OR
+
+npm install
+```
+
 ### Development mode
 
 ```bash

@@ -12,7 +12,7 @@ import fire from "../images/fire.svg";
 import volume from "../images/volume.svg";
 import mic from "../images/mic.svg";
 import dailyActivities from './daily_activities';
-import speechTechniques from './speech_techniques';
+import NavbarClient from './client_navbar';
 
 
 function Quote() {
@@ -43,7 +43,8 @@ function Quote() {
 
   return (
     <div className="client-bg">
-      <div>
+      <NavbarClient />
+      {/* <div>
         <h6 className='welcome'>Emaan's Dashboard</h6>
       </div>
         <div className="quoteback">
@@ -89,7 +90,7 @@ function Quote() {
           <div className='rectangle2'></div>
           <h6 className='activitytext'>Speech Techniques</h6>
           <img className='icon'src={volume}></img>
-          <a href='speechTechniques'><img className='arrow2'src={arrow}/></a> 
+          <img className='arrow2'src={arrow}/>
           </div>
 
           <div className='quickPractice'>
@@ -99,7 +100,7 @@ function Quote() {
           <img className='arrow2'src={arrow}/>
           </div>
           <a className='progress'>View Progress</a>
-        </div>
+        </div> */}
       
      
     </div>

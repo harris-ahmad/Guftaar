@@ -43,7 +43,8 @@ function Quote() {
 
   return (
     <div className="client-bg">
-      <div>
+      <NavbarClient />
+      {/* <div>
         <h6 className='welcome'>Emaan's Dashboard</h6>
       </div>
         <div className="quoteback">
@@ -99,7 +100,7 @@ function Quote() {
           <img className='arrow2'src={arrow}/>
           </div>
           <a className='progress'>View Progress</a>
-        </div>
+        </div> */}
       
      
     </div>

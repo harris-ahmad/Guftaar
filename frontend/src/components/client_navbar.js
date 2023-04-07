@@ -11,13 +11,13 @@ function NavbarClient(){
 
     return(
         <nav>
-            <ul>
-                <li className='guftaar-logo'><a>Guftaar</a></li>
-                <li>daily activities</li>
-                <li>speech techniques</li>
-                <li>quick practice</li>
-                <li>coaches</li>
-                <li>courses</li>
+            <ul className='nav-items-list'>
+                <li className='guftaar-logo nav-item'><a>Guftaar</a></li>
+                <li className='nav-item'> <a className='nav-anchor' href='./dailyActivities'>daily activities</a></li>
+                <li className='nav-item'> <a className='nav-anchor' href='./speechTechniques'>speech techniques</a></li>
+                <li className='nav-item'><a className='nav-anchor' href='./quickPractice'>quick practice</a></li>
+                <li className='nav-item'><a className='nav-anchor' href='./coaches'>coaches</a></li>
+                <li className='nav-item'><a className='nav-anchor' href='./courses'>courses</a></li>
                 <div>
                     <img src={fire} className='navbar-img-fire'/>
                     <span className='streak-value'>50</span>

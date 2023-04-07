@@ -1,48 +1,50 @@
-import './App.css';
-import "./fonts/LeagueSpartan-VariableFont_wght.ttf"
-import LandingPage from './components/landing_page.js';
-import { Routes, Route, Link} from 'react-router-dom';
-import CoachLogin from './components/coach-login';
-import Login from './components/login';
-import Register from './components/register';
-import AdminLogin from './components/admin_login';
-import Dashboard from './components/client_dashboard';
-import ChangePass from './components/change_password';
-import AdminDashboard from './components/admin_dashboard';
-import AddEmployee from './components/add_employee';
-import AddCoach from './components/add_coach_form';
-import AddAdmin from './components/add_admin_form';
-import DailyActivities from './components/daily_activities';
-import {useState} from 'react'
+import "./App.css";
+import "./fonts/LeagueSpartan-VariableFont_wght.ttf";
+import LandingPage from "./components/landing_page.js";
+import { Routes, Route, Link } from "react-router-dom";
+import CoachLogin from "./components/coach-login";
+import Login from "./components/login";
+import Register from "./components/register";
+import AdminLogin from "./components/admin_login";
+import Dashboard from "./components/client_dashboard";
+import ChangePass from "./components/change_password";
+import AdminDashboard from "./components/admin_dashboard";
+import AddEmployee from "./components/add_employee";
+import AddCoach from "./components/add_coach_form";
+import AddAdmin from "./components/add_admin_form";
+import DailyActivities from "./components/daily_activities";
+import SetBreathingTime from "./components/set_breathing_time";
+import { useState } from "react";
 
 function App() {
   return (
     <div>
-    <Routes>
-      <Route path = "/">
-        <Route index element = {<LandingPage />}/>
-        <Route path = "coach">
-          <Route path = "login" element={<CoachLogin/>}/>
-          </Route> 
-        <Route path ="client">
-          <Route path = "login" element= {<Login/>}/>
-          <Route path = "register" element= {<Register/>}/>
-          <Route path = "dashboard" element= {<Dashboard/>}/>
-          <Route path = "changePassword" element= {<ChangePass/>}/>
-          <Route path = "dailyActivities" element= {<DailyActivities/>}/>
-
-
-        </Route>
-        <Route path = "admin">
-          <Route path = "login" element= {<AdminLogin/>}/>
-          <Route path = "dashboard" element= {<AdminDashboard/>}/>
-          <Route path = "addEmployee" element = {<AddEmployee/>}/>
-          <Route path = "addCoach" element = {<AddCoach/>}/>
-          <Route path = "addAdmin" element = {<AddAdmin/>}/>
-        
+      <Routes>
+        <Route path="/">
+          <Route index element={<LandingPage />} />
+          <Route path="coach">
+            <Route path="login" element={<CoachLogin />} />
           </Route>
-      </Route>
-    </Routes>
+          <Route path="client">
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="changePassword" element={<ChangePass />} />
+            <Route path="dailyActivities">
+              <Route index element={<DailyActivities />} />
+              <Route path="setBreathingTime" element={<SetBreathingTime />} />
+            </Route>
+          </Route>
+
+          <Route path="admin">
+            <Route path="login" element={<AdminLogin />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="addEmployee" element={<AddEmployee />} />
+            <Route path="addCoach" element={<AddCoach />} />
+            <Route path="addAdmin" element={<AddAdmin />} />
+          </Route>
+        </Route>
+      </Routes>
     </div>
   );
 }

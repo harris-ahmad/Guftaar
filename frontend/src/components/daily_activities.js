@@ -4,12 +4,24 @@ import Dashboard from './client_dashboard';
 import breathing from "../images/breathing.png";
 import syllable from "../images/syllable.png";
 import link from "../images/link.svg";
+import setBreathingTime from './set_breathing_time'
+import { useNavigate } from 'react-router-dom';
 
-function daily_activities(){
+function Daily_Activities(){
+    const navigate = useNavigate();
+
+    function GoBack(){
+        navigate("/client/dashboard")
+    }
+
+    function GoTimer(){
+        navigate("/client/dailyActivities/setBreathingTime")
+    }
+
 return(
     <div className='dailyBack'>
          <h3 className='titlequestion'>Daily Activities</h3>  
-         <a href='Dashboard'><img className="gobackcross"src={cross}/></a>
+         <img className="gobackcross"src={cross} onClick={GoBack}/>
          <h1 className='whichquestion'>Which activity do you want to play?</h1>
 
          <div className='syllableBack'>
@@ -17,8 +29,8 @@ return(
          <h3 className= 'categorysc'>Syllable Counting</h3>
          </div>
 
-         <div className='breathingBack'>
-         <img className='breathingpic' src={breathing}/>
+         <div className='breathingBack' onClick={GoTimer}>
+        <img className='breathingpic' src={breathing}/>
          <h3 className= 'categorybe'>Breathing Exercise</h3>
          </div>
 
@@ -31,4 +43,4 @@ return(
 );
 }
 
-export default daily_activities;
+export default Daily_Activities;

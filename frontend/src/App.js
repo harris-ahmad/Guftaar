@@ -12,6 +12,7 @@ import AdminDashboard from './components/admin_dashboard';
 import AddEmployee from './components/add_employee';
 import AddCoach from './components/add_coach_form';
 import AddAdmin from './components/add_admin_form';
+import DailyActivities from './components/daily_activities';
 import {useState} from 'react'
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
           <Route path = "register" element= {<Register/>}/>
           <Route path = "dashboard" element= {<Dashboard/>}/>
           <Route path = "changePassword" element= {<ChangePass/>}/>
+          <Route path = "dailyActivities" element= {<DailyActivities/>}/>
+
+
         </Route>
         <Route path = "admin">
           <Route path = "login" element= {<AdminLogin/>}/>

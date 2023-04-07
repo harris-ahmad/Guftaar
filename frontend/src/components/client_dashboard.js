@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import fire from "../images/fire.svg";
 import volume from "../images/volume.svg";
 import mic from "../images/mic.svg";
+import dailyActivities from './daily_activities';
 
 
 function Quote() {
@@ -80,7 +81,7 @@ function Quote() {
             <div className='rectangle'></div>
             <h6 className='activitytext'>Daily Activities</h6>
             <img className='icon'src={fire}></img>
-            <img className='arrow2'src={arrow}/>
+            <a href='dailyActivities'><img className='arrow2'src={arrow}/></a>
           </div>
 
           <div className='speechTechniques'>

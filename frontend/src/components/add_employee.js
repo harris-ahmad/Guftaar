@@ -24,7 +24,6 @@ function add_employee(){
     </div>
 
     );
-
 }
 
 export default add_employee;

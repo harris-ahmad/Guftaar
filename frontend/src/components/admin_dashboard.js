@@ -31,7 +31,7 @@ function Dashboard() {
       </div>
       <div className="navbar">
         <h3 className='Name'> Guftaar</h3>
-        <button className='empbutton'> add employees</button>
+        <a href='addEmployee'><button className='empbutton'> add employees</button></a>
         <button className='ratingbutton'> coach ratings</button>
         <img src={pi} alt="ProfileIcon" className='profileicon'></img>
         <img src={hi} alt="HomeIcon" className='homeicon'></img>

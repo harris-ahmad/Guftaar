@@ -1,34 +1,68 @@
-# Backend of Guftaar
+# Secrets
+![Key](./public/images/favicon.ico) 
 
-## Instructions to run the server
+A site to post your secrets on.
+
+*A showcase for user authentication on express backend.*
+
+## Modules Used For Authentication
+
+- mongoose - database ORM
+- bcrypt - password hashing
+- connect-ensure-login - simple middleware for checking auth status
+- connect-mongo - mongoStore for sessions
+- express-session - manage user sessions
+- passport - manage authentication
+- passport-local - strategy for passport authentication
+
+
+## Installation
+
+### Clone the repository
+
+```bash
+git clone https://github.com/millionhz/secrets.git
+```
+
+### Set environment variables
+
+The app requires:
+- PORT (port to run the server on)
+- DB (database url)
+- NODE_ENV
+- SESSION_SECRET
+
+For **development**, nodemon config file can be used to set the environment variables.
+Sample `nodemon.json`:
+
+```json
+{
+    "ext": "js,json",
+    "env": {
+        "PORT": 3000,
+        "DB": "mongodb://127.0.0.1:27017/secrets",
+        "NODE_ENV": "development",
+        "SESSION_SECRET": "p@ss50Rd321"
+    }
+}
+```
 
 ### Install dependencies
-Before running the server, make sure to install the relevant packages in package.json using either of the two commands in the root folder:
-```bash
-yarn install
 
-OR
-
+```
 npm install
 ```
 
-### Development mode
+Note: If NODE_ENV is set to **production**, `npm` will not install devDependencies.
 
-```bash
-yarn start --dev
+### Run the app
 
-OR
-
-npm start --dev
+Production:
 ```
-
-### Production mode
-
-```bash
-yarn start
-
-OR
-
 npm start
 ```
-**Note**: Nodemon has been installed for your ease so you won't have to restart the server everytime you make any change.
+
+Development:
+```
+npm run dev
+```

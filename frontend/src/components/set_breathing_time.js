@@ -21,10 +21,12 @@ function SetBreathingTime() {
            <img className='clockpic' src={timer}/>
 
         <select className="timeDropdown" value={selectedOption} onChange={handleSelectChange}>
-            <option value="">Select Time Duration</option>
-            <option value="1">1 minute</option>
-            <option value="2">2 minutes</option>
-            <option value="3">3 minutes</option>
+        <option value="" disabled hidden className="option1">
+          Select Time
+        </option>
+            <option value="1" className="option1">1 minute</option>
+            <option value="2" className="option1">2 minutes</option>
+            <option value="3" className="option1">3 minutes</option>
         </select>
            </div>
         </div>

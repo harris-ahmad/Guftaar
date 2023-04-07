@@ -3,6 +3,7 @@ import pi from "../images/profileicon.png"
 import hi from "../images/homeicon.png"
 import si from "../images/staricon.png"
 import "./admin_dashboard.css"
+import addEmployee from './add_employee';
 
 function Dashboard() {
   return (
@@ -21,9 +22,9 @@ function Dashboard() {
       </div>
       <div className="empbox">
         <h2>add employee</h2>
-        <button class="circlebutton">
+        <a href='addEmployee'><button class="circlebutton">
           <span class="plusicon">+</span>
-        </button>
+        </button></a>
       </div>
       <div className="heading">
         <h1>Administrator Centre</h1>

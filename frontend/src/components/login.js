@@ -3,38 +3,62 @@ import './form_content.css'
 import Si from '../images/sign_in.svg'
 import { useNavigate } from 'react-router-dom';
 
-
-const handleSubmit = (e) => {
-    e.preventDefault();
-
-}
-
 function Login(props){
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [e_error, setE_error] = useState(false)
     const [e_pass, setE_pass] = useState(false)
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+
+    const validation = (e) => {
         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        let e_flag = false;
+
         
         if (email === ""){
-            console.log(e_error);
-            setE_error(true);
+            e_flag = true;
             document.getElementById('email').className = "error-control";
             document.getElementById('email').placeholder = "Email required";
         }
         else if(!email.match(mailformat)){
+            e_flag = true;
             document.getElementById('error-text').textContent = "Invalid email";
         }
-        if(email.match(mailformat)){
+        else{
+            document.getElementById('email').className = "input";
+            document.getElementById('email').placeholder = "";
             document.getElementById('error-text').textContent = "";
         }
+
         if (pass == ""){
-            setE_pass(true)
+            e_flag = true;
             document.getElementById('password').className = "error-control";
             document.getElementById('password').placeholder = "Password required";
+        }
+        else{
+            document.getElementById('password').className = "input";
+            document.getElementById('password').placeholder = "";
+        }
+        if (e_flag){
+            console.log("error")
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let flag = validation();
+        if (flag){
+            // axios call
+            console.log(flag)
+        }
+        else{
+            //pass
         }
 
     }

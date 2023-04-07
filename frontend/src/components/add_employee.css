@@ -1,0 +1,95 @@
+.employeeBack{
+    background-image: url("../images/bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align:center;
+    display:flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.adminBack{
+position: absolute;
+width: 400px;
+height: 350px;
+left: 320px;
+top: 330px;
+background: #FFFFFF;
+border-radius: 28.9717px;
+}
+
+.coachBack{
+position: absolute;
+width: 400px;
+height: 350px;
+left: 780px;
+top: 330px;
+background: #FFFFFF;
+border-radius: 28.9717px;
+}
+
+.titlequestion{
+position: absolute;
+width: 168px;
+height: 28px;
+left: 650px;
+top: 60px;
+font-family: 'League Spartan';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 28px;
+color: #000000;
+}
+
+.whichquestion{
+position: absolute;
+width: 855.14px;
+height: 138px;
+left: 339.91px;
+top: 100.48px;
+font-family: 'League Spartan';
+font-style: normal;
+font-weight: 600;
+font-size: 58.7778px;
+line-height: 69px;
+text-align: center;
+color: #191D63;
+}
+
+.category{
+position: relative;
+width: 367.94px;
+height: 87px;
+top:71%;
+left: 5%;
+font-family: 'League Spartan';
+font-style: normal;
+font-weight: 600;
+font-size: 23px;
+line-height: 87px;
+text-align: center;
+color: #191D63;
+}
+
+.gobackcross{
+position: absolute;
+width: 18px;
+height: 18px;
+left: 1250px;
+top: 80px;
+cursor: pointer;
+}
+
+.adminpic{
+width: 290px;
+position: relative;
+bottom: 125px;
+}
+
+.coachpic{
+width: 290px;
+position: relative;
+bottom: 1px;
+}

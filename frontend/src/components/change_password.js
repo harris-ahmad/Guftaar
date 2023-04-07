@@ -38,9 +38,6 @@ function ChangePassword(){
             <div class="img-container"> 
                 <img src={Si} class="change-pw-image"/>
             </div>
-            {/* <h2>Update Password</h2>
-            <img src={Si} id="change-pw-image"/>
-            <h1>Change Password Page</h1> */}
             <div className="form-container">
                 <h1 id="form-heading">Update Password</h1>
                 <form>

@@ -9,6 +9,7 @@ import AdminLogin from './components/admin_login';
 import Dashboard from './components/client_dashboard';
 import ChangePass from './components/change_password';
 import AdminDashboard from './components/admin_dashboard';
+import AddEmployee from './components/add_employee';
 
 
 import {useState} from 'react'
@@ -31,6 +32,7 @@ function App() {
         <Route path = "admin">
           <Route path = "login" element= {<AdminLogin/>}/>
           <Route path = "dashboard" element= {<AdminDashboard/>}/>
+          <Route path = "addEmployee" element = {<AddEmployee/>}/>
           </Route>
       </Route>
     </Routes>

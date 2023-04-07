@@ -14,6 +14,7 @@ import AddCoach from "./components/add_coach_form";
 import AddAdmin from "./components/add_admin_form";
 import DailyActivities from "./components/daily_activities";
 import SetBreathingTime from "./components/set_breathing_time";
+import SpeechTechniques from "./components/speech_techniques"
 import { useState } from "react";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="changePassword" element={<ChangePass />} />
+            <Route path="speechTechniques" element={<SpeechTechniques/>} />
             <Route path="dailyActivities">
               <Route index element={<DailyActivities />} />
               <Route path="setBreathingTime" element={<SetBreathingTime />} />

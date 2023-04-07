@@ -12,6 +12,7 @@ import fire from "../images/fire.svg";
 import volume from "../images/volume.svg";
 import mic from "../images/mic.svg";
 import dailyActivities from './daily_activities';
+import speechTechniques from './speech_techniques';
 
 
 function Quote() {
@@ -88,7 +89,7 @@ function Quote() {
           <div className='rectangle2'></div>
           <h6 className='activitytext'>Speech Techniques</h6>
           <img className='icon'src={volume}></img>
-          <img className='arrow2'src={arrow}/>
+          <a href='speechTechniques'><img className='arrow2'src={arrow}/></a> 
           </div>
 
           <div className='quickPractice'>

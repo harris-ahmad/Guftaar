@@ -12,6 +12,7 @@ import fire from "../images/fire.svg";
 import volume from "../images/volume.svg";
 import mic from "../images/mic.svg";
 import dailyActivities from './daily_activities';
+import NavbarClient from './client_navbar';
 
 
 function Quote() {

@@ -10,7 +10,7 @@ import './landing_page.css';
 function LandingPage(){
     const navigate = useNavigate();
     function CoachLogin(){
-        navigate("/coach")
+        navigate("/coach/login")
     }
     function Client(){
         navigate("/client/login")
@@ -23,7 +23,7 @@ function LandingPage(){
             <img id="lc"src={lc}/> I'm looking for speech support </button>
             <button id ="coachlogin" onClick={CoachLogin}> 
             <img id="lcc"src={lcc}/> I'm a coach that offers services </button>
-            <a id="admin" href="/admin"> Admin Login</a>
+            <a id="admin" href="/admin/login"> Admin Login</a>
             <h1 id="abt"> about us</h1>
             <img id="sb" src={sb}></img>
             <p align="left">Guftaar is a speech therapy support web service, empowering PWS to take the first step in reclaiming their speech. With guided vocal practice, daily exercises and positive reinforcement, through Guftaar, we want to make it easier for you to overcome your stuttering.

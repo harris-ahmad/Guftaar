@@ -9,6 +9,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css'
 import 'primereact/resources/themes/mdc-light-deeppurple/theme.css';
 import NavbarClient from './client_navbar';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,6 +26,32 @@ function SetBreathingTime() {
         { name: "3 minutes" }
         ];
 
+    const navigate = useNavigate();
+
+    function next(){
+        if (!selectedOption){
+            document.getElementById("error-text-time").textContent = "Please pick an option!"
+            return
+        }
+        else{
+            document.getElementById("error-text-time").textContent = ""
+        }
+        if (selectedOption.name === "1 minute"){
+            const state = {rounds: 9}
+            navigate("../BreathingExercise", { state })
+        }
+        else if (selectedOption.name === "2 minutes"){
+            const state = {rounds: 18}
+            navigate("../BreathingExercise", { state })
+        }
+        else if (selectedOption.name === "3 minutes"){
+            const state = {rounds: 27}
+            navigate("../BreathingExercise", { state })
+        }
+
+
+    }
+
 
     return (
         <div className='breathingBackGround'>
@@ -37,7 +64,8 @@ function SetBreathingTime() {
 
            <Dropdown value={selectedOption} onChange={handleSelectChange} options={opt} optionLabel="name" 
                 placeholder="Select Time Duration"  className='dropd'/>
-            <button className="gbtn"> I'm ready </button>
+            <button className="gbtn" onClick={next}> I'm ready </button>
+            <span id="error-text-time"></span>
            </div>
         </div>
     );

@@ -4,7 +4,8 @@ import './dropdown.css'
 import { useState } from 'react';
 
 
-function DropdownNavbar(){
+function DropdownNavbar(props){
+
 
     return(
         <Dropdown className='dropdown'>

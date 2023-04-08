@@ -31,13 +31,13 @@ function Quote() {
   }, []);
 
   function NoStuttering(){
-    axios.post('http://localhost:3000/client/moodlog', {UserID:localStorage.email, mood: "NoStuttering"})
+    axios.post('http://localhost:3000/client/moodlog', {email:localStorage.email, mood: "NoStuttering"})
 }
   function Moderate(){
-    axios.post('http://localhost:3000/client/moodlog', {UserID:localStorage.email, mood: "Moderate"})
+    axios.post('http://localhost:3000/client/moodlog', {email:localStorage.email, mood: "Moderate"})
 }
   function Extreme(){
-    axios.post('http://localhost:3000/client/moodlog', {UserID:localStorage.email, mood: "Extreme"})
+    axios.post('http://localhost:3000/client/moodlog', {email:localStorage.email, mood: "Extreme"})
 }
   function Course(){
     navigate("/courses")

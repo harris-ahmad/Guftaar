@@ -17,6 +17,8 @@ import SetBreathingTime from "./components/set_breathing_time";
 import SpeechTechniques from "./components/speech_techniques"
 import BreathingExercise from "./components/breathing"
 import LinkLator from "./components/linklater"
+
+import QuickPractice from "./components/quick_practice"
 import { useState } from "react";
 import SyllableCounting from "./components/syllable_counting";
 
@@ -35,6 +37,8 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="changePassword" element={<ChangePass />} />
             <Route path="speechTechniques" element={<SpeechTechniques/>} />
+            <Route path="quickPractice" element={<QuickPractice/>} />
+
             <Route path="dailyActivities">
               <Route index element={<DailyActivities />} />
               <Route path="setBreathingTime" element={<SetBreathingTime />} />

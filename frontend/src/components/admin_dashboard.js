@@ -4,10 +4,12 @@ import hi from "../images/homeicon.png"
 import si from "../images/staricon.png"
 import "./admin_dashboard.css"
 import addEmployee from './add_employee';
+import NavbarAdmin from './navbar_admin';
 
 function Dashboard() {
   return (
     <div className="dashboard-container">
+       <NavbarAdmin />
       <div className="coachbox">
         <h2>30</h2>
         <p>coaches</p>
@@ -29,7 +31,7 @@ function Dashboard() {
       <div className="heading">
         <h1>Administrator Centre</h1>
       </div>
-      <div className="navbar">
+      {/* <div className="navbar">
         <h3 className='Name'> Guftaar</h3>
         <a href='addEmployee'><button className='empbutton'> add employees</button></a>
         <button className='ratingbutton'> coach ratings</button>
@@ -43,7 +45,7 @@ function Dashboard() {
         <h3 className='icon3text'>4</h3>
         <img src={si} alt="StarIcon" className='staricon4'></img>
         <h3 className='icon4text'>3.5</h3>
-      </div>
+      </div> */}
       <div className="reviewbox">
         <h1>Top Coaches</h1>
         <ul class="names">

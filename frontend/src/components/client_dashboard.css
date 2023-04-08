@@ -4,7 +4,6 @@
     background-repeat: no-repeat;
     text-align:center; 
     display:flex;
-    min-height: 100vh;
     align-items: center; 
     justify-content: center; 
 }
@@ -22,7 +21,7 @@ width: 590px; height: 200px;
 overflow: scroll;
 }
 
-.top{
+.top1{
 position: absolute;
 left: 62%;
 bottom: 58%;
@@ -37,30 +36,25 @@ color: #469FA3;
 backdrop-filter: blur(16.4787px);
 }
 
-.text{
-position: relative;
-top: 6%;
-left: 20%;
+.text1{
 font-family: 'League Spartan';
 font-style: normal;
 font-weight: 500;
 font-size: 25px;
 letter-spacing: 0.03em;
 color: #469FA3;
-/* backdrop-filter: blur(16.4787px); */
-text-align: left;
+text-align: justify;
 display:flex;
 overflow:auto;
-padding-top: 3%;
-
-
-
+margin-left: 17%;
+margin-right: 10%;
+margin-top: 12%;
 }
 
 .log{
-position: absolute;
-left: 8%;
-top: 66%;
+position: relative;
+right: 530px;
+top: 220px;
 width: 500px; height: 210px;
 display: flex; 
 align-items: center; 
@@ -71,8 +65,8 @@ border-radius: 29px;
 
 .logtext1{
 position: absolute;
-left: 170px;
-top: 67%;
+left: 55px;
+bottom: 130px;
 font-family: 'League Spartan';
 font-style: normal;
 font-weight: 700;
@@ -121,7 +115,7 @@ border-radius: 41px;
 
 .qu{
     position: absolute;
-    top: 25%;
+    top: 13%;
     right: 83%;
     width: 2cm;
     height: 1cm;
@@ -245,9 +239,9 @@ border-radius: 10px;
     }
 
 .progress{
-position: relative;
-top: 70px;
-right: 720px;
+position: absolute;
+top: 44px;
+right: 380px;
 font-family: 'League Spartan';
 font-style: normal;
 font-weight: 600;
@@ -257,10 +251,8 @@ display: flex;
 align-items: center;
 text-align: right;
 letter-spacing: 0.03em;
-
 color: #F08B53;
-
-backdrop-filter: blur(16.4787px);
+/* backdrop-filter: blur(16.4787px); */
 }
 
 .rectangle{
@@ -361,4 +353,9 @@ border-radius: 65.5px;
     top: 23px;
     background: rgba(113, 167, 241, 0.25);
     border-radius: 65.5px;
+    }
+
+    .mainwelcome{
+        position: relative;
+        left: 200px;
     }

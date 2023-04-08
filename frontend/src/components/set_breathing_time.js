@@ -3,15 +3,28 @@ import cross from "../images/cross.svg";
 import DailyActivities from "./daily_activities";
 import timer from "../images/setTime.svg";
 import React, { useState } from 'react';
+import { Dropdown } from 'primereact/dropdown';
+import 'primereact/resources/primereact.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css'
+import 'primereact/resources/themes/mdc-light-deeppurple/theme.css';
 import NavbarClient from './client_navbar';
 
 
+
 function SetBreathingTime() {
-    const [selectedOption, setSelectedOption] = useState("");
+
+    const [selectedOption, setSelectedOption] = useState(null);
 
     const handleSelectChange = (event) => {
         setSelectedOption(event.target.value);
     }
+    const opt = [
+        { name: '1 minute'},
+        { name: "2 minutes" },
+        { name: "3 minutes" }
+        ];
+
 
     return (
         <div className='breathingBackGround'>
@@ -22,14 +35,9 @@ function SetBreathingTime() {
            <div className='timerBack'>
            <img className='clockpic' src={timer}/>
 
-        <select className="timeDropdown" value={selectedOption} onChange={handleSelectChange}>
-        <option value="" disabled hidden className="option1">
-          Select Time
-        </option>
-            <option value="1" className="option1">1 minute</option>
-            <option value="2" className="option1">2 minutes</option>
-            <option value="3" className="option1">3 minutes</option>
-        </select>
+           <Dropdown value={selectedOption} onChange={handleSelectChange} options={opt} optionLabel="name" 
+                placeholder="Select Time Duration"  className='dropd'/>
+            <button className="gbtn"> I'm ready </button>
            </div>
         </div>
     );

@@ -480,12 +480,13 @@
     align-items: center; 
   }
   .editicon1, .editicon2, .editicon3, .editicon4{
-    background-color:rgba(70, 159, 163, 0.38);
-    border-radius: 20%; 
+    background-color:rgba(70, 159, 163, 0.38); 
+    border-radius: 25%; 
   }
   .editbutton{
     cursor: pointer;
     background-color: transparent;
+
     border: none;
     margin-left: 0px;
   }

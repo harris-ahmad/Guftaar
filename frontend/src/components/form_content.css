@@ -46,12 +46,12 @@
 }
 
 #login{
-    width: 50%;
+    width: 90%;
     height: auto;
-    /* width: 55vw;  */
     position: relative;
     padding-left: 40%;
     padding-top: 10%;
+
 }
 
 
@@ -104,6 +104,12 @@ label{
     text-decoration-line: underline;
     position: center;
     position: bottom;
+    border:none;
+    font-family: 'League Spartan';
+    margin-top:4%;
+    font-size:medium;
+    text-align: center;
+
 
 }
 
@@ -118,7 +124,11 @@ label{
     color: #4d5399;
     text-decoration-line: underline;
     position: center;
-    margin-top:15%;
+    margin-top:13%;
+    border:none;
+    font-family: 'League Spartan';
+    font-size:medium;
+
 
 }
 
@@ -127,28 +137,26 @@ label{
     color: #4d5399;
 }
 
-button{
+.buttonL{
     border:none;
     background-color:#4d539957;
     padding: 20px;
     border-radius: 10px;
     cursor:pointer;
-    font:LeagueSpartan;
     margin-top: 15px;
     font-family: "League Spartan";
+    font-size: medium;
+
 
 }
 
-button:hover{
+.buttonL:hover{
     background-color:#4d5399;
     color: whitesmoke;
 
 }
 
-button:hover{
-    background-color:#4d5399;
 
-}
 
 .input{
     margin: 0.5rem 0;

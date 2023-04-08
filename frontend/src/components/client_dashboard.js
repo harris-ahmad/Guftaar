@@ -52,7 +52,7 @@ function Quote() {
         <h6 className='top'>Strength Statements</h6>
         <p className='text'>{quote}</p>  
         </div>
-        <p className='logtext'> How was your stuttering today?</p>
+        <p className='logtext1'> How was your stuttering today?</p>
         <div className='log'>
           <div className='circleBack'></div>
           <img className='happy'src={happy} onClick={NoStuttering}/> 
@@ -64,7 +64,7 @@ function Quote() {
         <img className='sad'src={extreme} onClick={Extreme}/>
 
         </div>
-        <p className='support'>Guided Speech Support</p>
+        <p className='support1'>Guided Speech Support</p>
         <div className='gbox1'>  
         <img className='phone'src={phone}/>
         <h6 className='subtext'>Coaching With Harris</h6>

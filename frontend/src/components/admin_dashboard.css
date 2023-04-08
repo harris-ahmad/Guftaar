@@ -223,17 +223,13 @@
     right: 11.51%;
     top: 55.92%;
     bottom: 49.72%;
-
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 500;
     font-size: 38.6625px;
     line-height: 54px;
-
     letter-spacing: 0.03em;
-
     color: #F2F2F2;
-
     backdrop-filter: blur(24.1671px);
   }
   .coachbox p{
@@ -242,7 +238,6 @@
     right: 11.51%;
     top: 62.92%;
     bottom: 49.72%;
-
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 500;

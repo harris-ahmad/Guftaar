@@ -2,8 +2,10 @@ import { useState } from "react";
 import './form_content.css'
 import Si from '../images/sign_in.svg'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Login(props){
+
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [e_error, setE_error] = useState(false)
@@ -39,6 +41,7 @@ function Login(props){
         else{
             document.getElementById('password').className = "input";
             document.getElementById('password').placeholder = "";
+
         }
         if (e_flag){
             console.log("error")
@@ -54,12 +57,20 @@ function Login(props){
         e.preventDefault();
         let flag = validation();
         if (flag){
-            // axios call
-            console.log(flag)
+            axios.post("http://localhost:3001/api/client/login/", {email:email, password:pass}).then((response) => {
+            if (response.data.message === "success"){
+                    navigate("/client/dashboard")
+                }
+                else if (response.data.message === "failure"){
+                    
+                    document.getElementById('error-text-p').textContent = "Login failed!";
+                }
+            })
         }
         else{
             //pass
         }
+        navigate("/client/dashboard")
 
     }
 
@@ -67,9 +78,6 @@ function Login(props){
     function Toggle(){
         navigate("/client/register")
     }
-
-    
-
 
 
 
@@ -85,7 +93,8 @@ function Login(props){
                 <span id="error-text"></span>
                 <label for="password"> Password</label>
                 <input type="password" className={'input'} value={pass} onChange={(e)=> {setPass(e.target.value)}} placeholder={"Enter your password"}  id="password" name="password"></input>
-                <button type="submit" className="next">Log In</button>
+                <span id="error-text-p"></span>
+                <button type="submit" className="buttonL">Log In</button>
             </form>
             <button  className="form-buttonl" onClick={Toggle}> New to Guftaar? Register here. </button>
         </div>

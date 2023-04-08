@@ -34,7 +34,6 @@
 .navbar-img{
     width: 50%;
     height: auto;
-    margin-left: 2%;
-    margin-right: 2%;
-    padding-right: 10%;
+    padding-right: 1%;
+    padding-left: 50%;
 }

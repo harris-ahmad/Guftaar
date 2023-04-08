@@ -78,14 +78,15 @@ nav .nav-item .nav-anchor {
     width: 30%;
     height: auto;
     position: relative;
-    left: 130px;
+    left: 105px;
+    top:5px;
 }
 
 .navbar-img-home{
     width: 60%;
     height: auto;
     position: relative;
-    left: 66px;
+    left: 65px;
 }
 
 
@@ -101,9 +102,10 @@ nav .nav-item .nav-anchor {
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 20px;
     position: relative;
-    left: 130px;
+    left: 105px;
+    top:3px;
     line-height: 32px;
     color: #191D63;
     padding-right: 10%;

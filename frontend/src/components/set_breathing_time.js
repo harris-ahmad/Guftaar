@@ -3,6 +3,7 @@ import cross from "../images/cross.svg";
 import DailyActivities from "./daily_activities";
 import timer from "../images/setTime.svg";
 import React, { useState } from 'react';
+import NavbarClient from './client_navbar';
 
 
 function SetBreathingTime() {
@@ -14,6 +15,7 @@ function SetBreathingTime() {
 
     return (
         <div className='breathingBackGround'>
+             <NavbarClient />
            <h3 className='titlequestion'>Breathing Exercise</h3>  
            <a href='./'><img className="gobackcross"src={cross}/></a>
            <h1 className='whichquestion'>Select the time duration for this activity</h1>

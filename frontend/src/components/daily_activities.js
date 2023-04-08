@@ -6,6 +6,7 @@ import syllable from "../images/syllable.png";
 import link from "../images/link.svg";
 import setBreathingTime from './set_breathing_time'
 import { useNavigate } from 'react-router-dom';
+import NavbarClient from './client_navbar';
 
 function Daily_Activities(){
     const navigate = useNavigate();
@@ -20,6 +21,7 @@ function Daily_Activities(){
 
 return(
     <div className='dailyBack'>
+         <NavbarClient />
          <h3 className='titlequestion'>Daily Activities</h3>  
          <img className="gobackcross"src={cross} onClick={GoBack}/>
          <h1 className='whichquestion'>Which activity do you want to play?</h1>

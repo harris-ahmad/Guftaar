@@ -14,6 +14,7 @@ import tomatoaud from '../audios/tomato.mp3';
 import wakeaud from '../audios/wake.mp3';
 import whisperaud from '../audios/whisper.mp3';
 import cross from "../images/cross.svg";
+import NavbarClient from './client_navbar';
 
 
 import React, { useState } from 'react';
@@ -45,6 +46,7 @@ function SpeechTechniques(){
     }
     return(
         <div className='speechTechBack'>
+            <NavbarClient />
              <h3 className='titlequestion3'>Quick Practice</h3>  
              <img className="gobackcross"src={cross} onClick={GoBack}/>
             <h3 className='please'>Click on the tiles to practice your sounds</h3>

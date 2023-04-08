@@ -12,7 +12,7 @@ function NavbarClient(){
     return(
         <nav>
             <ul className='nav-items-list'>
-                <li className='guftaar-logo nav-item'><a>Guftaar</a></li>
+                <li className='guftaar-logo nav-item'><a href='./dashboard'>Guftaar</a></li>
                 <li className='nav-item'> <a className='nav-anchor' href='./dailyActivities'>daily activities</a></li>
                 <li className='nav-item'> <a className='nav-anchor' href='./speechTechniques'>speech techniques</a></li>
                 <li className='nav-item'><a className='nav-anchor' href='./quickPractice'>quick practice</a></li>
@@ -24,7 +24,7 @@ function NavbarClient(){
                 </div>
 
                 <div className='navbar-icons'>    
-                    <img src={home} className='navbar-img-home'/>
+                <a href='./dashboard'><img src={home} className='navbar-img-home'/></a>
                 </div>
 
                 <DropdownNavbar />

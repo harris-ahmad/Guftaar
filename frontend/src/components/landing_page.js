@@ -26,7 +26,7 @@ function LandingPage(){
             <a id="admin" href="/admin/login"> Admin Login</a>
             <h1 id="abt"> about us</h1>
             <img id="sb" src={sb}></img>
-            <p align="left">Guftaar is a speech therapy support web service, empowering PWS to take the first step in reclaiming their speech. With guided vocal practice, daily exercises and positive reinforcement, through Guftaar, we want to make it easier for you to overcome your stuttering.
+            <p className="info" align="left">Guftaar is a speech therapy support web service, empowering PWS to take the first step in reclaiming their speech. With guided vocal practice, daily exercises and positive reinforcement, through Guftaar, we want to make it easier for you to overcome your stuttering.
                 <br/>Beyond independent speech practice, Guftaar connects users to top rated coaches for one-one mentorship calls, and brings exclusive access to purchase complete stammer support courses.
                 <br/>At Guftaar, we help make speech easy.</p>
             <h1 id="sj"> Take charge of your speech journey</h1>

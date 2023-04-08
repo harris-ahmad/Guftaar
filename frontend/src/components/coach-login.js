@@ -52,7 +52,7 @@ function CoachLogin(props){
                 <span id="error-text"></span>
                 <label for="password"> Password</label>
                 <input type="password" className={'input'} value={pass} onChange={(e)=> {setPass(e.target.value)}} placeholder={"Enter your password"}  id="password" name="password"></input>
-                <button type="submit" className="next">Log In</button>
+                <button type="submit" className="buttonL">Log In</button>
             </form>
         </div>
         </div>

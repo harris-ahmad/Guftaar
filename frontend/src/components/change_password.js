@@ -11,10 +11,13 @@ function ChangePassword(){
         e.preventDefault();
         if (pass_o === ""){
             document.getElementsByClassName('input-field-c')[0].style.borderColor = "crimson";
+            document.getElementsByClassName('input-field-c')[0].style.borderWidth = "2px";
             document.getElementsByClassName('input-field-c')[0].placeholder = "Password required";
         }
         else if (!passwordRegex.test(pass_o)){
             document.getElementsByClassName('input-field-c')[0].style.borderColor = "crimson";
+            document.getElementsByClassName('input-field-c')[0].style.borderWidth = "2px";
+
             document.getElementById('pass_o').textContent = "Password must have 8+ characters, with a number.";
             document.getElementById('pass_o').style.color = "crimson";
             document.getElementById('pass_o').style.display = "block"
@@ -23,9 +26,12 @@ function ChangePassword(){
         if (cpass === ""){
             document.getElementsByClassName('input-field-c')[1].style.borderColor = "crimson";
             document.getElementsByClassName('input-field-c')[1].placeholder = "Password required";
+            document.getElementsByClassName('input-field-c')[1].style.borderWidth = "2px";
         }
         else if (cpass !== pass_o){
             document.getElementsByClassName('input-field-c')[1].style.borderColor = "crimson";
+            document.getElementsByClassName('input-field-c')[1].style.borderWidth = "2px";
+
             document.getElementById('cpass').textContent = "Both passwords do not match.";
             document.getElementById('cpass').style.color = "crimson"
         }
@@ -44,7 +50,7 @@ function ChangePassword(){
                     <label> New Password</label>
                     <input placeholder="Enter new password" className="input-field-c" onChange={(e)=> setPass(e.target.value)}></input>
                     <span id="pass_o" style={{paddingBottom:"10px"}}></span>
-                    <label> Confirm New Password</label>
+                    <label className="try"> Confirm New Password</label>
                     <input placeholder="Re-enter password" className="input-field-c" onChange={(e)=> setCPass(e.target.value)}></input>
                     <span id="cpass"></span>
                     <div className="btn-container">

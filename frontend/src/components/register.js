@@ -2,12 +2,7 @@ import { useState } from "react";
 import './form_content.css'
 import reg from "../images/register.svg"
 import { useNavigate } from 'react-router-dom';
-
-
-const handleSubmit = (e) => {
-    e.preventDefault();
-
-}
+import axios from "axios";
 
 function Register(props){
     const [email, setEmail] = useState("")
@@ -23,7 +18,7 @@ function Register(props){
         if (email === ""){
             document.getElementById('email').style.borderColor = "crimson";
             document.getElementById('email').style.borderWidth = "2px";
-            document.getElementById('email').placeholder = "Last name required";
+            document.getElementById('email').placeholder = "Email required";
         }
         else if(!email.match(mailformat)){
             document.getElementById('email').style.borderColor = "crimson";
@@ -64,6 +59,26 @@ function Register(props){
             document.getElementById('error-text-age').style.paddingBottom  = "2%";
             document.getElementById('error-text-age').style.display  = "block";
         }
+
+        const newUser = {
+            firstName: fname,
+            lastName: lname,
+            age: age,
+            email: email,
+            password: pass,
+          };
+      
+          axios
+            .post("http://localhost:4000/client/register", newUser, {
+              headers: { "Content-Type": "application/json; charset=UTF-8" },
+            })
+            .then((response) => {
+              navigate("/client/login");
+            })
+            .catch((err) => {
+              console.log(err);
+              window.location.reload();
+            });
     
     }
 
@@ -90,13 +105,13 @@ function Register(props){
                     <span id={"error-text-age"} className={"et"}></span>
                     <label for="email">Enter your email</label>
                    
-                    <input value={email} className="input-field" onChange={(e)=> setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email"></input>
+                    <input value={email} className="input-field" onChange={(e)=> setEmail(e.target.value)} type="email" placeholder="Enter your email" id="email" name="email"></input>
                     <span id={"error-text-email"} className={"et"}></span>
                     <label for="password">Enter your password</label>
                     
                     <input type="password" className="input-field" value={pass} onChange={(e)=> setPass(e.target.value)} placeholder="Enter password" id="password" name="password"></input>
                     <span id={"error-text-pass"} className={"et"}></span>
-                    <button type="submit" className="reg-btn">Register</button>
+                    <button type="submit" className="buttonL">Register</button>
                     <button className="form-button" onClick={Toggle}> Already have an account? Login here </button>
                 </form>
             </div>

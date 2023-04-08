@@ -2,6 +2,7 @@ import { useState } from "react";
 import './form_content.css'
 import Si from '../images/sign_in.svg'
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function Login(props){
     const [email, setEmail] = useState("")
@@ -54,8 +55,26 @@ function Login(props){
         e.preventDefault();
         let flag = validation();
         if (flag){
-            // axios call
-            console.log(flag)
+            const clientLogin = {
+                email: email,
+                password: pass,
+              };
+              axios
+                .post("http://localhost:4000/client/login", clientLogin)
+                .then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                    window.location = "/";
+                  } else {
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("id", res.data.id);
+                    localStorage.setItem("email", res.data.email);
+                    window.location = "/client/dashboard";
+                  }
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
         }
         else{
             //pass
@@ -85,7 +104,7 @@ function Login(props){
                 <span id="error-text"></span>
                 <label for="password"> Password</label>
                 <input type="password" className={'input'} value={pass} onChange={(e)=> {setPass(e.target.value)}} placeholder={"Enter your password"}  id="password" name="password"></input>
-                <button type="submit" className="next">Log In</button>
+                <button type="submit" className="buttonL">Log In</button>
             </form>
             <button  className="form-buttonl" onClick={Toggle}> New to Guftaar? Register here. </button>
         </div>

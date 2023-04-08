@@ -69,9 +69,9 @@ background: rgba(113, 167, 241, 0.5);
 border-radius: 29px;
 }
 
-.logtext{
+.logtext1{
 position: absolute;
-left: 0.3%;
+left: 170px;
 top: 67%;
 font-family: 'League Spartan';
 font-style: normal;
@@ -83,9 +83,9 @@ color: #6EA1E7;
 backdrop-filter: blur(16.4787px);
 }
 
-.support{
+.support1{
 position: absolute;
-left: 40%;
+left: 760px;
 top: 53%;
 font-family: 'League Spartan';
 font-style: normal;

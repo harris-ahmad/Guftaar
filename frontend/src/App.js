@@ -15,7 +15,10 @@ import AddAdmin from "./components/add_admin_form";
 import DailyActivities from "./components/daily_activities";
 import SetBreathingTime from "./components/set_breathing_time";
 import SpeechTechniques from "./components/speech_techniques"
+import BreathingExercise from "./components/breathing"
+import LinkLator from "./components/linklater"
 import { useState } from "react";
+import SyllableCounting from "./components/syllable_counting";
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
             <Route path="dailyActivities">
               <Route index element={<DailyActivities />} />
               <Route path="setBreathingTime" element={<SetBreathingTime />} />
+              <Route path="BreathingExercise" element={<BreathingExercise />} />
+              <Route path="Linklator" element={<LinkLator />} />
+              <Route path="SyllableCounting" element={<SyllableCounting />} />
             </Route>
           </Route>
 

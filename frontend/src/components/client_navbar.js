@@ -6,7 +6,7 @@ import {Link, Route, Router} from 'react-router-dom'
 import LandingPage from './landing_page';
 import DropdownNavbar from './navbar_dropdown';
 import { useNavigate } from 'react-router-dom';
-
+import { useState } from 'react';
 
 function NavbarClient(){
     const navigate = useNavigate();
@@ -14,6 +14,7 @@ function NavbarClient(){
     function GoBack(){
         navigate("/client/dashboard")
     }
+
 
     return(
         <nav>
@@ -33,7 +34,7 @@ function NavbarClient(){
                <img src={home} className='navbar-img-home' onClick={GoBack}/>
                 </div>
 
-                <DropdownNavbar />
+                <DropdownNavbar/>
                 
             </ul>
         </nav>

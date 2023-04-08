@@ -93,10 +93,10 @@ color: #191D63;
 
 .gobackcross{
 position: absolute;
-width: 23px;
-height: 23px;
+width: 30px;
+height: 30px;
 left: 1200px;
-top: 85px;
+top: 100px;
 cursor: pointer;
 }
 

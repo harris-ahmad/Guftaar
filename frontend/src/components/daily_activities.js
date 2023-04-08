@@ -18,6 +18,9 @@ function Daily_Activities(){
     function GoTimer(){
         navigate("/client/dailyActivities/setBreathingTime")
     }
+    function GoLinkLator(){
+        navigate("/client/dailyActivities/Linklator")
+    }
 
 return(
     <div className='dailyBack'>
@@ -36,7 +39,7 @@ return(
          <h3 className= 'categorybe'>Breathing Exercise</h3>
          </div>
 
-         <div className='linkBack'>
+         <div className='linkBack' onClick={GoLinkLator}>
          <img className='linkpic' src={link}/>
          <h3 className= 'categoryll'>Link Later Voice Progression</h3>
          </div>

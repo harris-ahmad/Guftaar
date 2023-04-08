@@ -68,6 +68,7 @@ nav .nav-item .nav-anchor {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    cursor: pointer;
 }
 
 .navbar-icons{
@@ -87,6 +88,7 @@ nav .nav-item .nav-anchor {
     height: auto;
     position: relative;
     left: 65px;
+    cursor: pointer;
 }
 
 

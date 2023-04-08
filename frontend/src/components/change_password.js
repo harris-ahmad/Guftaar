@@ -1,6 +1,9 @@
 import Si from "../images/change_pw.svg"
 import './update_pw.css'
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const bcrypt = require("bcryptjs");
 
 function ChangePassword(){
     const navigate = useNavigate();

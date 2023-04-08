@@ -18,6 +18,7 @@ import axios from "axios";
 function Quote() {
   const navigate = useNavigate();
   const [quote, setQuote] = useState('');
+  const email = localStorage.getItem("email")
 
   useEffect(() => {
     fetch("http://api.quotable.io/random")
@@ -31,13 +32,13 @@ function Quote() {
   }, []);
 
   function NoStuttering(){
-    axios.post('http://localhost:3000/client/moodlog', {email:localStorage.email, mood: "NoStuttering"})
+    axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "NoStuttering"})
 }
   function Moderate(){
-    axios.post('http://localhost:3000/client/moodlog', {email:localStorage.email, mood: "Moderate"})
+    axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "Moderate"})
 }
   function Extreme(){
-    axios.post('http://localhost:3000/client/moodlog', {email:localStorage.email, mood: "Extreme"})
+    axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "Extreme"})
 }
   function Course(){
     navigate("/courses")

@@ -13,7 +13,7 @@ import volume from "../images/volume.svg";
 import mic from "../images/mic.svg";
 import dailyActivities from './daily_activities';
 import NavbarClient from './client_navbar';
-
+import axios from "axios";
 
 function Quote() {
   const navigate = useNavigate();
@@ -31,11 +31,13 @@ function Quote() {
   }, []);
 
   function NoStuttering(){
-    // alert("called")
+    axios.post('http://localhost:3000/client/moodlog', {UserID:localStorage.email, mood: "NoStuttering"})
 }
   function Moderate(){
+    axios.post('http://localhost:3000/client/moodlog', {UserID:localStorage.email, mood: "Moderate"})
 }
   function Extreme(){
+    axios.post('http://localhost:3000/client/moodlog', {UserID:localStorage.email, mood: "Extreme"})
 }
   function Course(){
     navigate("/courses")

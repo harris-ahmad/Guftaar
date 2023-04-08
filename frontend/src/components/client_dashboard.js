@@ -49,8 +49,8 @@ function Quote() {
       </div>
         <div className="quoteback">
         <img className="qu"src={qu}/>
-        <h6 className='top'>Strength Statements</h6>
-        <p className='text'>{quote}</p>  
+        <h6 className='top1'>Strength Statements</h6>
+        <p className='text1'>{quote}</p>  
         </div>
         <p className='logtext1'> How was your stuttering today?</p>
         <div className='log'>
@@ -97,7 +97,7 @@ function Quote() {
           <div className='rectangle2'></div>
           <h6 className='activitytext'>Quick Practice</h6>
           <img className='icon'src={mic}></img>
-          <img className='arrow2'src={arrow}/>
+          <a href='quickPractice'><img className='arrow2'src={arrow}/></a>
           </div>
           <a className='progress'>View Progress</a>
         </div>

@@ -22,7 +22,7 @@ width: 590px; height: 200px;
 overflow: scroll;
 }
 
-.top{
+.top1{
 position: absolute;
 left: 62%;
 bottom: 58%;
@@ -37,7 +37,7 @@ color: #469FA3;
 backdrop-filter: blur(16.4787px);
 }
 
-.text{
+.text1{
 position: relative;
 top: 6%;
 left: 20%;
@@ -47,14 +47,10 @@ font-weight: 500;
 font-size: 25px;
 letter-spacing: 0.03em;
 color: #469FA3;
-/* backdrop-filter: blur(16.4787px); */
 text-align: left;
 display:flex;
 overflow:auto;
 padding-top: 3%;
-
-
-
 }
 
 .log{

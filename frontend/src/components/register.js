@@ -2,12 +2,7 @@ import { useState } from "react";
 import './form_content.css'
 import reg from "../images/register.svg"
 import { useNavigate } from 'react-router-dom';
-
-
-const handleSubmit = (e) => {
-    e.preventDefault();
-
-}
+import axios from "axios";
 
 function Register(props){
     const [email, setEmail] = useState("")
@@ -64,6 +59,26 @@ function Register(props){
             document.getElementById('error-text-age').style.paddingBottom  = "2%";
             document.getElementById('error-text-age').style.display  = "block";
         }
+
+        const newUser = {
+            firstName: fname,
+            lastName: lname,
+            age: age,
+            email: email,
+            password: pass,
+          };
+      
+          axios
+            .post("http://localhost:4000/client/register", newUser, {
+              headers: { "Content-Type": "application/json; charset=UTF-8" },
+            })
+            .then((response) => {
+              navigate("/client/login");
+            })
+            .catch((err) => {
+              console.log(err);
+              window.location.reload();
+            });
     
     }
 

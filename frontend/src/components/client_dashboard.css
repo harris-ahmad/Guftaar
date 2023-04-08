@@ -38,19 +38,18 @@ backdrop-filter: blur(16.4787px);
 }
 
 .text1{
-position: relative;
-top: 6%;
-left: 20%;
 font-family: 'League Spartan';
 font-style: normal;
 font-weight: 500;
 font-size: 25px;
 letter-spacing: 0.03em;
 color: #469FA3;
-text-align: left;
+text-align: justify;
 display:flex;
 overflow:auto;
-padding-top: 3%;
+margin-left: 17%;
+margin-right: 10%;
+margin-top: 12%;
 }
 
 .log{
@@ -117,7 +116,7 @@ border-radius: 41px;
 
 .qu{
     position: absolute;
-    top: 25%;
+    top: 13%;
     right: 83%;
     width: 2cm;
     height: 1cm;

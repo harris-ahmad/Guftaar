@@ -52,3 +52,13 @@
         background: rgba(190, 188, 213, 0.53);
         border-radius: 8px;
         }
+
+        .recordingbutton{
+            position: relative;
+            top:300px;
+            left:30px;
+            height: 100px;
+            width: 100px;
+        }
+
+          

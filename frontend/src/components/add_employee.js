@@ -5,11 +5,13 @@ import coach from "../images/coachadd.png";
 import Dashboard from './admin_dashboard';
 import addAdmin from './add_admin_form';
 import addCoach from './add_coach_form';
+import NavbarAdmin from './navbar_admin';
 
 function add_employee(){
     return (
 
     <div className='employeeBack'>
+         <NavbarAdmin />
             <h3 className='titlequestion'>Add Employee</h3>
             <a href='Dashboard'><img className="gobackcross"src={cross}/></a>
             <h1 className='whichquestion'>Which employee type are you creating an account for?</h1>

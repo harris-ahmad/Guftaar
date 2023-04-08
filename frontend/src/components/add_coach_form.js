@@ -4,6 +4,7 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { useNavigate } from 'react-router-dom';
 import cross from "../images/cross.svg";
+import NavbarAdmin from './navbar_admin';
 
 function AdminForm(){
     const [email, setEmail] = useState("")
@@ -147,6 +148,7 @@ function AdminForm(){
 
     return(
     <div className="formbg">
+         <NavbarAdmin />
         {/* <div className="formAdmin" >
             <div className="ftext">
             <h3 className='Name'> Guftaar</h3></div>

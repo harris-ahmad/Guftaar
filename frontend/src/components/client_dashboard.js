@@ -44,7 +44,7 @@ function Quote() {
   return (
     <div className="client-bg">
       <NavbarClient />
-      <div>
+      <div className='mainwelcome'>
         <h6 className='welcome'>Emaan's Dashboard</h6>
       </div>
         <div className="quoteback">
@@ -52,8 +52,9 @@ function Quote() {
         <h6 className='top1'>Strength Statements</h6>
         <p className='text1'>{quote}</p>  
         </div>
-        <p className='logtext1'> How was your stuttering today?</p>
+       
         <div className='log'>
+        <p className='logtext1'> How was your stuttering today?</p>
           <div className='circleBack'></div>
           <img className='happy'src={happy} onClick={NoStuttering}/> 
        
@@ -98,8 +99,8 @@ function Quote() {
           <h6 className='activitytext'>Quick Practice</h6>
           <img className='icon'src={mic}></img>
           <a href='quickPractice'><img className='arrow2'src={arrow}/></a>
+          <h6 className='progress'>View Progress</h6>
           </div>
-          <a className='progress'>View Progress</a>
         </div>
 
     </div>

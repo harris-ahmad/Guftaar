@@ -6,19 +6,43 @@ import addEmployee from './add_employee';
 import NavbarAdmin from './navbar_admin';
 
 function Dashboard() {
+  
+  const [adminCount, setAdminCount] = useState(0);
+  const [coachCount, setCoachCount] = useState(0);
+  const [clientCount, setClientCount] = useState(0);
+  const [allCoaches, setAllCoaches] = useState([{}]);
+  const [topCoaches, setTopCoaches] = useState([{}]);
+  
+  useEffect(() => {
+    const fetchInfo = async function () {
+      const actorCount = await axios.get(
+        "http://localhost:4000/admin/getActorCount"
+      );
+      const topCoaches = await axios.get(
+        "http://localhost:4000/admin/getTopCoaches"
+      );
+      setTopCoaches(topCoaches.data.data.coaches);
+      setAdminCount(actorCount.data.data.actorCount.admins);
+      setCoachCount(actorCount.data.data.actorCount.coaches);
+      setClientCount(actorCount.data.data.actorCount.clients);
+      setAllCoaches(actorCount.data.data.allCoaches);
+    };
+    fetchInfo();
+  }, []);
+  
   return (
     <div className="dashboard-container">
        <NavbarAdmin />
       <div className="coachbox">
-        <h2>30</h2>
+        <h2>{coachCount}</h2>
         <p>coaches</p>
       </div>
       <div className="adminbox">
-        <h2>2</h2>
+        <h2>{adminCount}</h2>
         <p>admins</p>
       </div>
       <div className="userbox">
-        <h2>150</h2>
+        <h2>{clientCount}</h2>
         <p>users</p>
       </div>
       <div className="empbox">
@@ -31,7 +55,7 @@ function Dashboard() {
         <h1>Administrator Centre</h1>
       </div>
       <div className="reviewbox">
-        <h1>Top Coaches</h1>
+        <h1>Top Coaches</h1> {/* render the list here */}
         <ul class="names">
           <li>Emaan Atique</li>
           <li>Romessa Shah</li>

@@ -35,6 +35,23 @@ const clientSchema = new Schema({
   quickPracticeRate: { type: Number, default: 0 },
 });
 
+const coachSchema = new Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  gender: { type: String, required: true },
+  age: { type: Number, required: true },
+  qualification: { type: String, required: true },
+  yearsOfExperience: { type: Number, required: true },
+  password: { type: String, required: true },
+  salt: { type: String }, // ? Do we need this?
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: [validator.isEmail, "Invalid email"],
+  },
+});
+
 const Client = mongoose.model("Client", clientSchema);
 
 module.exports = Client;

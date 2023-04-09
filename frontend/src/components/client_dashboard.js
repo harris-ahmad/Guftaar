@@ -18,17 +18,21 @@ import axios from "axios";
 function Quote() {
   const navigate = useNavigate();
   const [quote, setQuote] = useState('');
+  const [firstName, setFirstName] = useState("");
   const email = localStorage.getItem("email")
 
   useEffect(() => {
-    fetch("http://api.quotable.io/random")
-      .then(res => res.json())
-      .then(
-        (quote) => {
-            setQuote(quote.content)
-        }
-      )
-      .catch(err => console.log(err));
+    const fetchData = async function () {
+      let result = await axios.get("http://api.quotable.io/random");
+      let toSend = { email: localStorage.getItem("email") };
+      let result2 = await axios.post(
+        "http://localhost:4000/client/getFirstName",
+        toSend
+      );
+      setQuote(result.data.content);
+      setFirstName(result2.data.firstName);
+    };
+    fetchData();
   }, []);
 
   function NoStuttering(){
@@ -48,7 +52,7 @@ function Quote() {
     <div className="client-bg">
       <NavbarClient />
       <div className='mainwelcome'>
-        <h6 className='welcome'>Emaan's Dashboard</h6>
+        <h6 className='welcome'>{firstName}'s Dashboard</h6>
       </div>
         <div className="quoteback">
         <img className="qu"src={qu}/>

@@ -41,7 +41,7 @@ function Quick_Practice(){
         <img className="gobackcross2"src={cross} onClick={GoBack}/>
         <h3 className='please2'>Follow the highlighted text practice your speech</h3>
         <div className='paragraphBack'>
-        <SpeechText text="Zander was proud of his new costume. He was excited to wear it for the play on Friday night. The bones looked like a real skeleton, the eyes were beady and red, and the claws were long and sharp.He thought it would be fun to scare his Mom, so he walked quietly down the hall toward the kitchen. Suddenly, he screamed Ahhhhhhh! He saw his reflection in the mirror and forgot he was wearing his costume."speed={200} />
+        <SpeechText text="Zander was proud of his new costume. He was excited to wear it for the play on Friday night. The bones looked like a real skeleton, the eyes were beady and red, and the claws were long and sharp.He thought it would be fun to scare his Mom, so he walked quietly down the hall toward the kitchen. Suddenly, he screamed Ahhhhhhh! He saw his reflection in the mirror and forgot he was wearing his costume."speed={100} />
         </div>
           </div>
     );

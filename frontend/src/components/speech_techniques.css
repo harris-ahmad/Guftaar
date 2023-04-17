@@ -240,10 +240,11 @@ align-content: center;
     opacity: 0;
   }
 
-  .lol:hover{
+  /* .lol:hover{
     background-color:#4d539987;
     opacity: 0.9;
-}
+    border: 0cm;
+} */
 
 
 .wordToSpeak{

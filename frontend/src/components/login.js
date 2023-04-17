@@ -98,7 +98,6 @@ function Login(props){
             <h2> Login</h2>
             <img id="login" src={Si}/>
             <form className="login-form" onSubmit={handleSubmit}> 
-                
                 <label for="email">Email</label>
                 <input value={email} className={'input'} onChange={(e)=> setEmail(e.target.value)} type="email" placeholder={"Enter your email"} id="email" name="email" title="test"></input>
                 <span id="error-text"></span>

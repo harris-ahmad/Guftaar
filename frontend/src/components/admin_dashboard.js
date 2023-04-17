@@ -5,6 +5,7 @@ import "./admin_dashboard.css"
 import addEmployee from './add_employee';
 import NavbarAdmin from './navbar_admin';
 import axios from "axios";
+import { useState, useEffect } from 'react';
 
 function Dashboard() {
   

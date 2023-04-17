@@ -67,11 +67,6 @@ div.first{
 
 
 #clientsignup{
-  /* position: absolute;
-  left: 0%;
-  right: 50.93%;
-  top: 0%;
-  bottom: 0.18%; */
   position: absolute;
   height:45%;
   max-width:35%;
@@ -91,7 +86,6 @@ div.first{
   line-height: 110%;
   text-align: left;
   padding-left: 2%;
-  
 }
 #clientsignup:hover{
   background: rgba(70, 107, 160, 0.51);

@@ -93,10 +93,15 @@ function Register(props){
                 })
                 .then((response) => {
                     if(response.data == "We already have an account made with this email"){
-                        alert("Email in use")
+                        document.getElementById('email').style.borderColor = "crimson";
+                        document.getElementById('email').style.borderWidth = "2px";
+                        document.getElementById('error-text-email').textContent = "Email already in use";
+                        document.getElementById('error-text-email').style.paddingBottom  = "2%";
+                        document.getElementById('error-text-email').style.display = "block"
+        
                         setTimeout(() => {
                             window.location.reload();
-                          }, 500);
+                          }, 1500);
                     }
                     else{
                         alert("Successfully Created Account")

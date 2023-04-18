@@ -19,12 +19,16 @@ function Quote() {
   const navigate = useNavigate();
   const [quote, setQuote] = useState('');
   const [firstName, setFirstName] = useState("");
+  const [joiningDate, setJoiningDate] = useState("")
+  const [logRecord, setRecord] = useState ()
+  const [activeCourse, setCourse] = useState("")
+  const [hasCourse, setHasCourse] = useState(true); 
+
   const email = localStorage.getItem("email")
 
   useEffect(() => {
     const fetchData = async function () {
       let result = await axios.get("http://api.quotable.io/random");
-      let toSend = { email: localStorage.getItem("email") };
       setQuote(result.data.content);
     };
     fetchData();
@@ -34,14 +38,21 @@ function Quote() {
     const fetchData = async function () {
       let toSend = { email: localStorage.getItem("email") };
       let result2 = await axios.post(
-        "http://localhost:4000/client/getFirstName",
+        "http://localhost:4000/client/getClientDashboardDetails",
         toSend
       );
+      console.log(result2.data)
       setFirstName(result2.data.firstName);
+      setCourse(result2.data.currentActiveCourse); 
+      if(course.length > 0){
+        setHasCourse(false); 
+      }
+      // alert(hasCourse); 
     };
     fetchData();
   }, []);
 
+  
 
   function NoStuttering(){
     axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "NoStuttering"})
@@ -52,13 +63,10 @@ function Quote() {
   function Extreme(){
     axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "Extreme"})
 }
-  function Course(){
-    navigate("/courses")
-}
-
+ 
   return (
     <div className="client-bg">
-      <NavbarClient />
+      <NavbarClient/>
       <div className='mainwelcome'>
         <h6 className='welcome'>{firstName}'s Dashboard</h6>
       </div>
@@ -89,7 +97,7 @@ function Quote() {
 
         <div className='gbox2'>  
         <img className='course'src={course}/>
-        <h6 className='subtext'>Stammer and Social Settings</h6>
+        {hasCourse ? <h6 className='subtext'>{course}</h6> : <h6 className='subtext'>Buy Courses</h6>}
         <h6 className='detail'>Courses</h6>
         <img className='arrow'src={arrow}/>
         </div>

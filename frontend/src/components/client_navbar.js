@@ -6,14 +6,28 @@ import {Link, Route, Router} from 'react-router-dom'
 import LandingPage from './landing_page';
 import DropdownNavbar from './navbar_dropdown';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 function NavbarClient(){
     const navigate = useNavigate();
+    const [streak, setStreak] = useState(0)
 
     function GoBack(){
         navigate("/client/dashboard")
     }
+
+    useEffect(() => {
+        const fetchData = async function () {
+          let toSend = { email: localStorage.getItem("email") };
+          let result2 = await axios.post(
+            "http://localhost:4000/client/getStreak",
+            toSend
+          );
+          setStreak(result2.data.streakCount)
+        };
+        fetchData();
+      }, []);
 
 
     return(
@@ -27,7 +41,7 @@ function NavbarClient(){
                 <li className='nav-item'><a className='nav-anchor' href='./courses'>courses</a></li>
                 <div>
                     <img src={fire} className='navbar-img-fire'/>
-                    <span className='streak-value'>50</span>
+                    <span className='streak-value'>{streak}</span>
                 </div>
 
                 <div className='navbar-icons'>    

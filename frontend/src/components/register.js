@@ -10,6 +10,8 @@ function Register(props){
     const [fname, setFname] = useState("")
     const [lname, setLname] = useState("")
     const [age, setAge] = useState()
+    let please = false
+    let [someError, setErr] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,6 +21,8 @@ function Register(props){
             document.getElementById('email').style.borderColor = "crimson";
             document.getElementById('email').style.borderWidth = "2px";
             document.getElementById('email').placeholder = "Email required";
+            // setErr(true)
+            please = true
         }
         else if(!email.match(mailformat)){
             document.getElementById('email').style.borderColor = "crimson";
@@ -26,60 +30,87 @@ function Register(props){
             document.getElementById('error-text-email').textContent = "Invalid email";
             document.getElementById('error-text-email').style.paddingBottom  = "2%";
             document.getElementById('error-text-email').style.display = "block"
+            // setErr(true)
+            please = true
         }
         if (pass === ""){
             document.getElementById('password').style.borderColor= "crimson";
             document.getElementById('password').style.borderWidth = "2px";
             document.getElementById('password').placeholder = "Password required";
+            // setErr(true)
+            please = true
         }
         else if (!passwordRegex.test(pass)){
             document.getElementById('password').style.borderColor = "crimson";
             document.getElementById('password').style.borderWidth = "2px";
             document.getElementById('error-text-pass').textContent = "Password must be at least 8 characters long, with a number.";
             document.getElementById('error-text-pass').style.display  = "block";
+            // setErr(true)
+            please = true
         }
         if (fname === ""){
             document.getElementById('fname').style.borderColor = "crimson";
             document.getElementById('fname').style.borderWidth = "2px";
             document.getElementById('fname').placeholder = "First name required";
+            // setErr(true)
+            please = true
         }
         if (lname === ""){
             document.getElementById('lname').style.borderColor = "crimson";
             document.getElementById('lname').style.borderWidth = "2px";
             document.getElementById('lname').placeholder = "Last name required";
+            // setErr(true)
+            please = true
         }
         if (!age){
             document.getElementById('age').style.borderColor = "crimson";
             document.getElementById('age').style.borderWidth = "2px";
             document.getElementById('age').placeholder = "Age required";
+            // setErr(true)
+            please = true
         }
         else if (age < 13){
             document.getElementById('age').className = "error-control-r";
             document.getElementById('error-text-age').textContent = "To use Guftaar, you must be 13+.";
             document.getElementById('error-text-age').style.paddingBottom  = "2%";
             document.getElementById('error-text-age').style.display  = "block";
+            // setErr(true)
+            please = true
         }
 
-        const newUser = {
-            firstName: fname,
-            lastName: lname,
-            age: age,
-            email: email,
-            password: pass,
-          };
-      
-          axios
-            .post("http://localhost:4000/client/register", newUser, {
-              headers: { "Content-Type": "application/json; charset=UTF-8" },
-            })
-            .then((response) => {
-              navigate("/client/login");
-            })
-            .catch((err) => {
-              console.log(err);
-              window.location.reload();
-            });
-    
+        if(please === false){
+            const newUser = {
+                firstName: fname,
+                lastName: lname,
+                age: age,
+                email: email,
+                password: pass,
+              };
+          
+              axios
+                .post("http://localhost:4000/client/register", newUser, {
+                  headers: { "Content-Type": "application/json; charset=UTF-8" },
+                })
+                .then((response) => {
+                    if(response.data == "We already have an account made with this email"){
+                        alert("Email in use")
+                        setTimeout(() => {
+                            window.location.reload();
+                          }, 500);
+                    }
+                    else{
+                        alert("Successfully Created Account")
+                        navigate("/client/login");
+                    }
+                })
+                .catch((err) => {
+                  window.location.reload();
+                });
+        }else{
+            setTimeout(() => {
+                window.location.reload();
+              }, 1500);
+        }
     }
 
     const navigate = useNavigate();

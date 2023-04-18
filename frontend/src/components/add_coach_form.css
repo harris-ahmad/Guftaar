@@ -16,8 +16,9 @@
 }
 
 .center-container{
-    width: 90vh;
-    height: 70vh;
+    width: 110vh;
+    height: 85vh;
+    margin-top: 5%;
     background-color: #FFFFFF;
     box-shadow: 0px 12px 60px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
@@ -68,7 +69,7 @@
 
 
 .form-content-employee {
-    border: solid;
+    /* border: solid; */
     flex: 1;
     width: 100%;
     display: flex;
@@ -76,14 +77,16 @@
 }
 
 .form-row-1{
-    border: solid;
+    /* border: solid; */
     display: flex;
     padding-left: 10%;
     padding-right: 10%;
+    /* padding-bottom: 20px; */
     width: 100%;
     height: 25%;
     align-items: center;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    justify-content: space-between;
 }
 
 
@@ -105,26 +108,39 @@
 }
 
 
-/*
+
 .input-field-add {
     margin: 0;
-    width: 85%;
+    width: 100%;
 }
-*/
+
 
 
 
 .input-row-1{
-    width: 30%;
+    /* border: solid; */
+    width: 100%;
     padding: 0;
+    margin-right: 20px;
 }
 
 
 .gen{
-    width: 100%;
+    /* width: 100%;
     border-radius: 10px;
     text-align: left;
-    min-height: 40px;
+    min-height: 40px; */
+    font-family: 'League Spartan' !important;
+    margin: 0;
+    padding: 0;
+    border-color: #1d1d1d68;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    /* min-width: min-content; */
+
+    min-width: 100%;
+
 }
 
 
@@ -135,8 +151,11 @@
 
 
 .input-row-2{
-    /* width: 50%; */
-    padding-left: 0;    
+    /* border: solid; */
+    width: 100%;
+    margin-right: 20px;
+    /* margin-right: 20px; */
+    /* padding-left: 0;     */
 }
 
 /* .lef-pad-2{
@@ -145,13 +164,24 @@
 
 
 
-/* .exp{
+.exp{
     width: 50%;
     border-radius: 10px;
     text-align: left;
 }
 
-.buttonL{
+.button-row{
+    /* border: solid; */
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
+    height: 25%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.buttonLL{
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 400;
@@ -169,4 +199,5 @@
     background-color: #5A54B1;
     padding: 2.2% 20%;
     margin-top: 0px;
-} */
+
+}

@@ -1,12 +1,13 @@
 import './add_coach_form.css'
 import { useState } from "react";
-import Dropdown from 'react-dropdown';
+// import Dropdown from 'react-dropdown';
+import { Dropdown } from 'primereact/dropdown';
 import 'react-dropdown/style.css';
 import { useNavigate } from 'react-router-dom';
 import cross from "../images/cross.svg";
 import NavbarAdmin from './navbar_admin';
 
-function AdminForm(){
+function CoachForm(){
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [cpass, setCPass] = useState("")
@@ -25,7 +26,7 @@ function AdminForm(){
         navigate("/admin/addEmployee")
     }
     const options = [
-        'Male', 'Female'
+        'Male', 'Female', 'Other'
       ];
     const options2 = [
         'No experience', '1 year', '2 years', '3 years', '4 years', '5+ years'
@@ -224,7 +225,7 @@ function AdminForm(){
                             setGender(e.value);
                             }}  
                         value={gender}  
-                        placeholder="Choose your gender"  id="gender" name="gender" ></Dropdown>
+                        id="gender" name="gender" ></Dropdown>
                         <span id={"error-text-gen"} className={"et"}></span>
                     </div>
                 </div>
@@ -242,13 +243,11 @@ function AdminForm(){
                 </div>
                 <div className='form-row-1'>
                     <div className='input-row-2'>
-                        Test
-                        {/* <label for="qual" className="lf lef-pad-2">Qualification</label>
-                        <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your qualification" id="qual" name="qual"></input> */}
+                        <label for="qual" className="lf lef-pad-2">Qualification</label>
+                        <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your qualification" id="qual" name="qual"></input>
                     </div>
                     <div className='input-row-2'>
-                        Test
-                        {/* <label for="exp" className="lf lef-pad-2">Past Experience</label> */}
+                        <label for="exp" className="lf lef-pad-2">Past Experience</label>
                         {/* <Dropdown  className="exp" 
                         options={options2} 
                         onChange={(e)=>{
@@ -259,33 +258,28 @@ function AdminForm(){
                         <span id={"error-text-exp"} className={"et"}></span>   */}
 
                         {/* NEEDS TO BE CHANGED */}
-                        {/* <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your years of experience" id="qual" name="qual"></input> */}
+                        <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your years of experience" id="qual" name="qual"></input>
                     </div>
                 </div>
                 <div className='form-row-1'>
                     <div className='input-row-2'>
-                        Test
-                        {/* <label for="password" className="lf lef-pad-2">Enter your password</label>
+                        <label for="password" className="lf lef-pad-2">Enter your password</label>
                         <input type="password" className="input-field-add" value={pass} onChange={(e)=> setPass(e.target.value)} placeholder="Enter password" id="password" name="password"></input>
-                        <span id={"error-text-pass"} className={"et"}></span> */}
+                        <span id={"error-text-pass"} className={"et"}></span>
                     </div>
                     <div className='input-row-2'>
-                        Test
-                        {/* <label for="cpassword" className="lf lef-pad-2">Confirm your password</label>    
+                        <label for="cpassword" className="lf lef-pad-2">Confirm your password</label>    
                         <input type="password" className="input-field-add" value={cpass} onChange={(e)=> setCPass(e.target.value)} placeholder="Confirm password" id="cpassword" name="cpassword"></input>
-                        <span id={"error-text-cpass"} className={"et"}></span> */}
+                        <span id={"error-text-cpass"} className={"et"}></span>
                     </div>
                 </div>
-                <div className='form-row-1'>
-                    Test
-                    {/* <button type="submit" className="buttonL" onClick={handleSubmit}>Create Account</button> */}
+                <div className='button-row'>
+                    <button type="submit" className="buttonLL" onClick={handleSubmit}>Create Account</button>
                 </div>
             </div>
-            {/* </div> */}
-            {/* <h1>Test</h1> */}
         </div>
     </div>
     )
 }
 
-export default AdminForm;
+export default CoachForm;

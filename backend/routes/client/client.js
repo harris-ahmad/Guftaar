@@ -47,7 +47,10 @@ router.post("/register", (req, res, next) => {
       res.send({ status: "success", message: "Client registered" });
       next(response);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      res.send("We already have an account made with this email")
+      // console.log("in error")
+    });
 
   const token = new Client.Token({
     userId: newClient._id,

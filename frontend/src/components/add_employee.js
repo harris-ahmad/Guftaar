@@ -2,9 +2,6 @@ import "./add_employee.css";
 import cross from "../images/cross.svg";
 import admin from "../images/adminadd.png";
 import coach from "../images/coachadd.png";
-import Dashboard from "./admin_dashboard";
-import addAdmin from "./add_admin_form";
-import addCoach from "./add_coach_form";
 import NavbarAdmin from "./navbar_admin";
 
 function add_employee() {

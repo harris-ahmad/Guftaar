@@ -13,10 +13,7 @@ function Login(props){
 
     const validation = (e) => {
         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
         let e_flag = false;
-
-        
         if (email === ""){
             e_flag = true;
             document.getElementById('email').className = "error-control";
@@ -64,7 +61,9 @@ function Login(props){
                 .then((res) => {
                   if (res.data.error) {
                     alert(res.data.error);
-                    window.location = "/";
+                    setTimeout(() => {
+                        window.location.reload();
+                      }, 500);
                   } else {
                     localStorage.setItem("token", res.data.token);
                     localStorage.setItem("id", res.data.id);
@@ -86,12 +85,6 @@ function Login(props){
     function Toggle(){
         navigate("/client/register")
     }
-
-    
-
-
-
-
     return(
         <div className="client-bg">
         <div className="form-content-login">

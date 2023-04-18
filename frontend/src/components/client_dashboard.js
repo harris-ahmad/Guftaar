@@ -7,21 +7,15 @@ import arrow from "../images/arrow.svg";
 import happy from "../images/happy.svg";
 import moderate from "../images/moderate.svg";
 import extreme from "../images/extreme.svg";
-import { useNavigate } from "react-router-dom";
 import fire from "../images/fire.svg";
 import volume from "../images/volume.svg";
 import mic from "../images/mic.svg";
-import dailyActivities from "./daily_activities";
 import NavbarClient from "./client_navbar";
 import axios from "axios";
 
 function Quote() {
-  const navigate = useNavigate();
   const [quote, setQuote] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [joiningDate, setJoiningDate] = useState("");
-  const [logRecord, setRecord] = useState();
-  const [activeCourse, setCourse] = useState("");
   const [hasCourse, setHasCourse] = useState(true);
 
   const email = localStorage.getItem("email");

@@ -47,7 +47,7 @@ function SpeechTechniques(){
     return(
         <div className='speechTechBack'>
             <NavbarClient />
-             <h3 className='titlequestion3'>Quick Practice</h3>  
+             <h3 className='titlequestion3'>Speech Techniques</h3>  
              <img className="gobackcross"src={cross} onClick={GoBack}/>
             <h3 className='please'>Click on the tiles to practice your sounds</h3>
             <div className='overallBack'>

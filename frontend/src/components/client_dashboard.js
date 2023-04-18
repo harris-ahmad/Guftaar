@@ -25,15 +25,23 @@ function Quote() {
     const fetchData = async function () {
       let result = await axios.get("http://api.quotable.io/random");
       let toSend = { email: localStorage.getItem("email") };
+      setQuote(result.data.content);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async function () {
+      let toSend = { email: localStorage.getItem("email") };
       let result2 = await axios.post(
         "http://localhost:4000/client/getFirstName",
         toSend
       );
-      setQuote(result.data.content);
       setFirstName(result2.data.firstName);
     };
     fetchData();
   }, []);
+
 
   function NoStuttering(){
     axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "NoStuttering"})

@@ -238,6 +238,7 @@ align-content: center;
     align-content: center;
     background: #F6F6F6;
     opacity: 0;
+    cursor: pointer;
   }
 
   /* .lol:hover{

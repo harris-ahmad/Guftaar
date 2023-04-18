@@ -242,11 +242,13 @@ function AdminForm(){
                 </div>
                 <div className='form-row-1'>
                     <div className='input-row-2'>
-                        <label for="qual" className="lf lef-pad-2">Qualification</label>
-                        <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your qualification" id="qual" name="qual"></input>
+                        Test
+                        {/* <label for="qual" className="lf lef-pad-2">Qualification</label>
+                        <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your qualification" id="qual" name="qual"></input> */}
                     </div>
                     <div className='input-row-2'>
-                        <label for="exp" className="lf lef-pad-2">Past Experience</label>
+                        Test
+                        {/* <label for="exp" className="lf lef-pad-2">Past Experience</label> */}
                         {/* <Dropdown  className="exp" 
                         options={options2} 
                         onChange={(e)=>{
@@ -257,23 +259,26 @@ function AdminForm(){
                         <span id={"error-text-exp"} className={"et"}></span>   */}
 
                         {/* NEEDS TO BE CHANGED */}
-                        <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your years of experience" id="qual" name="qual"></input>
+                        {/* <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your years of experience" id="qual" name="qual"></input> */}
                     </div>
                 </div>
                 <div className='form-row-1'>
                     <div className='input-row-2'>
-                        <label for="password" className="lf lef-pad-2">Enter your password</label>
+                        Test
+                        {/* <label for="password" className="lf lef-pad-2">Enter your password</label>
                         <input type="password" className="input-field-add" value={pass} onChange={(e)=> setPass(e.target.value)} placeholder="Enter password" id="password" name="password"></input>
-                        <span id={"error-text-pass"} className={"et"}></span>
+                        <span id={"error-text-pass"} className={"et"}></span> */}
                     </div>
                     <div className='input-row-2'>
-                        <label for="cpassword" className="lf lef-pad-2">Confirm your password</label>    
+                        Test
+                        {/* <label for="cpassword" className="lf lef-pad-2">Confirm your password</label>    
                         <input type="password" className="input-field-add" value={cpass} onChange={(e)=> setCPass(e.target.value)} placeholder="Confirm password" id="cpassword" name="cpassword"></input>
-                        <span id={"error-text-cpass"} className={"et"}></span>
+                        <span id={"error-text-cpass"} className={"et"}></span> */}
                     </div>
                 </div>
                 <div className='form-row-1'>
-                    <button type="submit" className="buttonL" onClick={handleSubmit}>Create Account</button>
+                    Test
+                    {/* <button type="submit" className="buttonL" onClick={handleSubmit}>Create Account</button> */}
                 </div>
             </div>
             {/* </div> */}

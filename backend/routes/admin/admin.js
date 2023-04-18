@@ -107,10 +107,14 @@ router.post("/addCoach", (req, res, next) => {
 });
 
 router.post("/addAdmin", (req, res, next) => {
-  const { email, password } = req.body;
+  const { firstName, lastName, gender, email, password, age } = req.body;
   const newAdmin = new Admin.Admin({
-    email: email,
+    firstName: firstName,
+    lastName: lastName,
+    gender: gender,
+    age: age,
     password: password,
+    email: email,
   });
   newAdmin
     .save()

@@ -19,9 +19,9 @@ const clientSchema = new Schema({
   logRecord: [
     {
       id: { type: Schema.Types.ObjectId },
-      noStuttering: {type: Number, default: 0},
-      mild: {type: Number, default: 0},
-      extreme: {type: Number, default: 0},
+      noStuttering: { type: Number, default: 0 },
+      mild: { type: Number, default: 0 },
+      extreme: { type: Number, default: 0 },
     },
   ],
   currentActiveCourse: {
@@ -54,14 +54,18 @@ const coachSchema = new Schema({
 });
 
 const adminSchema = new Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  gender: { type: String, required: true },
+  age: { type: Number, required: true },
+  password: { type: String, required: true },
+  salt: { type: String },
   email: {
     type: String,
     required: true,
     unique: true,
     validate: [validator.isEmail, "Invalid email"],
   },
-  password: { type: String, required: true },
-  salt: { type: String },
 });
 
 const tokenSchema = new Schema({

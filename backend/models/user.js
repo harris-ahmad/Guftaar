@@ -34,6 +34,14 @@ const clientSchema = new Schema({
   syllableTotal: { type: Number, default: 0 },
   syllableCorrect: { type: Number, default: 0 },
   quickPracticeRate: { type: Number, default: 0 },
+
+  // for the streak
+  lastLogin: { type: Date },
+  activityStatus: {
+    linkLater: { type: Boolean, default: false },
+    syllableCounting: { type: Boolean, default: false },
+    breathingExercise: { type: Boolean, default: false },
+  },
 });
 
 const coachSchema = new Schema({

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const Client = require("../../models/user");
 const Coach = require("../../models/user");
 const crypto = require("crypto");
-const Meetings = require("../../models/meeting")
+const Meetings = require("../../models/meeting");
 
 const router = new express.Router();
 
@@ -49,7 +49,7 @@ router.post("/register", (req, res, next) => {
       next(response);
     })
     .catch((err) => {
-      res.send("We already have an account made with this email")
+      res.send("We already have an account made with this email");
       // console.log("in error")
     });
 
@@ -147,12 +147,10 @@ router.post("/getClientDashboardDetails", (req, res) => {
   // console.log("Getting data for this user:", req.body.email)
   const { email } = req.body;
   Client.Client.findOne({ email: email })
-    .select(
-      "firstName currentActiveCourse"
-    ) 
+    .select("firstName currentActiveCourse")
     .exec()
     .then((response) => {
-      console.log(response)
+      console.log(response);
       res.send(response);
     })
     .catch((err) => {
@@ -163,9 +161,7 @@ router.post("/getClientDashboardDetails", (req, res) => {
 router.post("/getStreak", (req, res) => {
   const { email } = req.body;
   Client.Client.findOne({ email: email })
-    .select(
-      "streakCount"
-    ) 
+    .select("streakCount")
     .exec()
     .then((response) => {
       res.send(response);
@@ -176,24 +172,24 @@ router.post("/getStreak", (req, res) => {
 });
 
 router.post("/getMeetings", (req, res) => {
-  let name = ""
-  let date = ""
-  const now = new Date()
+  let name = "";
+  let date = "";
+  const now = new Date();
   const { email } = req.body;
 
-  Meetings.Meetings.find({ clientEmail: email})
-    .select(
-      "coachEmail meetingDate "
-    ) 
+  Meetings.Meetings.find({ clientEmail: email })
+    .select("coachEmail meetingDate ")
     .exec()
     .then((emailResponse) => {
       // console.log(emailResponse)
-      const upcomingMeeting = emailResponse.find((meeting) => meeting.meetingDate.getTime() > now.getTime())
+      const upcomingMeeting = emailResponse.find(
+        (meeting) => meeting.meetingDate.getTime() > now.getTime()
+      );
       // console.log(upcomingMeeting)
 
       if (upcomingMeeting) {
-        date =upcomingMeeting.meetingDate
-        const  coachEmail  = upcomingMeeting.coachEmail;
+        date = upcomingMeeting.meetingDate;
+        const coachEmail = upcomingMeeting.coachEmail;
         // console.log(coachEmail)
 
         Client.Coach.findOne({ email: coachEmail })
@@ -202,8 +198,8 @@ router.post("/getMeetings", (req, res) => {
           .then((nameResponse) => {
             name = nameResponse.firstName;
 
-            let toSend = { name: name, time: date};
-            console.log(toSend)
+            let toSend = { name: name, time: date };
+            console.log(toSend);
             res.send(toSend);
             // console.log(nameResponse.firstName);
           })
@@ -211,40 +207,56 @@ router.post("/getMeetings", (req, res) => {
             console.log("In error for Name");
             res.send("");
           });
-      } 
-      else {
-        console.log("time has passed")
-        res.send("")
+      } else {
+        console.log("time has passed");
+        res.send("");
       }
     })
     .catch((err) => {
-      console.log("In email error")
+      console.log("In email error");
       res.send({ error: err });
     });
 });
 
-
-router.post("/moodlog", (req, res) => {
-  console.log("getting mood")
+router.post("/updateStreak", async (req, res) => {
   const { email } = req.body;
-  const mood = req.body.mood
 
-  console.log(mood)
+  const user = await Client.Client.findOne({ email: email });
 
-  Client.Client.findOne({ email: email })
-    .select(
-      "logRecord"
-    ) 
-    .exec()
-    .then((response) => {
-      console.log(response)
-      // console.log(response.logRecord.noStuttering)
-    })
-    .catch((err) => {
-      console.log("in error")
-      res.send({ error: err });
-    });
+  // get the streakLastUpdated field from the client schema
+  let lastUpdated = await Client.Client({ email: email }).select(
+    "streakLastUpdated"
+  );
+  lastUpdated = Date(lastUpdated);
+  // get the current date
+  const now = new Date();
+  const timeDiff = Math.abs(now.getTime() - lastUpdated.getTime());
+  const diffHours = Math.ceil(timeDiff / (1000 * 60 * 60));
+
+  let resetStreak = false;
+  if (diffHours > 24) {
+    resetStreak = true;
+  } else {
+    resetStreak =
+      !user.activityStatus.linkLater ||
+      !user.activityStatus.syllableCounting ||
+      !user.activityStatus.breathingExercise;
+  }
+
+  if (resetStreak) {
+    user.streakCount = 0;
+    user.activityStatus.linkLater = false;
+    user.activityStatus.syllableCounting = false;
+    user.activityStatus.breathingExercise = false;
+  } else if (
+    user.activityStatus.linkLater &&
+    user.activityStatus.syllableCounting &&
+    user.activityStatus.breathingExercise
+  ) {
+    user.streakCount += 1;
+  } else {
+    // dont do anything
+  }
 });
-
 
 module.exports = router;

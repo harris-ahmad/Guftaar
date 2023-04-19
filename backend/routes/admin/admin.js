@@ -28,14 +28,18 @@ const verifyJWT = (req, res, next) => {
 };
 
 router.post("/login", (req, res) => {
+  // console.log("Got Request?")
   const adminLogin = req.body;
+  // console.log(adminLogin.email)
   Admin.Admin.findOne({ email: adminLogin.email })
     .then((admin) => {
       if (!admin) {
+        // console.log("This user doesn't exist")
         return res.json({
           error: "Invalid email or password",
         });
       }
+      // console.log("user exists")
       bcrypt.compare(adminLogin.password, admin.password, (err, result) => {
         if (result) {
           const token = jwt.sign(
@@ -44,6 +48,7 @@ router.post("/login", (req, res) => {
             { expiresIn: 86400 },
             (err, token) => {
               if (err) {
+                // console.log("Incorrect Password")
                 return res.json({ message: err });
               } else {
                 return res.json({

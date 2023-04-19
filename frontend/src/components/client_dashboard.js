@@ -19,10 +19,12 @@ function Quote() {
   const navigate = useNavigate();
   const [quote, setQuote] = useState('');
   const [firstName, setFirstName] = useState("");
-  const [joiningDate, setJoiningDate] = useState("")
-  const [logRecord, setRecord] = useState ()
   const [activeCourse, setCourse] = useState("")
   const [hasCourse, setHasCourse] = useState(true); 
+  let [coachName, setCoach] = useState("")
+  const [hasMeeting, setMeeting] = useState(true)
+  const [time, setTime] = useState()
+  const [countdown, setCountdown] = useState({});
 
   const email = localStorage.getItem("email")
 
@@ -44,15 +46,55 @@ function Quote() {
       console.log(result2.data)
       setFirstName(result2.data.firstName);
       setCourse(result2.data.currentActiveCourse); 
-      if(course.length > 0){
+      if(activeCourse.length == 0){
         setHasCourse(false); 
       }
-      // alert(hasCourse); 
     };
     fetchData();
   }, []);
 
-  
+  useEffect(() => {
+    const fetchData = async function () {
+      let toSend = { email: localStorage.getItem("email") };
+      let result2 = await axios.post(
+        "http://localhost:4000/client/getMeetings",
+        toSend
+      );
+      if (!(result2.data)){
+        setMeeting(false);
+      }
+      else{
+        setMeeting(true);
+        setCoach(result2.data.name);
+        setTime(new Date(result2.data.time));
+      } 
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (time) {
+        const now = new Date().getTime();
+        const distance = time.getTime() - now;
+
+        if (distance > 0) {
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          setCountdown({ days, hours, minutes, seconds });
+        } else {
+          clearInterval(intervalId);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [time]);
 
   function NoStuttering(){
     axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "NoStuttering"})
@@ -91,13 +133,27 @@ function Quote() {
         <p className='support1'>Guided Speech Support</p>
         <div className='gbox1'>  
         <img className='phone'src={phone}/>
-        <h6 className='subtext'>Coaching With Harris</h6>
+        {hasMeeting ? (
+        <div>
+          <h6 className='subtext'>Coaching with {coachName} in</h6>
+          {countdown.days && (
+            <p className='timer'>
+              {countdown.days}d {countdown.hours}h {countdown.minutes}m{" "}
+              {countdown.seconds}s
+            </p>
+          )}
+        </div>
+      ) : (
+        <h6 className='subtext'>No Upcoming Meetings</h6>
+      )}
+        {/* {hasMeeting ? <h6 className='subtext'>Coaching with {coachName} in</h6> : <h6 className='subtext'>No Upcoming Meetings</h6>} */}
+       
         <h6 className='detail'>Meetings</h6>
         </div>
 
         <div className='gbox2'>  
         <img className='course'src={course}/>
-        {hasCourse ? <h6 className='subtext'>{course}</h6> : <h6 className='subtext'>Buy Courses</h6>}
+        {hasCourse ? <h6 className='subtext'>{activeCourse}</h6> : <h6 className='subtext'>Buy Courses</h6>}
         <h6 className='detail'>Courses</h6>
         <img className='arrow'src={arrow}/>
         </div>

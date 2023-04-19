@@ -224,7 +224,31 @@ router.post("/setBreathing", async (req, res) => {
   const { email, breathing } = req.body;
   const user = await Client.Client.findOne({ email: email });
   if (user) {
-    user.breathing = breathing;
+    user.activityStatus.breathingExercise = breathing;
+    user.save();
+    res.status(200).send("success");
+  } else {
+    res.status(400).send("error");
+  }
+});
+
+router.post("/setlinklater", async (req, res) => {
+  const { email, linklater } = req.body;
+  const user = await Client.Client.findOne({ email: email });
+  if (user) {
+    user.activityStatus.linkLater = linklater;
+    user.save();
+    res.status(200).send("success");
+  } else {
+    res.status(400).send("error");
+  }
+});
+
+router.post("/setSyllableCounting", async (req, res) => {
+  const { email, syllableCounting } = req.body;
+  const user = await Client.Client.findOne({ email: email });
+  if (user) {
+    user.activityStatus.syllableCounting = syllableCounting;
     user.save();
     res.status(200).send("success");
   } else {

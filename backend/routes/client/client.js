@@ -33,7 +33,7 @@ router.get("/", (req, res) => {
 
 router.post("/register", (req, res, next) => {
   const { firstName, lastName, age, email, password } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   const newClient = new Client.Client({
     firstName: firstName,
     lastName: lastName,
@@ -59,7 +59,7 @@ router.post("/register", (req, res, next) => {
   })
     .save()
     .then((response) => {
-      console.log(response);
+      // console.log(response);
     });
 });
 
@@ -68,7 +68,7 @@ router.post("/login", (req, res) => {
   const clientLogin = req.body;
   Client.Client.findOne({ email: clientLogin.email }).then((client) => {
     if (!client) {
-      console.log("Invalid Email or Password");
+      // console.log("Invalid Email or Password");
       return res.json({
         error: "Invalid Email or Password",
       });
@@ -83,7 +83,7 @@ router.post("/login", (req, res) => {
             if (err) {
               return res.json({ message: err });
             } else {
-              console.log("->Client logged in");
+              // console.log("->Client logged in");
               return res.json({
                 message: "success",
                 token: token,
@@ -94,7 +94,7 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        console.log("->Invalid Email or Password");
+        // console.log("->Invalid Email or Password");
         res.json({
           error: "Invalid Email or Password",
         });
@@ -150,7 +150,7 @@ router.post("/getClientDashboardDetails", (req, res) => {
     .select("firstName currentActiveCourse")
     .exec()
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       res.send(response);
     })
     .catch((err) => {
@@ -158,17 +158,45 @@ router.post("/getClientDashboardDetails", (req, res) => {
     });
 });
 
-router.post("/getStreak", (req, res) => {
+router.post("/getStreak", async (req, res) => {
+  // console.log("Got Request")
   const { email } = req.body;
+  const user = await Client.Client.findOne({ email: email });
+  // console.log("This USER: ",user)
+  
   Client.Client.findOne({ email: email })
-    .select("streakCount")
-    .exec()
-    .then((response) => {
-      res.send(response);
-    })
-    .catch((err) => {
-      res.send({ error: err });
-    });
+  .select("streakLastUpdated streakCount")
+  .exec()
+  .then(async (response) => {
+    // console.log("GOT THESE:")
+    console.log(response.streakLastUpdated)
+    console.log(response.streakCount)
+    let lastUpdated = response.streakLastUpdated
+    // console.log("LAST UPDATED DATE")
+    console.log(lastUpdated)
+    const now = new Date();
+    // console.log("starting")
+    console.log(now.getTime())
+    console.log(lastUpdated.getTime())
+    const timeDiff = Math.abs(now.getTime() - lastUpdated.getTime());
+    const diffHours = Math.ceil(timeDiff / (1000 * 60 * 60));
+    if (diffHours > 24) {
+      // console.log("Difference greater than 24 hours")
+      user.streakCount = 0;
+      user.activityStatus.linkLater = false;
+      user.activityStatus.syllableCounting = false;
+      user.activityStatus.breathingExercise = false;
+      await user.save();
+      res.json({streak: user.streakCount})
+    }else{
+      // console.log("Difference less than 24 hours")
+      res.json({streak:response.streakCount})
+    }
+  })
+  .catch((err) => {
+    // console.log("in error")
+    res.send({ error: err });
+  });
 });
 
 router.post("/getMeetings", (req, res) => {
@@ -199,64 +227,22 @@ router.post("/getMeetings", (req, res) => {
             name = nameResponse.firstName;
 
             let toSend = { name: name, time: date };
-            console.log(toSend);
+            // console.log(toSend);
             res.send(toSend);
             // console.log(nameResponse.firstName);
           })
           .catch((err) => {
-            console.log("In error for Name");
+            // console.log("In error for Name");
             res.send("");
           });
       } else {
-        console.log("time has passed");
+        // console.log("time has passed");
         res.send("");
       }
     })
     .catch((err) => {
-      console.log("In email error");
+      // console.log("In email error");
       res.send({ error: err });
     });
 });
-
-router.post("/updateStreak", async (req, res) => {
-  const { email } = req.body;
-
-  const user = await Client.Client.findOne({ email: email });
-
-  // get the streakLastUpdated field from the client schema
-  let lastUpdated = await Client.Client({ email: email }).select(
-    "streakLastUpdated"
-  );
-  lastUpdated = Date(lastUpdated);
-  // get the current date
-  const now = new Date();
-  const timeDiff = Math.abs(now.getTime() - lastUpdated.getTime());
-  const diffHours = Math.ceil(timeDiff / (1000 * 60 * 60));
-
-  let resetStreak = false;
-  if (diffHours > 24) {
-    resetStreak = true;
-  } else {
-    resetStreak =
-      !user.activityStatus.linkLater ||
-      !user.activityStatus.syllableCounting ||
-      !user.activityStatus.breathingExercise;
-  }
-
-  if (resetStreak) {
-    user.streakCount = 0;
-    user.activityStatus.linkLater = false;
-    user.activityStatus.syllableCounting = false;
-    user.activityStatus.breathingExercise = false;
-  } else if (
-    user.activityStatus.linkLater &&
-    user.activityStatus.syllableCounting &&
-    user.activityStatus.breathingExercise
-  ) {
-    user.streakCount += 1;
-  } else {
-    // dont do anything
-  }
-});
-
 module.exports = router;

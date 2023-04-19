@@ -24,7 +24,7 @@ function NavbarClient(){
             "http://localhost:4000/client/getStreak",
             toSend
           );
-          setStreak(result2.data.streakCount)
+          setStreak(result2.data.streak)
         };
         fetchData();
       }, []);

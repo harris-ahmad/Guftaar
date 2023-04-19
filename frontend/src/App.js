@@ -17,6 +17,7 @@ import SetBreathingTime from "./components/set_breathing_time";
 import SpeechTechniques from "./components/speech_techniques"
 import BreathingExercise from "./components/breathing"
 import LinkLator from "./components/linklater"
+import CoachDashboard from "./components/coach_dashboard"
 
 import QuickPractice from "./components/quick_practice"
 import { useState } from "react";
@@ -30,6 +31,8 @@ function App() {
           <Route index element={<LandingPage />} />
           <Route path="coach">
             <Route path="login" element={<CoachLogin />} />
+            <Route path="dashboard" element={<CoachDashboard/>} />
+
           </Route>
           <Route path="client">
             <Route path="login" element={<Login />} />

@@ -8,25 +8,6 @@ const Meetings = require("../../models/meeting")
 
 const router = new express.Router();
 
-const verifyJWT = (req, res, next) => {
-  const token = req.headers["accesstoken"];
-  if (!token) {
-    res.json({ isLoggedIn: false, message: "No token provided" });
-  } else {
-    jwt.verify(token, "harris123", (err, decoded) => {
-      // TODO: Replace with env variable
-      if (err) {
-        return res.json({ isLoggedIn: false, message: "Invalid token" });
-      } else {
-        req.user = {};
-        req.userId = decoded.id;
-        req.user.username = decoded.username;
-        next();
-      }
-    });
-  }
-};
-
 router.get("/", (req, res) => {
   res.send("Client route");
 });
@@ -49,7 +30,7 @@ router.post("/register", (req, res, next) => {
       next(response);
     })
     .catch((err) => {
-      res.send("We already have an account made with this email")
+      res.send("We already have an account made with this email");
       // console.log("in error")
     });
 
@@ -147,12 +128,10 @@ router.post("/getClientDashboardDetails", (req, res) => {
   // console.log("Getting data for this user:", req.body.email)
   const { email } = req.body;
   Client.Client.findOne({ email: email })
-    .select(
-      "firstName currentActiveCourse"
-    ) 
+    .select("firstName currentActiveCourse")
     .exec()
     .then((response) => {
-      console.log(response)
+      console.log(response);
       res.send(response);
     })
     .catch((err) => {
@@ -163,9 +142,7 @@ router.post("/getClientDashboardDetails", (req, res) => {
 router.post("/getStreak", (req, res) => {
   const { email } = req.body;
   Client.Client.findOne({ email: email })
-    .select(
-      "streakCount"
-    ) 
+    .select("streakCount")
     .exec()
     .then((response) => {
       res.send(response);

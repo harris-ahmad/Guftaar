@@ -63,6 +63,8 @@ router.post("/register", (req, res, next) => {
     });
 });
 
+
+
 router.post("/login", (req, res) => {
   // console.log("in client?")
   const clientLogin = req.body;
@@ -238,7 +240,6 @@ router.post("/moodlog", (req, res) => {
     .exec()
     .then((response) => {
       console.log(response)
-      // console.log(response.logRecord.noStuttering)
     })
     .catch((err) => {
       console.log("in error")

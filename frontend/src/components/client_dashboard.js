@@ -16,7 +16,12 @@ import axios from "axios";
 function Quote() {
   const [quote, setQuote] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [hasCourse, setHasCourse] = useState(true);
+  const [activeCourse, setCourse] = useState("")
+  const [hasCourse, setHasCourse] = useState(true); 
+  let [coachName, setCoach] = useState("")
+  const [hasMeeting, setMeeting] = useState(true)
+  const [time, setTime] = useState()
+  const [countdown, setCountdown] = useState({});
 
   const email = localStorage.getItem("email");
 
@@ -37,33 +42,56 @@ function Quote() {
       );
       console.log(result2.data);
       setFirstName(result2.data.firstName);
-      setCourse(result2.data.currentActiveCourse);
-      if (course.length > 0) {
-        setHasCourse(false);
+      setCourse(result2.data.currentActiveCourse); 
+      if(activeCourse.length == 0){
+        setHasCourse(false); 
       }
-      // alert(hasCourse);
     };
     fetchData();
   }, []);
 
-  function NoStuttering() {
-    axios.post("http://localhost:4000/client/moodlog", {
-      email: email,
-      mood: "NoStuttering",
-    });
-  }
-  function Moderate() {
-    axios.post("http://localhost:4000/client/moodlog", {
-      email: email,
-      mood: "Moderate",
-    });
-  }
-  function Extreme() {
-    axios.post("http://localhost:4000/client/moodlog", {
-      email: email,
-      mood: "Extreme",
-    });
-  }
+  useEffect(() => {
+    const fetchData = async function () {
+      let toSend = { email: localStorage.getItem("email") };
+      let result2 = await axios.post(
+        "http://localhost:4000/client/getMeetings",
+        toSend
+      );
+      if (!(result2.data)){
+        setMeeting(false);
+      }
+      else{
+        setMeeting(true);
+        setCoach(result2.data.name);
+        setTime(new Date(result2.data.time));
+      } 
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (time) {
+        const now = new Date().getTime();
+        const distance = time.getTime() - now;
+
+        if (distance > 0) {
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          setCountdown({ days, hours, minutes, seconds });
+        } else {
+          clearInterval(intervalId);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [time]);
 
   return (
     <div className="client-bg">
@@ -82,47 +110,33 @@ function Quote() {
         <div className="circleBack"></div>
         <img className="happy" src={happy} onClick={NoStuttering} />
 
-        <div className="circleBack2"></div>
-        <img className="meh" src={moderate} onClick={Moderate} />
-
-        <div className="circleBack3"></div>
-        <img className="sad" src={extreme} onClick={Extreme} />
-      </div>
-      <p className="support1">Guided Speech Support</p>
-      <div className="gbox1">
-        <img className="phone" src={phone} />
-        <h6 className="subtext">Coaching With Harris</h6>
-        <h6 className="detail">Meetings</h6>
-      </div>
-
-      <div className="gbox2">
-        <img className="course" src={course} />
-        {hasCourse ? (
-          <h6 className="subtext">{course}</h6>
-        ) : (
-          <h6 className="subtext">Buy Courses</h6>
-        )}
-        <h6 className="detail">Courses</h6>
-        <img className="arrow" src={arrow} />
-      </div>
-
-      <div>
-        <div className="dailyTasks">
-          <div className="rectangle"></div>
-          <h6 className="activitytext">Daily Activities</h6>
-          <img className="icon" src={fire}></img>
-          <a href="dailyActivities">
-            <img className="arrow2" src={arrow} />
-          </a>
+        </div>
+        <p className='support1'>Guided Speech Support</p>
+        <div className='gbox1'>  
+        <img className='phone'src={phone}/>
+        {hasMeeting ? (
+        <div>
+          <h6 className='subtext'>Coaching with {coachName} in</h6>
+          {countdown.days && (
+            <p className='timer'>
+              {countdown.days}d {countdown.hours}h {countdown.minutes}m{" "}
+              {countdown.seconds}s
+            </p>
+          )}
+        </div>
+      ) : (
+        <h6 className='subtext'>No Upcoming Meetings</h6>
+      )}
+        {/* {hasMeeting ? <h6 className='subtext'>Coaching with {coachName} in</h6> : <h6 className='subtext'>No Upcoming Meetings</h6>} */}
+       
+        <h6 className='detail'>Meetings</h6>
         </div>
 
-        <div className="speechTechniques">
-          <div className="rectangle2"></div>
-          <h6 className="activitytext">Speech Techniques</h6>
-          <img className="icon" src={volume}></img>
-          <a href="speechTechniques">
-            <img className="arrow2" src={arrow} />
-          </a>
+        <div className='gbox2'>  
+        <img className='course'src={course}/>
+        {hasCourse ? <h6 className='subtext'>{activeCourse}</h6> : <h6 className='subtext'>Buy Courses</h6>}
+        <h6 className='detail'>Courses</h6>
+        <img className='arrow'src={arrow}/>
         </div>
 
         <div className="quickPractice">

@@ -52,9 +52,9 @@ margin-top: 12%;
 }
 
 .log{
-position: relative;
-right: 550px;
-top: 220px;
+position: absolute;
+right: 820px;
+top: 520px;
 width: 500px; height: 210px;
 display: flex; 
 align-items: center; 
@@ -150,7 +150,7 @@ height: 20px;
 .subtext{
 position: relative;
 left: 18%;
-bottom: 13%;
+bottom: 15px;
 font-family: 'League Spartan';
 font-style: normal;
 font-weight: 600;
@@ -316,17 +316,18 @@ filter: invert(55%) sepia(88%) saturate(322%) hue-rotate(337deg) brightness(95%)
 }
 
 .welcome{
-position: relative;
-bottom: 285px;
-right: 360px;
+position: absolute;
+bottom: 150px;
+right: 450px;
 font-family: 'League Spartan';
 font-style: normal;
 font-weight: 700;
 font-size: 40px;
-line-height: 55px;
+line-height: 45px;
 letter-spacing: 0.03em;
 color: #4C539C;
 backdrop-filter: blur(16.4787px);
+white-space: nowrap;
 }
 
 .circleBack{
@@ -359,6 +360,22 @@ border-radius: 65.5px;
     }
 
     .mainwelcome{
-        position: relative;
-        left: 200px;
+        position: absolute;
+        left: 65%;
     }
+
+.timer{
+    position: relative;
+    left: 430px;
+    bottom: 100px;
+    font-family: 'League Spartan';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+    color: #4C539C;
+
+}

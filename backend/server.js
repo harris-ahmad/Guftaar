@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+// const Meetings = require("./models/meeting")
 require("dotenv").config();
 
 const clientRouter = require("./routes/client/client");
@@ -32,3 +33,4 @@ connection.once("open", () => {
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
+

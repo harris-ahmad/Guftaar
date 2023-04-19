@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const Client = require("../../models/user");
 const Coach = require("../../models/user");
 const crypto = require("crypto");
+const Meetings = require("../../models/meeting")
 
 const router = new express.Router();
 
@@ -44,6 +45,7 @@ router.post("/register", (req, res, next) => {
 });
 
 router.post("/login", (req, res) => {
+  // console.log("in client?")
   const clientLogin = req.body;
   Client.Client.findOne({ email: clientLogin.email }).then((client) => {
     if (!client) {
@@ -123,7 +125,7 @@ router.get("/coaches", (req, res) => {
 });
 
 router.post("/getClientDashboardDetails", (req, res) => {
-  console.log("Getting data for this user:", req.body.email);
+  // console.log("Getting data for this user:", req.body.email)
   const { email } = req.body;
   Client.Client.findOne({ email: email })
     .select("firstName currentActiveCourse")
@@ -138,18 +140,86 @@ router.post("/getClientDashboardDetails", (req, res) => {
 });
 
 router.post("/getStreak", (req, res) => {
-  // console.log("Getting data for this user:", req.body.email)
   const { email } = req.body;
   Client.Client.findOne({ email: email })
     .select("streakCount")
     .exec()
     .then((response) => {
-      console.log(response);
       res.send(response);
     })
     .catch((err) => {
       res.send({ error: err });
     });
 });
+
+router.post("/getMeetings", (req, res) => {
+  let name = ""
+  let date = ""
+  const now = new Date()
+  const { email } = req.body;
+
+  Meetings.Meetings.find({ clientEmail: email})
+    .select(
+      "coachEmail meetingDate "
+    ) 
+    .exec()
+    .then((emailResponse) => {
+      // console.log(emailResponse)
+      const upcomingMeeting = emailResponse.find((meeting) => meeting.meetingDate.getTime() > now.getTime())
+      // console.log(upcomingMeeting)
+
+      if (upcomingMeeting) {
+        date =upcomingMeeting.meetingDate
+        const  coachEmail  = upcomingMeeting.coachEmail;
+        // console.log(coachEmail)
+
+        Client.Coach.findOne({ email: coachEmail })
+          .select("firstName")
+          .exec()
+          .then((nameResponse) => {
+            name = nameResponse.firstName;
+
+            let toSend = { name: name, time: date};
+            console.log(toSend)
+            res.send(toSend);
+            // console.log(nameResponse.firstName);
+          })
+          .catch((err) => {
+            console.log("In error for Name");
+            res.send("");
+          });
+      }
+      
+      // let email = emailResponse.coachEmail
+      // console.log(email)
+      // console.log(emailResponse.meetingDate)
+
+
+      // if (emailResponse.meetingDate.getTime() > now.getTime()) {
+      //   Client.Coach.findOne({ email: email })
+      //     .select(
+      //       "firstName"
+      //     ) 
+      //     .exec()
+      //     .then((nameResponse) => {
+      //       name = nameResponse.firstName
+      //       res.send(name)
+      //       console.log(nameResponse.firstName)
+      //     })
+      //     .catch((err) => {
+      //       console.log("In error for Name")
+      //     });
+      // } 
+      else {
+        console.log("time has passed")
+        res.send("")
+      }
+    })
+    .catch((err) => {
+      console.log("In email error")
+      res.send({ error: err });
+    });
+});
+
 
 module.exports = router;

@@ -211,28 +211,7 @@ router.post("/getMeetings", (req, res) => {
             console.log("In error for Name");
             res.send("");
           });
-      }
-      
-      // let email = emailResponse.coachEmail
-      // console.log(email)
-      // console.log(emailResponse.meetingDate)
-
-
-      // if (emailResponse.meetingDate.getTime() > now.getTime()) {
-      //   Client.Coach.findOne({ email: email })
-      //     .select(
-      //       "firstName"
-      //     ) 
-      //     .exec()
-      //     .then((nameResponse) => {
-      //       name = nameResponse.firstName
-      //       res.send(name)
-      //       console.log(nameResponse.firstName)
-      //     })
-      //     .catch((err) => {
-      //       console.log("In error for Name")
-      //     });
-      // } 
+      } 
       else {
         console.log("time has passed")
         res.send("")
@@ -240,6 +219,29 @@ router.post("/getMeetings", (req, res) => {
     })
     .catch((err) => {
       console.log("In email error")
+      res.send({ error: err });
+    });
+});
+
+
+router.post("/moodlog", (req, res) => {
+  console.log("getting mood")
+  const { email } = req.body;
+  const mood = req.body.mood
+
+  console.log(mood)
+
+  Client.Client.findOne({ email: email })
+    .select(
+      "logRecord"
+    ) 
+    .exec()
+    .then((response) => {
+      console.log(response)
+      // console.log(response.logRecord.noStuttering)
+    })
+    .catch((err) => {
+      console.log("in error")
       res.send({ error: err });
     });
 });

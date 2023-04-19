@@ -141,32 +141,20 @@ router.post("/addAdmin", (req, res, next) => {
     });
 });
 
-router.get("/getActorCount", (req, res) => {
-  let data = { actorCount: {}, allCoaches: [{}] };
-  Coach.Coach.find({})
-    .select("firstName lastName rating")
-    .then((coaches) => {
-      data.actorCount.coaches = coaches.length;
-      data.allCoaches = coaches;
-      Client.Client.find({})
-        .then((clients) => {
-          data.actorCount.clients = clients.length;
-          Admin.Admin.find({})
-            .then((admins) => {
-              data.actorCount.admins = admins.length;
-              res.json({ data: data });
-            })
-            .catch((err) => {
-              res.status(500).json({ error: err });
-            });
-        })
-        .catch((err) => {
-          res.status(500).json({ error: err });
-        });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err });
-    });
+router.get("/getActorCount", async (req, res) => {
+  try {
+    const [clientCount, coachCount, adminCount] = await Promise.all([
+      Client.Client.countDocuments(),
+      Client.Coach.countDocuments(),
+      Client.Admin.countDocuments(),
+    ]);
+    const data = { Clients: clientCount, Coach: coachCount, Admin: adminCount };
+    console.log(data);
+    res.send(data);
+  } catch (err) {
+    console.log("in error:", err);
+    res.send({ error: err });
+  }
 });
 
 router.get("/getTopCoaches", (req, res) => {

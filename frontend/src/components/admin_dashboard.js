@@ -12,6 +12,7 @@ function Dashboard() {
   const [adminCount, setAdminCount] = useState(0);
   const [coachCount, setCoachCount] = useState(0);
   const [clientCount, setClientCount] = useState(0);
+
   const [allCoaches, setAllCoaches] = useState([{}]);
   const [topCoaches, setTopCoaches] = useState([{}]);
   
@@ -20,14 +21,9 @@ function Dashboard() {
       const actorCount = await axios.get(
         "http://localhost:4000/admin/getActorCount"
       );
-      const topCoaches = await axios.get(
-        "http://localhost:4000/admin/getTopCoaches"
-      );
-      setTopCoaches(topCoaches.data.data.coaches);
-      setAdminCount(actorCount.data.data.actorCount.admins);
-      setCoachCount(actorCount.data.data.actorCount.coaches);
-      setClientCount(actorCount.data.data.actorCount.clients);
-      setAllCoaches(actorCount.data.data.allCoaches);
+      setAdminCount(actorCount.data.Admin);
+      setCoachCount(actorCount.data.Coach);
+      setClientCount(actorCount.data.Clients);
     };
     fetchInfo();
   }, []);

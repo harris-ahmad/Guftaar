@@ -96,14 +96,25 @@ function Quote() {
     return () => clearInterval(intervalId);
   }, [time]);
 
-  function NoStuttering(){
-    axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "NoStuttering"})
+  const NoStuttering = async function(){
+      let result2 = await axios.post(
+        'http://localhost:4000/client/moodlog', {email:localStorage.getItem("email"), mood: "noStuttering"}
+      );
+      console.log(result2.data)
 }
-  function Moderate(){
-    axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "Moderate"})
+
+const Moderate = async function(){
+  let result2 = await axios.post(
+    'http://localhost:4000/client/moodlog', {email:localStorage.getItem("email"), mood: "mild"}
+  );
+  console.log(result2.data)
 }
-  function Extreme(){
-    axios.post('http://localhost:3000/client/moodlog', {email:email, mood: "Extreme"})
+
+const Extreme = async function(){
+  let result2 = await axios.post(
+    'http://localhost:4000/client/moodlog', {email:localStorage.getItem("email"), mood: "extreme"}
+  );
+  console.log(result2.data)
 }
  
   return (

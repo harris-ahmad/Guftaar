@@ -51,6 +51,7 @@ const coachSchema = new Schema({
     unique: true,
     validate: [validator.isEmail, "Invalid email"],
   },
+  rating: {type: Number, required: true, default:0}
 });
 
 const adminSchema = new Schema({

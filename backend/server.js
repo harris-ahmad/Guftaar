@@ -21,6 +21,10 @@ app.use("/client", clientRouter);
 app.use("/coach", coachRouter);
 app.use("/admin", adminRouter);
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 const uri = process.env.DB;
 mongoose.connect(uri, { useNewUrlParser: true });
 const connection = mongoose.connection;

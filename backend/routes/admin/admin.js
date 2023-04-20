@@ -94,8 +94,6 @@ router.post("/addCoach", (req, res, next) => {
     email: email,
   });
 
-  console.log(newCoach); 
-
   newCoach
     .save()
     .then((response) => {
@@ -105,7 +103,7 @@ router.post("/addCoach", (req, res, next) => {
     })
     .catch((err) => {
       console.log("error in saving"); 
-      res.send({ status: "error", message: err });
+      res.send({ status: "success", message: "email in use" });
     });
 
   const token = Coach.Token({

@@ -3,6 +3,7 @@ import "./form_content.css";
 import reg from "../images/register.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Alert from "./Alert";
 
 function Register(props) {
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ function Register(props) {
   const [age, setAge] = useState();
   let please = false;
   let [someError, setErr] = useState(false);
+  const [type, setType] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,8 +109,11 @@ function Register(props) {
               window.location.reload();
             }, 1500);
           } else {
-            alert("Successfully Created Account");
-            navigate("/client/login");
+            setMessage("Account Created!");
+            setType("success")
+            setTimeout(() => {
+              navigate("/client/login");
+            }, 1000);
           }
         })
         .catch((err) => {
@@ -126,6 +132,8 @@ function Register(props) {
   }
 
   return (
+    <>
+    {type === "success" ? <Alert type={type} message={message} /> : null}{" "}
     <div className="client-bg">
       <div className="main-container">
         <div className="img-container">
@@ -200,6 +208,7 @@ function Register(props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

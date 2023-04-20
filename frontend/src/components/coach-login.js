@@ -3,12 +3,15 @@ import './form_content.css'
 import Si from '../images/sign_in.svg'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import Alert from "./Alert";
 
 function CoachLogin(props){
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [e_error, setE_error] = useState(false)
     const [e_pass, setE_pass] = useState(false)
+    const [type, setType] = useState("");
+    const [message, setMessage] = useState("");
 
     const validation = (e) => {
         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -58,10 +61,8 @@ function CoachLogin(props){
                 .post("http://localhost:4000/coach/login", clientLogin)
                 .then((res) => {
                   if (res.data.error) {
-                    alert(res.data.error);
-                    setTimeout(() => {
-                        window.location.reload();
-                      }, 500);
+                    setType("error");
+                    setMessage("Invalid Credentials");
                   } else {
                     localStorage.setItem("token", res.data.token);
                     localStorage.setItem("id", res.data.id);
@@ -78,6 +79,8 @@ function CoachLogin(props){
         }
     }
     return(
+        <>
+        {type === "error" ? <Alert type={type} message={message} /> : null}{" "}
         <div className="client-bg">
         <div className="form-content-login">
             <h2> Login</h2>
@@ -93,6 +96,7 @@ function CoachLogin(props){
             </form>
         </div>
         </div>
+        </>
     )
 }
 

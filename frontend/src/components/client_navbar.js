@@ -16,7 +16,7 @@ function NavbarClient(){
     function GoBack(){
         navigate("/client/dashboard")
     }
-
+    
     useEffect(() => {
         const fetchData = async function () {
           let toSend = { email: localStorage.getItem("email") };
@@ -29,14 +29,13 @@ function NavbarClient(){
         fetchData();
       }, []);
 
-
     return(
         <nav>
             <ul className='nav-items-list'>
                 <li className='guftaar-logo nav-item'><a onClick={GoBack}>Guftaar</a></li>
-                <li className='nav-item'> <a className='nav-anchor' href='./dailyActivities'>daily activities</a></li>
-                <li className='nav-item'> <a className='nav-anchor' href='./speechTechniques'>speech techniques</a></li>
-                <li className='nav-item'><a className='nav-anchor' href='./quickPractice'>quick practice</a></li>
+                <li className='nav-item'> <a className='nav-anchor' href= 'DailyActivities' >daily activities</a></li>
+                <li className='nav-item'> <a className='nav-anchor' href='SpeechTechniques'>speech techniques</a></li>
+                <li className='nav-item'><a className='nav-anchor' href='QuickPractice'>quick practice</a></li>
                 <li className='nav-item'><a className='nav-anchor' href='./coaches'>coaches</a></li>
                 <li className='nav-item'><a className='nav-anchor' href='./courses'>courses</a></li>
                 <div>

@@ -189,7 +189,7 @@ const Extreme = async function(){
           <h6 className='activitytext'>Quick Practice</h6>
           <img className='icon'src={mic}></img>
           <a href='quickPractice'><img className='arrow2'src={arrow}/></a>
-          <h6 className='progress'>View Progress</h6>
+          {/* <h6 className='progress'>View Progress</h6> */}
           </div>
         </div>
 

@@ -19,7 +19,6 @@ import BreathingExercise from "./components/breathing";
 import LinkLator from "./components/linklater";
 import CoachDashboard from "./components/coach_dashboard";
 // import ViewCoaches from "./components/view_coaches"
-
 import QuickPractice from "./components/quick_practice";
 import { useState } from "react";
 import SyllableCounting from "./components/syllable_counting";

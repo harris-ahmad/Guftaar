@@ -5,6 +5,7 @@ const Client = require("../../models/user");
 const Coach = require("../../models/user");
 const crypto = require("crypto");
 const Meetings = require("../../models/meeting");
+require("dotenv").config();
 
 const router = new express.Router();
 
@@ -77,7 +78,7 @@ router.post("/login", (req, res) => {
       if (result) {
         const token = jwt.sign(
           { id: client._id, username: client.firstName },
-          "harris123", // TODO: Replace with env variable
+          process.env.SESS_SECRET, // TODO: Replace with env variable
           { expiresIn: 86400 },
           (err, token) => {
             if (err) {

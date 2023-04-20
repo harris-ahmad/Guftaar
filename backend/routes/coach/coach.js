@@ -2,28 +2,8 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Coach = require("../../models/user");
-const crypto = require("crypto");
 
 const router = new express.Router();
-
-const verifyJWT = (req, res, next) => {
-  const token = req.headers["accesstoken"];
-  if (!token) {
-    res.json({ isLoggedIn: false, message: "No token provided" });
-  } else {
-    jwt.verify(token, "harris123", (err, decoded) => {
-      // TODO: Replace with env variable
-      if (err) {
-        return res.json({ isLoggedIn: false, message: "Invalid token" });
-      } else {
-        req.user = {};
-        req.userId = decoded.id;
-        req.user.username = decoded.username;
-        next();
-      }
-    });
-  }
-};
 
 router.post("/login", (req, res) => {
   const coachLogin = req.body;
@@ -38,7 +18,7 @@ router.post("/login", (req, res) => {
         if (result) {
           const token = jwt.sign(
             { id: coach._id, email: coach.email },
-            "harris123",
+            process.env.SESS_SECRET,
             { expiresIn: 86400 },
             (err, token) => {
               if (err) {

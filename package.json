@@ -2,7 +2,7 @@
   "name": "guftaar",
   "version": "1.0.0",
   "scripts": {
-    "install": "cd frontend && npm install --force && cd ../backend && npm install" --force,
+    "install": "cd frontend && npm install --force && cd ../backend && npm install --force",
     "build": "cd frontend && npm run build",
     "start": "cd backend && npm start"
   },

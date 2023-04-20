@@ -133,7 +133,7 @@ router.post("/getPass", (req, res) => {
 
 router.get("/coaches", (req, res) => {
   Coach.Coach.find({})
-    .select("firstName lastName")
+    .select("firstName lastName email rating qualification yearsOfExperience")
     .exec()
     .then((response) => {
       res.json(response);

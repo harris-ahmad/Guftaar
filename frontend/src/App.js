@@ -18,6 +18,7 @@ import SpeechTechniques from "./components/speech_techniques";
 import BreathingExercise from "./components/breathing";
 import LinkLator from "./components/linklater";
 import CoachDashboard from "./components/coach_dashboard";
+// import ViewCoaches from "./components/view_coaches"
 
 import QuickPractice from "./components/quick_practice";
 import { useState } from "react";
@@ -41,6 +42,8 @@ function App() {
             <Route path="changePassword" element={<ChangePass />} />
             <Route path="speechTechniques" element={<SpeechTechniques />} />
             <Route path="quickPractice" element={<QuickPractice />} />
+            {/* <Route path="viewCoaches" element={<ViewCoaches />} /> */}
+
 
             <Route path="dailyActivities">
               <Route index element={<DailyActivities />} />

@@ -79,7 +79,6 @@ function AdminLogin(props){
         }
         else{
         }
-
     }
 
 

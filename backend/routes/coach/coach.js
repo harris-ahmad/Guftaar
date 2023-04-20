@@ -63,4 +63,18 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.post("/changePassword", (req, res) => {
+  const pass = req.body.new;
+  const id = req.body.id;
+  const salted = req.body.salted;
+  Coach.Coach.updateOne({ _id: id }, { $set: { password: pass, salt: salted } })
+    .exec()
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.json({ error: err });
+    });
+});
+
 module.exports = router;

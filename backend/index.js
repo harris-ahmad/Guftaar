@@ -10,7 +10,7 @@ const coachRouter = require("./routes/coach/coach");
 const adminRouter = require("./routes/admin/admin");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5003;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -21,11 +21,8 @@ app.use("/client", clientRouter);
 app.use("/coach", coachRouter);
 app.use("/admin", adminRouter);
 
-app.get("/", (req, res) => {
-  res.status(200);
-});
 
-const uri = process.env.DB;
+const uri = "mongodb+srv://harrisahmad55:ladBob12@cluster0.4d91bik.mongodb.net/guftaar";
 mongoose.connect(uri, { useNewUrlParser: true });
 const connection = mongoose.connection;
 connection.once("open", () => {

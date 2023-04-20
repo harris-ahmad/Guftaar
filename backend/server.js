@@ -22,7 +22,7 @@ app.use("/coach", coachRouter);
 app.use("/admin", adminRouter);
 
 app.get("/", (req, res) => {
-  res.status(200).send("OK");
+  res.status(200);
 });
 
 const uri = process.env.DB;

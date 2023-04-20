@@ -1,5 +1,8 @@
 {
   "name": "guftaar",
   "version": "1.0.0",
-  "description": ""
+  "description": "",
+  "scripts" : {
+    "start": "node ./backend/index.js"
+  },
 }

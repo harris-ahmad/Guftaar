@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
   res.status(200);
 });
 
-const uri = process.env.DB;
+const uri = "mongodb+srv://harrisahmad55:ladBob12@cluster0.4d91bik.mongodb.net/guftaar";
 mongoose.connect(uri, { useNewUrlParser: true });
 const connection = mongoose.connection;
 connection.once("open", () => {

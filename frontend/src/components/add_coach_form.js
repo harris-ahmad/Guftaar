@@ -6,7 +6,7 @@ import "react-dropdown/style.css";
 import { useNavigate } from "react-router-dom";
 import cross from "../images/cross.svg";
 import NavbarAdmin from "./navbar_admin";
-import axios from "axios";
+import axios from 'axios'; 
 
 function CoachForm() {
   const [email, setEmail] = useState("");
@@ -25,6 +25,7 @@ function CoachForm() {
   function shift() {
     navigate("/admin/addEmployee");
   }
+
   const options = ["Male", "Female", "Other"];
   const options2 = [
     "No experience",
@@ -47,23 +48,27 @@ function CoachForm() {
       email: email,
       password: pass,
     };
+
     axios
       .post("http://localhost:4000/admin/addCoach", toSend)
       .then((response) => {
         if (response.data.status === "success") {
-          alert("successfully added");
+          // alert("successfully added");
+          navigate("/coach/login"); 
         } else {
-          alert(response.data.message);
+          // alert("could not save to database"); 
         }
       })
       .catch((err) => {
+        alert("idher2")
         alert(err);
       });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit2 = async (e) => {
     e.preventDefault();
     validate();
+    alert("clicked!"); 
     await addCoach(e);
   };
 
@@ -76,6 +81,8 @@ function CoachForm() {
       document.getElementById("fname").style.borderColor = "";
       document.getElementById("fname").style.borderWidth = "";
     }
+
+
     if (lname == "") {
       document.getElementById("lname").style.borderColor = "crimson";
       document.getElementById("lname").style.borderWidth = "2px";
@@ -84,6 +91,8 @@ function CoachForm() {
       document.getElementById("lname").style.borderColor = "";
       document.getElementById("lname").style.borderWidth = "";
     }
+
+
     if (!gender) {
       document.getElementById("error-text-gen").textContent = "Gender required";
       document.getElementById("error-text-gen").style.textDecorationColor =
@@ -92,6 +101,8 @@ function CoachForm() {
       document.getElementById("error-text-gen").textContent = "";
       document.getElementById("error-text-gen").style.textDecorationColor = "";
     }
+
+
     if (!age) {
       document.getElementById("age").style.borderColor = "crimson";
       document.getElementById("age").style.borderWidth = "2px";
@@ -103,8 +114,11 @@ function CoachForm() {
       document.getElementById("error-text-age").style.paddingBottom = "2%";
       document.getElementById("error-text-age").style.display = "block";
     }
+
+
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var passwordRegex = /^(?=.*\d).{8,}$/;
+
     if (email === "") {
       document.getElementById("email").style.borderColor = "crimson";
       document.getElementById("email").style.borderWidth = "2px";
@@ -122,6 +136,8 @@ function CoachForm() {
       document.getElementById("error-text-email").style.paddingBottom = "";
       document.getElementById("error-text-email").style.display = "";
     }
+
+
     if (pass === "") {
       document.getElementById("password").style.borderColor = "crimson";
       document.getElementById("password").style.borderWidth = "2px";
@@ -137,6 +153,7 @@ function CoachForm() {
       document.getElementById("password").style.borderWidth = "";
       document.getElementById("error-text-pass").textContent = "";
     }
+
     if (qual == "") {
       document.getElementById("qual").style.borderColor = "crimson";
       document.getElementById("qual").style.borderWidth = "2px";
@@ -145,6 +162,7 @@ function CoachForm() {
       document.getElementById("qual").style.borderColor = "";
       document.getElementById("qual").style.borderWidth = "";
     }
+
     if (!exp) {
       document.getElementById("error-text-exp").textContent =
         "Experience required";
@@ -154,6 +172,7 @@ function CoachForm() {
       document.getElementById("error-text-exp").textContent = "";
       document.getElementById("error-text-exp").style.textDecorationColor = "";
     }
+
     if (cpass === "") {
       document.getElementById("cpassword").style.borderColor = "crimson";
       document.getElementById("cpassword").style.borderWidth = "2px";
@@ -170,61 +189,17 @@ function CoachForm() {
       document.getElementById("error-text-cpass").textContent = "";
       document.getElementById("error-text-cpass").style.display = "";
     }
+
+    // console.log('agaya'); 
   }
 
   return (
     <div className="formbg">
       <NavbarAdmin />
-      {/* <div className="formAdmin" >
-            <div className="ftext">
-            <h3 className='Name'> Guftaar</h3></div>
-            <p className="create"> Add Coach</p>
-            <p className="details"> Fill in the details below</p>      
-            <img className="back"src={cross} onClick={shift}/>     
-            <div classname="fcontent">
-                <label for="fname"  className="lf" >First name</label>
-                <input value={fname} className="input-field-add" onChange={(e)=> setFname(e.target.value)} type="text" placeholder="Enter your name" id="fname" name="fname"></input>
-                <label for="lname" className="ls">Last name</label>
-                <input value={lname} className="input-field-add" onChange={(e)=> setLname(e.target.value)} type="text" placeholder="Enter your surname" id="lname" name="lname"></input>
-                <label for="gender" className="l">Gender</label>
-                <Dropdown  className="gen" 
-                options={options} 
-                onChange={(e)=>{
-                    setGender(e.value);
-                    }}  
-                value={gender}  
-                placeholder="Choose your gender"  id="gender" name="gender" ></Dropdown>
-                <span id={"error-text-gen"} className={"et"}></span>
-                <label for="email" className="l" >Email</label>                
-                <input value={email} className="input-field-add" onChange={(e)=> setEmail(e.target.value)} type="email" placeholder="Enter your email" id="email" name="email"></input>
-                <span id={"error-text-email"} className={"et"}></span>
-
-                <label for="age" className="l">Age</label>
-                <input value={age}  className="input-field-add" onChange={(e)=> setAge(e.target.value)} type="number" placeholder="Enter your age" id="age" name="age"></input>
-                <span id={"error-text-age"} className={"et"}></span>
-                <label for="qual" className="l">Qualification</label>
-                <input value={qual} className="input-field-add" onChange={(e)=> setQual(e.target.value)} type="text" placeholder="Enter your qualification" id="qual" name="qual"></input>
-                <label for="exp" className="l">Past Experience</label>
-                <Dropdown  className="exp" 
-                options={options2} 
-                onChange={(e)=>{
-                    setExp(e.value);
-                    }}  
-                value={exp}  
-                placeholder="Choose your years of experience" ></Dropdown>
-                <span id={"error-text-exp"} className={"et"}></span>       
-                <label for="password" className="l">Enter your password</label>
-                
-                <input type="password" className="input-field-add" value={pass} onChange={(e)=> setPass(e.target.value)} placeholder="Enter password" id="password" name="password"></input>
-                <span id={"error-text-pass"} className={"et"}></span>
-                <label for="cpassword" className="l">Confirm your password</label>    
-                <input type="password" className="input-field-add" value={cpass} onChange={(e)=> setCPass(e.target.value)} placeholder="Confirm password" id="cpassword" name="cpassword"></input>
-
-                <span id={"error-text-cpass"} className={"et"}></span>
-                <button type="submit" className="buttonL" onClick={handleSubmit}>Create Account</button>
-
-            </div >
-        </div> */}
+      <h3 className="titlequestion">Add Coach</h3>
+      <a href="AddEmployee">
+        <img className="gobackcross" src={cross} />
+      </a>
       <div className="center-container">
         {/* <div className="ftext"> */}
         <div className="form-header">
@@ -330,25 +305,18 @@ function CoachForm() {
               <label for="exp" className="lf lef-pad-2">
                 Past Experience
               </label>
-              {/* <Dropdown  className="exp" 
-                        options={options2} 
-                        onChange={(e)=>{
-                            setExp(e.value);
-                            }}  
-                        value={exp}  
-                        placeholder="Choose your years of experience" ></Dropdown>
-                        <span id={"error-text-exp"} className={"et"}></span>   */}
 
               {/* NEEDS TO BE CHANGED */}
               <input
-                value={qual}
+                value={exp}
                 className="input-field-add"
-                onChange={(e) => setQual(e.target.value)}
+                onChange={(e) => setExp(e.target.value)}
                 type="text"
                 placeholder="Enter your years of experience"
-                id="qual"
-                name="qual"
+                id="exp"
+                name="exp"
               ></input>
+              <span id={"error-text-exp"} className={"et"}></span>
             </div>
           </div>
           <div className="form-row-1">
@@ -384,7 +352,7 @@ function CoachForm() {
             </div>
           </div>
           <div className="button-row">
-            <button type="submit" className="buttonLL" onClick={handleSubmit}>
+            <button type="submit" className="buttonLL" onClick={handleSubmit2}>
               Create Account
             </button>
           </div>

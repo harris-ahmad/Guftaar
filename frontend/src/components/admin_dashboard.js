@@ -12,9 +12,9 @@ function Dashboard() {
   const [adminCount, setAdminCount] = useState(0);
   const [coachCount, setCoachCount] = useState(0);
   const [clientCount, setClientCount] = useState(0);
-
-  const [allCoaches, setAllCoaches] = useState([{}]);
-  const [topCoaches, setTopCoaches] = useState([{}]);
+  const [topCoaches, setTopCoaches] = useState([]);
+  const [display, setdisplay] = useState(false)
+  let idx = 0
   
   useEffect(() => {
     const fetchInfo = async function () {
@@ -27,9 +27,33 @@ function Dashboard() {
     };
     fetchInfo();
   }, []);
-  
+
+  useEffect(() => {
+    const fetchInfo = async function () {
+      const starCoaches = await axios.get(
+        "http://localhost:4000/admin/getTopCoaches"
+      );
+      setTopCoaches (Object.values((starCoaches.data)))
+      setdisplay(true)
+      // alert(topCoaches.firstName)
+    };
+    fetchInfo();
+  }, []);
+
+  const handleEditRating = async function (coachIndex) {
+    let newRating = prompt('Enter new rating for coach:');
+    if (newRating < 0 || newRating > 5){
+      alert("Rating must be between 0 and 5")
+      newRating = prompt('Enter new rating for coach:');
+    }
+    if (newRating !== null) {
+      const response = await axios.post("http://localhost:4000/admin/updateRating", {rating:newRating, id: coachIndex});
+      window.location.reload();
+    }
+  };
+
   return (
-    <div className="dashboard-container">
+      <div className="dashboard-container">
        <NavbarAdmin />
       <div className="coachbox">
         <h2>{coachCount}</h2>
@@ -52,52 +76,33 @@ function Dashboard() {
       <div className="heading">
         <h1>Administrator Centre</h1>
       </div>
+    <div className="dashboard-container">
+      {/* ... */}
       <div className="reviewbox">
-        <h1>Top Coaches</h1> {/* render the list here */}
-        <ul class="names">
-          <li>Emaan Atique</li>
-          <li>Romessa Shah</li>
-          <li>Arfa Imran</li>
-          <li>Hamza Ali </li>
+        <h1>Top Coaches</h1>
+        <ul className="names">
+          {display && topCoaches.map((coach) => (
+            <li key={coach._id}>{coach.firstName} {coach.lastName}</li>
+          ))}
         </ul>
-        <div className="row1">
-        <h3 className='icon1text'>5</h3>
-        <img src={si} alt="StarIcon" className='staricon1'></img>
-        <button type="button" className='editbutton'>
-        <img src={ei} alt="EditIcon" className='editicon1' />
-        </button>
-        </div>
-        <div className='row2'>
-        <h3 className='icon2text'>4</h3>
-        <img src={si} alt="StarIcon" className='staricon2'></img>
-        <button type="button" className='editbutton'>
-        <img src={ei} alt="EditIcon" className='editicon2' />
-        </button>
-        </div>
-        <div className='row3'>
-        <h3 className='icon3text'>4</h3>
-        <img src={si} alt="StarIcon" className='staricon3'></img>
-        <button type="button" className='editbutton'>
-        <img src={ei} alt="EditIcon" className='editicon3' />
-        </button>        
-        <div className='row4'>
-        <h3 className='icon4text'>3.5</h3>
-        <img src={si} alt="StarIcon" className='staricon4' />
-        <button type="button" className='editbutton'>
-        <img src={ei} alt="EditIcon" className='editicon4' />
-        </button>
 
-        </div>
+        {display && topCoaches.map((coach, index) => (
+          <div className={`row${index+1}`} key={coach._id}>
+            <h3 className={`icon${index+1}text`}>{coach.rating}</h3>
+            <img src={si} alt="StarIcon" className={`staricon${index+1}`}></img>
+            <button type="button" className="editbutton" onClick={() => handleEditRating(coach._id)}>
+              <img src={ei} alt="EditIcon" className={`editicon${index+1}`} />
+            </button>
+          </div>
+        ))}
 
-
-        </div>
+      </div>
         <p className='ratingtext'> rating</p>
         <p className='edittext'> edit</p>
         <button class="viewbutton">view all</button>
         <button class="readbutton">read reviews</button>
-      </div>
+        
     </div>
-  );
-}
-
+    </div>
+  )}
 export default Dashboard;

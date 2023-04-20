@@ -70,6 +70,7 @@ router.post("/login", (req, res) => {
     });
 });
 
+
 router.post("/addCoach", (req, res, next) => {
   const {
     firstName,
@@ -81,6 +82,7 @@ router.post("/addCoach", (req, res, next) => {
     yearsOfExperience,
     password,
   } = req.body;
+
   const newCoach = new Coach.Coach({
     firstName: firstName,
     lastName: lastName,
@@ -91,13 +93,18 @@ router.post("/addCoach", (req, res, next) => {
     password: password,
     email: email,
   });
+
+  console.log(newCoach); 
+
   newCoach
     .save()
     .then((response) => {
+      console.log("saved to db")
       res.send({ status: "success", message: "Coach registered" });
       next(response);
     })
     .catch((err) => {
+      console.log("error in saving"); 
       res.send({ status: "error", message: err });
     });
 
@@ -121,13 +128,18 @@ router.post("/addAdmin", (req, res, next) => {
     password: password,
     email: email,
   });
+
+  console.log(newAdmin); 
+  
   newAdmin
     .save()
     .then((response) => {
+      console.log("admin added to db"); 
       res.send({ status: "success", message: "Admin registered" });
       next(response);
     })
     .catch((err) => {
+      console.log("error in adding admin to db"); 
       res.send({ status: "error", message: err });
     });
 
@@ -140,6 +152,7 @@ router.post("/addAdmin", (req, res, next) => {
       console.log(response);
     });
 });
+
 
 router.get("/getActorCount", async (req, res) => {
   try {
@@ -163,12 +176,22 @@ router.get("/getTopCoaches", (req, res) => {
     .sort({ rating: -1 })
     .limit(4)
     .then((coaches) => {
-      res.json({ coaches: coaches });
+      let count = 0
+      let toSend = {}
+      coaches.forEach((coach) => {
+        toSend[count] = coach
+        count++
+      });
+     
+      console.log(toSend)
+      res.json(toSend);
     })
     .catch((err) => {
       res.status(500).json({ error: err });
     });
 });
+
+
 
 router.get("/getAllCoaches", (req, res) => {
   // get the list of all coaches
@@ -181,5 +204,26 @@ router.get("/getAllCoaches", (req, res) => {
       res.status(500).json({ error: err });
     });
 });
+
+router.post("/updateRating",async (req, res) => {
+  console.log("Got request", req.body.rating, req.body.id)
+  const user = await Coach.Coach.findById(req.body.id);
+
+  Coach.Coach.findById(req.body.id)
+    .select("rating")
+    .exec()
+    .then( async (response) => {
+      console.log("This coach:", user)
+      console.log("Old rating",response.rating);
+      user.rating = req.body.rating
+      await user.save();
+      res.send("sucess");
+    })
+    .catch((err) => {
+      console.log("in error for rating update")
+      res.send({ error: err });
+    });
+});
+
 
 module.exports = router;

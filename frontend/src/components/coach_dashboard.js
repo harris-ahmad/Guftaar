@@ -2,7 +2,7 @@ import React from 'react';
 import "./coach_dashboard.css";
 import phonei from "../images/phoneicon.png"
 import infoi from "../images/infoicon.png"
-// import NavbarCoach from './coach_navbar';
+import NavbarCoach from './coach_navbar';
 import Carousel from './coach_dashboard_carousel';
 // import { useNavigate } from 'react-router-dom';
 // import axios from "axios";
@@ -10,7 +10,7 @@ import Carousel from './coach_dashboard_carousel';
 function Dashboard() {
   return (
     <div className="admin-dashboard-bg">
-       {/* <NavbarCoach /> */}
+       <NavbarCoach />
        <div className='welcome-heading'>
         Welcome, Harris
        </div>

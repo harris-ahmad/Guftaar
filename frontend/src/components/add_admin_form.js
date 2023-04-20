@@ -8,6 +8,7 @@ import cross from "../images/cross.svg";
 import NavbarAdmin from "./navbar_admin";
 import axios from "axios";
 
+
 function AdminForm() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -17,6 +18,8 @@ function AdminForm() {
   const [lname, setLname] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState();
+
+  const [valid, setValid] = useState(true);
 
   const navigate = useNavigate();
 
@@ -34,8 +37,8 @@ function AdminForm() {
   ];
 
   // adding axios calls to send information
-  const addCoach = async (e) => {
-    e.preventDefault();
+  const addAdmin = async (e) => {
+    alert("admin start"); 
     const toSend = {
       firstName: fname,
       lastName: lname,
@@ -44,26 +47,36 @@ function AdminForm() {
       password: pass,
       email: email,
     };
+
+    alert("before axios"); 
     axios.post("http://localhost:4000/admin/addAdmin", toSend).then((res) => {
-      console.log(res);
-      if (res.data.success) {
+      if (res.data.status === "success"){
         alert("Admin added successfully");
       } else {
-        alert("Coach already exists");
+        alert("Admin already exists");
       }
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleAdminSubmit = async (e) => {
     e.preventDefault();
     validate();
-    await addCoach();
+    // alert("here"); 
+    if(valid){
+      alert("all data valid"); 
+      await addAdmin();
+      setValid(true); 
+    } else {
+      alert("invalid data"); 
+    }
   };
+
   function validate() {
     if (fname == "") {
       document.getElementById("fname").style.borderColor = "crimson";
       document.getElementById("fname").style.borderWidth = "2px";
       document.getElementById("fname").placeholder = "First name required";
+      setValid(false); 
     } else {
       document.getElementById("fname").style.borderColor = "";
       document.getElementById("fname").style.borderWidth = "";
@@ -72,41 +85,40 @@ function AdminForm() {
       document.getElementById("lname").style.borderColor = "crimson";
       document.getElementById("lname").style.borderWidth = "2px";
       document.getElementById("lname").placeholder = "Last name required";
+      setValid(false); 
     } else {
       document.getElementById("lname").style.borderColor = "";
       document.getElementById("lname").style.borderWidth = "";
     }
-    if (!gender) {
-      document.getElementById("error-text-gen").textContent = "Gender required";
-      document.getElementById("error-text-gen").style.textDecorationColor =
-        "crimson";
-    } else {
-      document.getElementById("error-text-gen").textContent = "";
-      document.getElementById("error-text-gen").style.textDecorationColor = "";
-    }
+    
     if (!age) {
       document.getElementById("age").style.borderColor = "crimson";
       document.getElementById("age").style.borderWidth = "2px";
       document.getElementById("age").placeholder = "Age required";
+      alert("empty"); 
+      setValid(false); 
     } else if (age < 20) {
       document.getElementById("age").className = "error-control-r";
-      document.getElementById("error-text-age").textContent =
-        "A coach must be 20+.";
+      document.getElementById("error-text-age").textContent ="A coach must be 20+.";
       document.getElementById("error-text-age").style.paddingBottom = "2%";
       document.getElementById("error-text-age").style.display = "block";
+      setValid(false); 
     }
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var passwordRegex = /^(?=.*\d).{8,}$/;
+    
     if (email === "") {
       document.getElementById("email").style.borderColor = "crimson";
       document.getElementById("email").style.borderWidth = "2px";
       document.getElementById("email").placeholder = "Email required";
+      setValid(false); 
     } else if (!email.match(mailformat)) {
       document.getElementById("email").style.borderColor = "crimson";
       document.getElementById("email").style.borderWidth = "2px";
       document.getElementById("error-text-email").textContent = "Invalid email";
       document.getElementById("error-text-email").style.paddingBottom = "2%";
       document.getElementById("error-text-email").style.display = "block";
+      setValid(false); 
     } else {
       document.getElementById("email").style.borderColor = "";
       document.getElementById("email").style.borderWidth = "";
@@ -119,12 +131,13 @@ function AdminForm() {
       document.getElementById("password").style.borderColor = "crimson";
       document.getElementById("password").style.borderWidth = "2px";
       document.getElementById("password").placeholder = "Password required";
+      setValid(false); 
     } else if (!passwordRegex.test(pass)) {
       document.getElementById("password").style.borderColor = "crimson";
       document.getElementById("password").style.borderWidth = "2px";
-      document.getElementById("error-text-pass").textContent =
-        "Password must be at least 8 characters long, with a number.";
+      document.getElementById("error-text-pass").textContent = "Password must be at least 8 characters long, with a number.";
       document.getElementById("error-text-pass").style.display = "block";
+      setValid(false); 
     } else {
       document.getElementById("password").style.borderColor = "";
       document.getElementById("password").style.borderWidth = "";
@@ -135,28 +148,34 @@ function AdminForm() {
       document.getElementById("cpassword").style.borderColor = "crimson";
       document.getElementById("cpassword").style.borderWidth = "2px";
       document.getElementById("cpassword").placeholder = "Password required";
+      setValid(false); 
     } else if (cpass != pass) {
       document.getElementById("cpassword").style.borderColor = "crimson";
       document.getElementById("cpassword").style.borderWidth = "2px";
-      document.getElementById("error-text-cpass").textContent =
-        "Passwords do not match.";
+      document.getElementById("error-text-cpass").textContent ="Passwords do not match.";
       document.getElementById("error-text-cpass").style.display = "block";
+      setValid(false); 
     } else {
       document.getElementById("cpassword").style.borderColor = "";
       document.getElementById("cpassword").style.borderWidth = "";
       document.getElementById("error-text-cpass").textContent = "";
       document.getElementById("error-text-cpass").style.display = "";
+      setValid(false); 
     }
   }
 
   return (
     <div className="formbg-2">
       <NavbarAdmin />
+      <h3 className="titlequestion">Add Admin</h3>
+      <a href="AddEmployee">
+        <img className="gobackcross" src={cross} />
+      </a>
       <div className="center-container-2">
-        {/* <div className="ftext"> */}
+     
         <div className="form-header-2">
           <h3 className="guftaar-name-2"> Guftaar</h3>
-          <p className="create-2"> Add Coach</p>
+          <p className="create-2"> Add Admin</p>
           <p className="details-2"> Fill in the details below</p>
         </div>
         <div className="form-content-employee-2">
@@ -204,7 +223,7 @@ function AdminForm() {
                 id="email"
                 name="email"
               ></input>
-              {/* <span id={"error-text-email"} className={"et"}></span> */}
+              <span id={"error-text-email"} className={"et"}></span>
             </div>
             <div className="input-row-2-2">
               <label for="age" className="lf-2 lef-pad-2-2">
@@ -219,7 +238,7 @@ function AdminForm() {
                 id="age"
                 name="age"
               ></input>
-              {/* <span id={"error-text-age"} className={"et"}></span> */}
+              <span id={"error-text-age"} className={"et"}></span>
             </div>
           </div>
           <div className="form-row-1-2">
@@ -236,7 +255,7 @@ function AdminForm() {
                 id="password"
                 name="password"
               ></input>
-              {/* <span id={"error-text-pass"} className={"et"}></span> */}
+              <span id={"error-text-pass"} className={"et"}></span>
             </div>
             <div className="input-row-2-2">
               <label for="cpassword" className="lf-2 lef-pad-2-2">
@@ -251,11 +270,11 @@ function AdminForm() {
                 id="cpassword"
                 name="cpassword"
               ></input>
-              {/* <span id={"error-text-cpass"} className={"et"}></span> */}
+              <span id={"error-text-cpass"} className={"et"}></span>
             </div>
           </div>
           <div className="button-row-2">
-            <button type="submit" className="buttonLL-2" onClick={handleSubmit}>
+            <button type="submit" className="buttonLL-2" onClick={handleAdminSubmit}>
               Create Account
             </button>
           </div>

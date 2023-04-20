@@ -245,4 +245,53 @@ router.post("/getMeetings", (req, res) => {
       res.send({ error: err });
     });
 });
+
+router.post("/updateLinkLater", async (req, res) => {
+  const { email, linkLater } = req.body;
+  const user = await Client.Client.findOne({ email: linkLater });
+  user.activityStatus.linkLater = true;
+  await user.save();
+
+  if (
+    user.activityStatus.linkLater &&
+    user.activityStatus.syllableCounting &&
+    user.activityStatus.breathingExercise
+  ) {
+    user.streakCount += 1;
+    await user.save();
+  }
+});
+
+router.post("/updateSyllableCounting", async (req, res) => {
+  const { email, syllableCounting } = req.body;
+  const user = await Client.Client.findOne({ email: email });
+  user.activityStatus.syllableCounting = true;
+  await user.save();
+
+  if (
+    user.activityStatus.linkLater &&
+    user.activityStatus.syllableCounting &&
+    user.activityStatus.breathingExercise
+  ) {
+    user.streakCount += 1;
+    await user.save();
+  }
+});
+
+router.post("/updateBreathingExercise", async (req, res) => {
+  const { email, breathingExercise } = req.body;
+  const user = await Client.Client.findOne({ email: email });
+  user.activityStatus.breathingExercise = true;
+  await user.save();
+
+  if (
+    user.activityStatus.linkLater &&
+    user.activityStatus.syllableCounting &&
+    user.activityStatus.breathingExercise
+  ) {
+    user.streakCount += 1;
+    await user.save();
+  }
+});
+
 module.exports = router;

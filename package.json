@@ -1,8 +1,23 @@
 {
   "name": "guftaar",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
-    "start": "node ./backend/index.js"
+    "install": "cd frontend && npm install && cd ../backend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harris-ahmad/Guftaar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harris-ahmad/guftaar/issues"
+  },
+  "homepage": "https://github.com/harris-ahmad/guftaar#readme",
+  "engines": {
+    "node": "16.x"
   }
 }

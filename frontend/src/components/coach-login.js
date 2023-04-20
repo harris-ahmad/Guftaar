@@ -18,21 +18,44 @@ function CoachLogin(props) {
   const validation = (e) => {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let e_flag = false;
-    if (email === "") {
-      e_flag = true;
-      document.getElementById("email").className = "error-control";
-      document.getElementById("email").placeholder = "Email required";
-    } else if (!email.match(mailformat)) {
-      e_flag = true;
-      document.getElementById("error-text").textContent = "Invalid email";
-    } else {
-      document.getElementById("email").className = "input";
-      document.getElementById("email").placeholder = "";
-      document.getElementById("error-text").textContent = "";
+    if (email === ""){
+        e_flag = true;
+        document.getElementById('email').className = "error-control";
+        document.getElementById('email').placeholder = "Email required";
     }
+    else if(!email.match(mailformat)){
+        e_flag = true;
+        document.getElementById('error-text').textContent = "Invalid email";
+    }
+    else{
+        document.getElementById('email').className = "input";
+        document.getElementById('email').placeholder = "";
+        document.getElementById('error-text').textContent = "";
+    }
+
+    if (pass == ""){
+        e_flag = true;
+        document.getElementById('password').className = "error-control";
+        document.getElementById('password').placeholder = "Password required";
+    }
+    else{
+        document.getElementById('password').className = "input";
+        document.getElementById('password').placeholder = "";
+    }
+    if (e_flag){
+        console.log("error")
+        return false;
+    }
+    else{
+        return true;
+    }
+
+}
     const handleSubmit = (e) => {
+      alert("Called")
       e.preventDefault();
       let flag = validation();
+      alert(flag)
       if (flag) {
         const clientLogin = {
           email: email,
@@ -48,7 +71,7 @@ function CoachLogin(props) {
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("id", res.data.id);
               localStorage.setItem("email", res.data.email);
-              window.location = "/coach/dashboard";
+             navigate("/coach/dashboard")
             }
           })
           .catch((err) => {
@@ -90,15 +113,24 @@ function CoachLogin(props) {
                 id="password"
                 name="password"
               ></input>
-              <button type="submit" className="buttonL">
+              <button type="submit" className="buttonL" >
                 Log In
               </button>
             </form>
+            <button
+            className="form-buttonl"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            {" "}
+            Back to Home{" "}
+          </button>
+            
           </div>
         </div>
       </>
     );
   };
-}
 
 export default CoachLogin;

@@ -13,6 +13,7 @@ function AdminLogin(props){
     const [e_pass, setE_pass] = useState(false)
     const [type, setType] = useState("");
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
     const validation = (e) => {
         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -98,6 +99,15 @@ function AdminLogin(props){
                 <input type="password" className={'input'} value={pass} onChange={(e)=> {setPass(e.target.value)}} placeholder={"Enter your password"}  id="password" name="password"></input>
                 <button type="submit" className="buttonL">Log In</button>
             </form>
+            <button
+            className="form-buttonl"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            {" "}
+            Back to Home{" "}
+          </button>
         </div>
         </div>
         </>

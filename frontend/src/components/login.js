@@ -121,7 +121,6 @@ function Login(props) {
             {" "}
             New to Guftaar? Register here.{" "}
           </button>
-          {/* navigate to the homepage */}
           <button
             className="form-buttonl"
             onClick={() => {

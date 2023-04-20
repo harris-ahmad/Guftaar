@@ -30,11 +30,13 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<LandingPage />} />
+         
           <Route path="coach">
             <Route path="login" element={<CoachLogin />} />
             <Route path="dashboard" element={<CoachDashboard />} />
             <Route path="changePassword" element={<ChangePass />} />
           </Route>
+          
           <Route path="client">
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

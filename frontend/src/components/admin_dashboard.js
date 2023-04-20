@@ -14,7 +14,7 @@ function Dashboard() {
   const [clientCount, setClientCount] = useState(0);
   const [topCoaches, setTopCoaches] = useState([]);
   const [display, setdisplay] = useState(false)
-  let idx = 0
+
   
   useEffect(() => {
     const fetchInfo = async function () {

@@ -167,7 +167,6 @@ function AdminForm() {
   return (
     <div className="formbg-2">
       <NavbarAdmin />
-      <h3 className="titlequestion">Add Admin</h3>
       <a href="AddEmployee">
         <img className="gobackcross" src={cross} />
       </a>

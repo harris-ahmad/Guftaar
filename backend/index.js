@@ -21,6 +21,12 @@ app.use("/client", clientRouter);
 app.use("/coach", coachRouter);
 app.use("/admin", adminRouter);
 
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
+
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
 
 const uri = "mongodb+srv://harrisahmad55:ladBob12@cluster0.4d91bik.mongodb.net/guftaar";
 mongoose.connect(uri, { useNewUrlParser: true });

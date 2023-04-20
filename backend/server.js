@@ -21,7 +21,7 @@ app.use("/client", clientRouter);
 app.use("/coach", coachRouter);
 app.use("/admin", adminRouter);
 
-app.get("/health", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).send("OK");
 });
 

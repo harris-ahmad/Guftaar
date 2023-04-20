@@ -12,6 +12,10 @@ const adminRouter = require("./routes/admin/admin");
 const app = express();
 const port = process.env.PORT || 5003;
 
+app/get("/", (req, res) => {
+  res.status(200);
+})
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());

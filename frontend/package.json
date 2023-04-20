@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"cd ..\\server && npm run dev\" \"npm start\""
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "concurrently": "^7.5.0",
+    "eslint-config-wesbos": "^3.1.4"
+  },
 }

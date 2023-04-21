@@ -1,10 +1,8 @@
 import './quick_practice.css'
 import NavbarClient from './client_navbar';
 import cross from "../images/cross.svg";
-import mic from "../images/microphone.svg";
 import { useNavigate } from 'react-router-dom';
-import { ReactMicRecord } from 'react-mic-record';
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
 
 function Quick_Practice(){
     const navigate = useNavigate();
@@ -47,6 +45,14 @@ function Quick_Practice(){
           </div>
         );
       }
+      if (!localStorage.getItem("token")){
+        return (
+          <div>
+            <h1> Not Authorized</h1>
+          </div>
+        )
+      }
+      else{
     return(
       <div className='quickBack'>
        <NavbarClient />
@@ -58,6 +64,7 @@ function Quick_Practice(){
         </div>
           </div>
     );
+}
 }
 
 export default Quick_Practice;

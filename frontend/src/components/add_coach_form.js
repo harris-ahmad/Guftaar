@@ -70,9 +70,9 @@ function CoachForm() {
           document.getElementById("error-text-email").style.paddingBottom =
             "2%";
           document.getElementById("error-text-email").style.display = "block";
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500);
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 1500);
         }
         else{
           alert("Created")
@@ -81,20 +81,21 @@ function CoachForm() {
         }
       })
       .catch((err) => {
-        alert("idher2")
+        // alert("idher2")
         alert(err);
       });
   };
 
   const handleSubmit2 = async (e) => {
     e.preventDefault();
-   
     validate();
     // alert("clicked!");
     // alert(please)
     if (please == false){
       await addCoach(e);
-    } 
+    }else{
+      // alert("data not valid")
+    }
   };
 
   function validate() {
@@ -247,7 +248,14 @@ function CoachForm() {
     }
     // alert("cpass validated"); 
   }
-
+  if (!localStorage.getItem("token")){
+    return (
+      <div>
+        <h1> Not Authorized</h1>
+      </div>
+    )
+  }
+  else{
   return (
     <>
     {/* {type === "success" ? <Alert type={type} message={message} /> : null}{" "} */}
@@ -417,6 +425,7 @@ function CoachForm() {
     </div>
     </>
   );
+}
 }
 
 export default CoachForm;

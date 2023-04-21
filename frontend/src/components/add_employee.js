@@ -5,6 +5,14 @@ import coach from "../images/coachadd.png";
 import NavbarAdmin from "./navbar_admin";
 
 function add_employee() {
+  if (!localStorage.getItem("token")){
+    return (
+      <div>
+        <h1> Not Authorized</h1>
+      </div>
+    )
+  }
+  else{
   return (
     <div className="employeeBack">
       <NavbarAdmin />
@@ -31,5 +39,5 @@ function add_employee() {
     </div>
   );
 }
-
+}
 export default add_employee;

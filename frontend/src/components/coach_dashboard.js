@@ -4,35 +4,88 @@ import phonei from "../images/phoneicon.png"
 import infoi from "../images/infoicon.png"
 import NavbarCoach from './coach_navbar';
 import Carousel from './coach_dashboard_carousel';
-// import { useNavigate } from 'react-router-dom';
-// import axios from "axios";
+import Calendar from './calendar'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function Dashboard() {
+  const [name, setName] = useState("");
+  const [meetingDetails, setMeetingDetails] = useState([]);
+  const [display, setDisplay] = useState(false);
+  // const email = localStorage.getItem("email")
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const fetchData = async function () {
+      let toSend = { email: localStorage.getItem("email") };
+      let result2 = await axios.post(
+        "http://localhost:4000/coach/getName",
+        toSend
+      );
+      setName(result2.data.firstName)
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async function () {
+      let toSend = { email: localStorage.getItem("email") };
+      let result2 = await axios.post(
+        "http://localhost:4000/coach/getMeetings",
+        toSend
+      );
+      if (result2.data.length === 0) {
+        alert("No meetings found.");
+      } else {
+        let meetingDetailsArray = result2.data;
+        setMeetingDetails(meetingDetailsArray);
+        setDisplay(true);
+      } 
+    };
+    fetchData();
+  }, []);
+
+  if (!localStorage.getItem("token")){
+    return (
+      <div>
+        <h1> Not Authorized</h1>
+      </div>
+    )
+  }
+  else{
+
   return (
     <div className="admin-dashboard-bg">
        <NavbarCoach />
        <div className='welcome-heading'>
-        Welcome, Harris
+        Welcome, {name}
        </div>
        <div className='second-heading'>
         Upcoming Meetings
        </div>
        <div className='meetingbox1'>
-        <h2 className='meetingname1'>Emaan Atique</h2>
+       {display && meetingDetails.length > 0 ? (
+        <div>
+          <h6 className='subtext'>Coaching with {meetingDetails['0'].clientName}</h6>
+        </div>
+      ) : (
+        <h6 className='subtext'>No Upcoming Meetings</h6>
+      )}
         <img src={phonei} alt="PhoneIcon" className='phoneicon1' />
         <p className='meetingstext1'> meetings</p>
-        <p className='time1'>01</p>
-        <p className='time2'>:</p>
-        <p className='time3'>59</p>
        </div>
        <div className='meetingbox2'>
-        <h2 className='meetingname2'>Salman Rehman</h2>
+       {display && meetingDetails.length > 0 ? (
+        <div>
+          <h6 className='subtext'>Coaching with {meetingDetails['1'].clientName}</h6>
+        </div>
+      ) : (
+        <h6 className='subtext'>No Upcoming Meetings</h6>
+      )}
         <img src={phonei} alt="PhoneIcon" className='phoneicon2' />
         <p className='meetingstext2'> meetings</p>
-        <p className='time4'>01</p>
-        <p className='time5'>:</p>
-        <p className='time6'>59</p>
-        <button className='viewallbutton'>view all</button>
+       
        </div>
        <div className='third-heading'>
        Your Clients
@@ -41,11 +94,13 @@ function Dashboard() {
         </button>
        </div>
        <div className='meetingscroll'>
-        <button className='addnotesbutton'>+ add notes</button> 
+        <button className='addnotesbutton' onClick={() => {navigate("/coach/notes")}}>+ add notes</button> 
         </div>
         <Carousel />
+        <Calendar/>
     </div>
   );
+}
 }
 
 export default Dashboard;

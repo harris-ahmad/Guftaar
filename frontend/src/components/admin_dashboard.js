@@ -6,6 +6,7 @@ import addEmployee from './add_employee';
 import NavbarAdmin from './navbar_admin';
 import axios from "axios";
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   
@@ -14,7 +15,7 @@ function Dashboard() {
   const [clientCount, setClientCount] = useState(0);
   const [topCoaches, setTopCoaches] = useState([]);
   const [display, setdisplay] = useState(false)
-
+  const navigate = useNavigate()
   
   useEffect(() => {
     const fetchInfo = async function () {
@@ -51,7 +52,14 @@ function Dashboard() {
       window.location.reload();
     }
   };
-
+  if (!localStorage.getItem("token")){
+    return (
+      <div>
+        <h1> Not Authorized</h1>
+      </div>
+    )
+  }
+  else{
   return (
       <div className="dashboard-container">
        <NavbarAdmin />
@@ -99,10 +107,9 @@ function Dashboard() {
       </div>
         <p className='ratingtext'> rating</p>
         <p className='edittext'> edit</p>
-        <button class="viewbutton">view all</button>
-        <button class="readbutton">read reviews</button>
-        
+        <button class="viewbutton" onClick={() => {navigate('/admin/readReviews')}}>view all</button>
     </div>
     </div>
   )}
+        }
 export default Dashboard;

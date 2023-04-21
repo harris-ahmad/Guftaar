@@ -33,11 +33,11 @@ function NavbarClient(){
         <nav>
             <ul className='nav-items-list'>
                 <li className='guftaar-logo nav-item'><a onClick={GoBack}>Guftaar</a></li>
-                <li className='nav-item'> <a className='nav-anchor' href= 'DailyActivities' >daily activities</a></li>
-                <li className='nav-item'> <a className='nav-anchor' href='SpeechTechniques'>speech techniques</a></li>
-                <li className='nav-item'><a className='nav-anchor' href='QuickPractice'>quick practice</a></li>
-                <li className='nav-item'><a className='nav-anchor' href='./coaches'>coaches</a></li>
-                <li className='nav-item'><a className='nav-anchor' href='./courses'>courses</a></li>
+                <li className='nav-item'> <a className='nav-anchor' href= '/client/dailyActivities'>daily activities</a></li>
+                <li className='nav-item'> <a className='nav-anchor' href='/client/SpeechTechniques'>speech techniques</a></li>
+                <li className='nav-item'><a className='nav-anchor' href='/client/QuickPractice'>quick practice</a></li>
+                <li className='nav-item'><a className='nav-anchor' href='/client/viewCoaches'>coaches</a></li>
+                <li className='nav-item'><a className='nav-anchor' href='/client/courses'>courses</a></li>
                 <div>
                     <img src={fire} className='navbar-img-fire'/>
                     <span className='streak-value'>{streak}</span>

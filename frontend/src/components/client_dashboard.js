@@ -25,7 +25,6 @@ function Quote() {
   const [hasMeeting, setMeeting] = useState(true)
   const [time, setTime] = useState()
   const [countdown, setCountdown] = useState({});
-
   const email = localStorage.getItem("email")
 
   useEffect(() => {
@@ -96,27 +95,77 @@ function Quote() {
     return () => clearInterval(intervalId);
   }, [time]);
 
-  const NoStuttering = async function(){
-      let result2 = await axios.post(
-        'http://localhost:4000/client/moodlog', {email:localStorage.getItem("email"), mood: "noStuttering"}
-      );
-      console.log(result2.data)
+  const NoStuttering = function(){
+    const divNoStuttering = document.querySelector(".circleBack");
+    if (divNoStuttering) {
+      divNoStuttering.style.backgroundColor = "#F2F2F2";
+    } else {
+      console.log("div not found")
+    }
+    const divModerate = document.querySelector(".circleBack2");
+    if (divModerate) {
+      divModerate.style.backgroundColor = "#71A7F140";
+    } else {
+      console.log("div not found");
+    }
+
+    const divExtreme = document.querySelector(".circleBack3");
+    if (divExtreme) {
+      divExtreme.style.backgroundColor = "#71A7F140";
+    } else {
+      console.log("div not found")
+    }
+  }
+
+const Moderate =  function(){
+  const div = document.querySelector(".circleBack2");
+  if (div) {
+    div.style.backgroundColor = "#F2F2F2";
+  } else {
+    console.log("div not found")
+  }
+  const divNoStuttering = document.querySelector(".circleBack");
+  if (divNoStuttering) {
+    divNoStuttering.style.backgroundColor = "#71A7F140";
+  } else {
+    console.log("div not found")
+  }
+
+  const divExtreme = document.querySelector(".circleBack3");
+  if (divExtreme) {
+    divExtreme.style.backgroundColor = "#71A7F140";
+  } else {
+    console.log("div not found")
+  }
 }
 
-const Moderate = async function(){
-  let result2 = await axios.post(
-    'http://localhost:4000/client/moodlog', {email:localStorage.getItem("email"), mood: "mild"}
-  );
-  console.log(result2.data)
-}
+const Extreme =  function(){
+  const div = document.querySelector(".circleBack3");
+  if (div) {
+    div.style.backgroundColor = "#F2F2F2";
+  } else {
+    console.log("div not found")
+  }
+  const divNoStuttering = document.querySelector(".circleBack");
+  if (divNoStuttering) {
+    divNoStuttering.style.backgroundColor = "#71A7F140";
+  } else {
+    console.log("div not found")
+  }
 
-const Extreme = async function(){
-  let result2 = await axios.post(
-    'http://localhost:4000/client/moodlog', {email:localStorage.getItem("email"), mood: "extreme"}
-  );
-  console.log(result2.data)
+  const divModerate = document.querySelector(".circleBack2");
+  if (divModerate) {
+    divModerate.style.backgroundColor = "#71A7F140";
+  }
 }
- 
+if (!localStorage.getItem("token")){
+  return (
+    <div>
+      <h1> Not Authorized</h1>
+    </div>
+  )
+}
+else{
   return (
     <div className="client-bg">
       <NavbarClient/>
@@ -162,7 +211,7 @@ const Extreme = async function(){
         <h6 className='detail'>Meetings</h6>
         </div>
 
-        <div className='gbox2'>  
+        <div className='gbox2' onClick={() => {navigate('/client/courses')}}>  
         <img className='course'src={course}/>
         {hasCourse ? <h6 className='subtext'>{activeCourse}</h6> : <h6 className='subtext'>Buy Courses</h6>}
         <h6 className='detail'>Courses</h6>
@@ -170,21 +219,21 @@ const Extreme = async function(){
         </div>
 
         <div>
-          <div className='dailyTasks'>
+          <div className='dailyTasks' onClick={() => {navigate('/client/dailyActivities')}}>
             <div className='rectangle'></div>
             <h6 className='activitytext'>Daily Activities</h6>
             <img className='icon'src={fire}></img>
             <a href='dailyActivities'><img className='arrow2'src={arrow}/></a>
           </div>
 
-          <div className='speechTechniques'>
+         <div className='speechTechniques' onClick={() => {navigate('/client/speechTechniques')}}>
           <div className='rectangle2'></div>
           <h6 className='activitytext'>Speech Techniques</h6>
           <img className='icon'src={volume}></img>
           <a href='speechTechniques'><img className='arrow2'src={arrow}/></a> 
           </div>
 
-          <div className='quickPractice'>
+          <div className='quickPractice' onClick={() => {navigate('/client/quickPractice')}}>
           <div className='rectangle2'></div>
           <h6 className='activitytext'>Quick Practice</h6>
           <img className='icon'src={mic}></img>
@@ -195,6 +244,6 @@ const Extreme = async function(){
 
     </div>
   );
-}
+}}
 
 export default Quote;

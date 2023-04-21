@@ -14,6 +14,10 @@ import tomatoaud from '../audios/tomato.mp3';
 import wakeaud from '../audios/wake.mp3';
 import whisperaud from '../audios/whisper.mp3';
 import cross from "../images/cross.svg";
+import sensitiveaud from '../audios/sensitive.mp3'
+import torchaud from '../audios/torch.mp3'
+import frightenaud from '../audios/frighten.mp3'
+import thousandaud from '../audios/thousand.mp3'
 import NavbarClient from './client_navbar';
 
 
@@ -44,6 +48,14 @@ function SpeechTechniques(){
     function GoBack(){
         navigate("/client/dashboard")
     }
+    if (!localStorage.getItem("token")){
+        return (
+          <div>
+            <h1> Not Authorized</h1>
+          </div>
+        )
+      }
+      else{
     return(
         <div className='speechTechBack'>
             <NavbarClient />
@@ -137,30 +149,30 @@ function SpeechTechniques(){
                 </div>
 
                 <div className='wordBox13'>
-                    <p className='wordToSpeak'>Word</p>
+                    <p className='wordToSpeak'>Torch</p>
                     <ImageWithAudio
-                        audioFile={wakeaud}
+                        audioFile={torchaud}
                     />
                 </div>
 
                 <div className='wordBox14'>
-                    <p className='wordToSpeak'>Word</p>
+                    <p className='wordToSpeak'>Frighten</p>
                     <ImageWithAudio
-                        audioFile={wakeaud}
+                        audioFile={frightenaud}
                     />
                 </div>
 
                 <div className='wordBox15'>
-                    <p className='wordToSpeak'>Word</p>
+                    <p className='wordToSpeak'>Sensitive</p>
                     <ImageWithAudio
-                        audioFile={wakeaud}
+                        audioFile={sensitiveaud}
                     />
                 </div>
 
                 <div className='wordBox16'>
-                    <p className='wordToSpeak'>Word</p>
+                    <p className='wordToSpeak'>Thousand</p>
                     <ImageWithAudio
-                        audioFile={wakeaud}
+                        audioFile={thousandaud}
                     />
                 </div>
 
@@ -169,6 +181,7 @@ function SpeechTechniques(){
       </div>
     );
 
+}
 }
 
 export default SpeechTechniques

@@ -12,8 +12,8 @@ nav {
 .navbar-img-home2{
   width: 60%;
   height: auto;
-  position: relative;
-  left: 225px;
+  position: absolute;
+  left: 545px;
   cursor: pointer;
 }
 

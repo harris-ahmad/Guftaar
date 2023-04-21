@@ -80,6 +80,7 @@ function Login(props) {
   function Toggle() {
     navigate("/client/register");
   }
+
   return (
     <>
       {type === "error" ? <Alert type={type} message={message} /> : null}{" "}

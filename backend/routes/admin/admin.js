@@ -5,6 +5,7 @@ const Admin = require("../../models/user");
 const Coach = require("../../models/user");
 const Client = require("../../models/user");
 const crypto = require("crypto");
+const Feedback = require("../../models/meeting");
 
 const router = new express.Router();
 
@@ -118,7 +119,7 @@ router.post("/addCoach", (req, res, next) => {
     })
     .catch((err) => {
       console.log("error in saving");
-      res.send({ status: "error", message: err });
+      res.send({ status: "error", message:"email in use" });
     });
 
   const token = Coach.Token({
@@ -153,7 +154,7 @@ router.post("/addAdmin", (req, res, next) => {
     })
     .catch((err) => {
       console.log("error in adding admin to db");
-      res.send({ status: "error", message: err });
+      res.send({ status: "error", message:"email in use" });
     });
 
   const token = Admin.Token({
@@ -232,6 +233,19 @@ router.post("/updateRating", async (req, res) => {
     .catch((err) => {
       console.log("in error for rating update");
       res.send({ error: err });
+    });
+});
+
+router.get("/feedback", (req, res) => {
+  console.log("Requesting for feedback"); 
+  Feedback.Feedback.find({})
+    .select("coachEmail feedback ")
+    .exec()
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.json({ error: err });
     });
 });
 

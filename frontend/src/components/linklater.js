@@ -43,7 +43,14 @@ function LinkLator(props) {
         console.log(err);
       });
   };
-
+  if (!localStorage.getItem("token")){
+    return (
+      <div>
+        <h1> Not Authorized</h1>
+      </div>
+    )
+  }
+  else{
   return (
     <div className="activity-bg">
       <svg>
@@ -109,6 +116,7 @@ function LinkLator(props) {
       {opt.length !== 1 && <h1 id="timeleft"> {remainingTime} seconds </h1>}
     </div>
   );
+}
 }
 
 export default LinkLator;

@@ -15,16 +15,12 @@ const clientNotes = new Schema({
 });
 
 const coachFeedback = new Schema({
-  FormId: { type: String, required: true },
   coachEmail: { type: String, required: true },
   feedback: { type: String, default: "" },
-  ratingGiven: { type: Number },
 });
 
 const Meetings = mongoose.model("Meetings", meetingSchema);
 const Notes = mongoose.model("Notes", clientNotes);
 const Feedback = mongoose.model("Feedback", coachFeedback);
-
-
 
 module.exports = { Meetings, Notes, Feedback };

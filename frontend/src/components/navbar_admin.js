@@ -18,8 +18,8 @@ function NavbarAdmin(){
         <nav>
             <ul className='nav-items-list'>
                 <li className='guftaar-logo nav-item'><a onClick={GoBack}>Guftaar</a></li>
-                <li className='nav-item2'> <a className='nav-anchor' href='./addEmployee'>add employees</a></li>
-                <li className='nav-item3'> <a className='nav-anchor' href='./coachRatings'>coach ratings</a></li>
+                <li className='nav-item2'> <a className='nav-anchor' href='/admin/addEmployee'>add employees</a></li>
+                <li className='nav-item3'> <a className='nav-anchor' href='/admin/readReviews'>coach profiles</a></li>
                 <div className='navbar-icons'>    
                <img src={hi} className='navbar-img-home2' onClick={GoBack}/>
                 </div>

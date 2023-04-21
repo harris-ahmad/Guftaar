@@ -18,10 +18,16 @@ import SpeechTechniques from "./components/speech_techniques";
 import BreathingExercise from "./components/breathing";
 import LinkLator from "./components/linklater";
 import CoachDashboard from "./components/coach_dashboard";
-// import ViewCoaches from "./components/view_coaches"
+import ViewCoaches from "./components/view_coaches"
 import QuickPractice from "./components/quick_practice";
 import { useState } from "react";
 import SyllableCounting from "./components/syllable_counting";
+import SyllableCountingResult from "./components/syllableResult"
+import Courses from "./components/courses";
+import CoachFeedback from "./components/coach_feedback";
+import ReadReviews from "./components/read_reviews";
+import SingleCoachFeedback from "./components/single_coach_feedback"
+import Notes from "./components/main-notes"
 
 function App() {
   return (
@@ -34,6 +40,8 @@ function App() {
             <Route path="login" element={<CoachLogin />} />
             <Route path="dashboard" element={<CoachDashboard />} />
             <Route path="changePassword" element={<ChangePass />} />
+            <Route path="notes" element={<Notes/>} />
+
           </Route>
           
           <Route path="client">
@@ -43,7 +51,10 @@ function App() {
             <Route path="changePassword" element={<ChangePass />} />
             <Route path="speechTechniques" element={<SpeechTechniques />} />
             <Route path="quickPractice" element={<QuickPractice />} />
-            {/* <Route path="viewCoaches" element={<ViewCoaches />} /> */}
+            <Route path="courses" element={<Courses />} />
+            {/* <Route path="coaches" element={<Coach} */}
+            <Route path="viewCoaches" element={<ViewCoaches />} />
+            <Route path="addFeedback" element={<CoachFeedback />} />
 
 
             <Route path="dailyActivities">
@@ -52,6 +63,7 @@ function App() {
               <Route path="BreathingExercise" element={<BreathingExercise />} />
               <Route path="Linklator" element={<LinkLator />} />
               <Route path="SyllableCounting" element={<SyllableCounting />} />
+              <Route path="SyllableCountingResult" element={<SyllableCountingResult />} />
             </Route>
           </Route>
 
@@ -62,6 +74,9 @@ function App() {
             <Route path="addCoach" element={<AddCoach />} />
             <Route path="addAdmin" element={<AddAdmin />} />
             <Route path="changePassword" element={<ChangePass />} />
+            <Route path="readReviews" element={<ReadReviews />} />
+            <Route path="readReviewCoach" element={<SingleCoachFeedback />} />
+          
           </Route>
         </Route>
       </Routes>

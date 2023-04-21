@@ -21,7 +21,18 @@ function Daily_Activities(){
     function GoLinkLator(){
         navigate("/client/dailyActivities/Linklator")
     }
+    function GoSyllable(){
+        navigate("/client/dailyActivities/syllableCounting")
+    }
 
+    if (!localStorage.getItem("token")){
+        return (
+          <div>
+            <h1> Not Authorized</h1>
+          </div>
+        )
+      }
+      else{
 return(
     <div className='dailyBack'>
          <NavbarClient />
@@ -29,7 +40,7 @@ return(
          <img className="gobackcross"src={cross} onClick={GoBack}/>
          <h1 className='whichquestion'>Which activity do you want to play?</h1>
 
-         <div className='syllableBack'>
+         <div className='syllableBack' onClick={GoSyllable}>
          <img className='syllablepic' src={syllable}/>
          <h3 className= 'categorysc'>Syllable Counting</h3>
          </div>
@@ -46,6 +57,7 @@ return(
 
     </div>
 );
+}
 }
 
 export default Daily_Activities;

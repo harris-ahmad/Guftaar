@@ -52,10 +52,10 @@ function CoachLogin(props) {
 
 }
     const handleSubmit = (e) => {
-      alert("Called")
+      // alert("Called")
       e.preventDefault();
       let flag = validation();
-      alert(flag)
+      // alert(flag)
       if (flag) {
         const clientLogin = {
           email: email,

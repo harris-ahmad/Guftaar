@@ -225,7 +225,6 @@
     position: absolute;
     left: 380px;
     top: 18px;
-
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 600;
@@ -234,9 +233,7 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.03em;
-
     color: #FFFFFF;
-
     background-color: #71A7F1;
     border-radius: 7px;
     padding: 12px;

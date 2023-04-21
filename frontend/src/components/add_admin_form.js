@@ -1,6 +1,5 @@
 import "./add_admin_form.css";
 import { useState } from "react";
-// import Dropdown from 'react-dropdown';
 import { Dropdown } from "primereact/dropdown";
 import "react-dropdown/style.css";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +19,7 @@ function AdminForm() {
   const [age, setAge] = useState();
 
   const [valid, setValid] = useState(true);
+  let check = false
 
   const navigate = useNavigate();
 
@@ -36,9 +36,7 @@ function AdminForm() {
     "5+ years",
   ];
 
-  // adding axios calls to send information
   const addAdmin = async (e) => {
-    alert("admin start"); 
     const toSend = {
       firstName: fname,
       lastName: lname,
@@ -48,26 +46,45 @@ function AdminForm() {
       email: email,
     };
 
-    alert("before axios"); 
-    axios.post("http://localhost:4000/admin/addAdmin", toSend).then((res) => {
-      if (res.data.status === "success"){
-        alert("Admin added successfully");
-      } else {
-        alert("Admin already exists");
+    // alert("before axios"); 
+    axios.post("http://localhost:4000/admin/addAdmin", toSend)
+    .then((response) => {
+      // alert(response.data.message)
+      // alert(response.status)
+      if (
+        response.data.message == "email in use"
+      ) {
+        document.getElementById("email").style.borderColor = "crimson";
+        document.getElementById("email").style.borderWidth = "2px";
+        document.getElementById("error-text-email").textContent =
+          "Email already in use";
+        document.getElementById("error-text-email").style.paddingBottom =
+          "2%";
+        document.getElementById("error-text-email").style.display = "block";
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 1500);
       }
+      else{
+        alert("Account Created!")
+        // setMessage("Account Created!");
+        // setType("success")
+      }
+    })
+    .catch((err) => {
+      // alert("idher2")
+      alert(err);
     });
   };
 
   const handleAdminSubmit = async (e) => {
     e.preventDefault();
     validate();
-    // alert("here"); 
-    if(valid){
-      alert("all data valid"); 
-      await addAdmin();
-      setValid(true); 
+    if(check == false){
+      // alert("all data valid"); 
+      await addAdmin(e);
     } else {
-      alert("invalid data"); 
+      // alert("invalid data"); 
     }
   };
 
@@ -76,7 +93,7 @@ function AdminForm() {
       document.getElementById("fname").style.borderColor = "crimson";
       document.getElementById("fname").style.borderWidth = "2px";
       document.getElementById("fname").placeholder = "First name required";
-      setValid(false); 
+      check = true
     } else {
       document.getElementById("fname").style.borderColor = "";
       document.getElementById("fname").style.borderWidth = "";
@@ -85,7 +102,7 @@ function AdminForm() {
       document.getElementById("lname").style.borderColor = "crimson";
       document.getElementById("lname").style.borderWidth = "2px";
       document.getElementById("lname").placeholder = "Last name required";
-      setValid(false); 
+      check = true
     } else {
       document.getElementById("lname").style.borderColor = "";
       document.getElementById("lname").style.borderWidth = "";
@@ -95,14 +112,19 @@ function AdminForm() {
       document.getElementById("age").style.borderColor = "crimson";
       document.getElementById("age").style.borderWidth = "2px";
       document.getElementById("age").placeholder = "Age required";
-      alert("empty"); 
-      setValid(false); 
+      check = true
     } else if (age < 20) {
       document.getElementById("age").className = "error-control-r";
-      document.getElementById("error-text-age").textContent ="A coach must be 20+.";
+      document.getElementById("error-text-age").textContent ="An admin must be 20+.";
       document.getElementById("error-text-age").style.paddingBottom = "2%";
       document.getElementById("error-text-age").style.display = "block";
-      setValid(false); 
+      check = true
+    }
+    else{
+      document.getElementById("age").className = "input-field-add-2";
+      document.getElementById("age").style.borderColor = "";
+      document.getElementById("age").style.borderWidth = "";
+      document.getElementById("error-text-age").style.display = "none";
     }
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var passwordRegex = /^(?=.*\d).{8,}$/;
@@ -111,14 +133,14 @@ function AdminForm() {
       document.getElementById("email").style.borderColor = "crimson";
       document.getElementById("email").style.borderWidth = "2px";
       document.getElementById("email").placeholder = "Email required";
-      setValid(false); 
+      check = true
     } else if (!email.match(mailformat)) {
       document.getElementById("email").style.borderColor = "crimson";
       document.getElementById("email").style.borderWidth = "2px";
       document.getElementById("error-text-email").textContent = "Invalid email";
       document.getElementById("error-text-email").style.paddingBottom = "2%";
       document.getElementById("error-text-email").style.display = "block";
-      setValid(false); 
+      check = true
     } else {
       document.getElementById("email").style.borderColor = "";
       document.getElementById("email").style.borderWidth = "";
@@ -131,13 +153,13 @@ function AdminForm() {
       document.getElementById("password").style.borderColor = "crimson";
       document.getElementById("password").style.borderWidth = "2px";
       document.getElementById("password").placeholder = "Password required";
-      setValid(false); 
+      check = true
     } else if (!passwordRegex.test(pass)) {
       document.getElementById("password").style.borderColor = "crimson";
       document.getElementById("password").style.borderWidth = "2px";
       document.getElementById("error-text-pass").textContent = "Password must be at least 8 characters long, with a number.";
       document.getElementById("error-text-pass").style.display = "block";
-      setValid(false); 
+      check = true
     } else {
       document.getElementById("password").style.borderColor = "";
       document.getElementById("password").style.borderWidth = "";
@@ -148,22 +170,28 @@ function AdminForm() {
       document.getElementById("cpassword").style.borderColor = "crimson";
       document.getElementById("cpassword").style.borderWidth = "2px";
       document.getElementById("cpassword").placeholder = "Password required";
-      setValid(false); 
+      check = true
     } else if (cpass != pass) {
       document.getElementById("cpassword").style.borderColor = "crimson";
       document.getElementById("cpassword").style.borderWidth = "2px";
       document.getElementById("error-text-cpass").textContent ="Passwords do not match.";
       document.getElementById("error-text-cpass").style.display = "block";
-      setValid(false); 
+      check = true
     } else {
       document.getElementById("cpassword").style.borderColor = "";
       document.getElementById("cpassword").style.borderWidth = "";
       document.getElementById("error-text-cpass").textContent = "";
       document.getElementById("error-text-cpass").style.display = "";
-      setValid(false); 
     }
   }
-
+  if (!localStorage.getItem("token")){
+    return (
+      <div>
+        <h1> Not Authorized</h1>
+      </div>
+    )
+  }
+  else{
   return (
     <div className="formbg-2">
       <NavbarAdmin />
@@ -282,5 +310,5 @@ function AdminForm() {
     </div>
   );
 }
-
+}
 export default AdminForm;

@@ -65,7 +65,6 @@ const coachSchema = new Schema({
 const adminSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  gender: { type: String, required: true },
   age: { type: Number, required: true },
   password: { type: String, required: true },
   salt: { type: String },

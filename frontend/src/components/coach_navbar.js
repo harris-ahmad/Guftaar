@@ -18,10 +18,7 @@ function NavbarCoach(){
         <nav>
             <ul className='nav-items-list'>
                 <li className='guftaar-logo nav-item'><a onClick={GoBack}>Guftaar</a></li>
-                <li className='nav-item2'> <a className='nav-anchor' href='./meetings'>meetings</a></li>
-                <li className='nav-item3'> <a className='nav-anchor' href='./clients'>clients </a></li>
-                <li className='nav-item4'> <a className='nav-anchor' href='./notes'>notes </a></li>
-                <li className='nav-item5'> <a className='nav-anchor' href='./calendar'>calendar</a></li>
+                <li className='nav-item4'> <a className='nav-anchor' href='/coach/notes'>notes </a></li>
                 <div className='navbar-icons'>    
                <img src={hi} className='navbar-img-home2' onClick={GoBack}/>
                 </div>

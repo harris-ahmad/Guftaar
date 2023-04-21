@@ -52,7 +52,14 @@ function SetBreathingTime() {
 
     }
 
-
+    if (!localStorage.getItem("token")){
+        return (
+          <div>
+            <h1> Not Authorized</h1>
+          </div>
+        )
+      }
+      else{
     return (
         <div className='breathingBackGround'>
              <NavbarClient />
@@ -69,6 +76,7 @@ function SetBreathingTime() {
            </div>
         </div>
     );
+}
 }
 
 export default SetBreathingTime

@@ -86,7 +86,7 @@ function ChangePassword(){
                         console.log(response.data.error);
                     } else {
                         console.log("password changed");
-                        navigate("/client/dashboard");
+                        // navigate("/client/dashboard");
                     }
                 }).catch((err) => {
                     console.log(err);
@@ -95,6 +95,14 @@ function ChangePassword(){
         }
 
     }
+    if (!localStorage.getItem("token")){
+        return (
+          <div>
+            <h1> Not Authorized</h1>
+          </div>
+        )
+      }
+      else{
 
     return (
         <div className="upper"> 
@@ -121,6 +129,7 @@ function ChangePassword(){
             </div>
         </div>
     )
+}
 }
 
 export default ChangePassword; 

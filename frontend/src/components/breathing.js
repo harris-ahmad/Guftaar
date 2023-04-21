@@ -23,16 +23,24 @@ function BreathingExercise(props) {
   const { rounds } = location.state;
 
   const handleTick = async () => {
-    navigate("../");
-    const res = await axios.post("http://localhost:4000/client/setBreathing", {
+    navigate("/client/dailyActivities/");
+    const res = await axios.post("http://localhost:4000/client/updateBreathingExercise", {
       email: localStorage.getItem("email"),
       breathingExercise: true,
     });
     if (res.status === 200) {
-      alert("breathing updated successfully");
     }
+    
   };
 
+  if (!localStorage.getItem("token")){
+    return (
+      <div>
+        <h1> Not Authorized</h1>
+      </div>
+    )
+  }
+  else{
   return (
     <div className="activity-bg">
       <svg>
@@ -83,6 +91,7 @@ function BreathingExercise(props) {
       </div>
     </div>
   );
+}
 }
 
 export default BreathingExercise;

@@ -4,6 +4,7 @@ import rev_img from '../images/review_feedback.svg'
 import axios from 'axios'
 import { Dropdown } from "primereact/dropdown";
 import NavbarClient from './client_navbar';
+import { useNavigate } from "react-router-dom";
 
 
 const CoachFeedback = () => {
@@ -11,6 +12,7 @@ const CoachFeedback = () => {
   const [coachSelected, setCoach] = useState(''); 
   const [coachEmail, setCoachEmail] = useState(''); 
   const [feedback, setFeedback] = useState(''); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async function () {
@@ -40,7 +42,10 @@ const CoachFeedback = () => {
       .post("http://localhost:4000/client/addFeedback", toSend)
       .then((response) => {
         if (response.data.status === "success") {
-          // alert("Success!"); 
+          alert("Your feedback has been shared with our Administration!"); 
+          setTimeout(() => {
+          navigate('/client/viewCoaches')
+        }, 1000);
         } else {
           // alert("Failed"); 
         }

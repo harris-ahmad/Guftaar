@@ -12,9 +12,11 @@ import axios from "axios";
 function Dashboard() {
   const [name, setName] = useState("");
   const [meetingDetails, setMeetingDetails] = useState([]);
-  const [display, setDisplay] = useState(false);
-  // const email = localStorage.getItem("email")
   const navigate = useNavigate()
+  const [shouldUpdate, setShouldUpdate] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  let display = false
 
   useEffect(() => {
     const fetchData = async function () {
@@ -31,17 +33,19 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async function () {
       let toSend = { email: localStorage.getItem("email") };
+      setIsLoading(true);
       let result2 = await axios.post(
         "http://localhost:4000/coach/getMeetings",
         toSend
       );
       if (result2.data.length === 0) {
-        alert("No meetings found.");
+        // alert("No meetings found.");
       } else {
         let meetingDetailsArray = result2.data;
+
         setMeetingDetails(meetingDetailsArray);
-        setDisplay(true);
-      } 
+      }
+      setIsLoading(false);
     };
     fetchData();
   }, []);
@@ -65,27 +69,28 @@ function Dashboard() {
         Upcoming Meetings
        </div>
        <div className='meetingbox1'>
-       {display && meetingDetails.length > 0 ? (
+
+       {Object.keys(meetingDetails).length > 0 ? (
         <div>
-          <h6 className='subtext'>Coaching with {meetingDetails['0'].clientName}</h6>
+          <h6 className='subtext1'>Coaching with {meetingDetails['0'].clientName} on {new Date(meetingDetails['0'].date).toISOString().substring(0, 10)} at {new Date(meetingDetails['0'].date).toISOString().substr(11, 5)} </h6>
         </div>
       ) : (
-        <h6 className='subtext'>No Upcoming Meetings</h6>
+        <h6 className='subtext1'>No Upcoming Meetings</h6>
       )}
         <img src={phonei} alt="PhoneIcon" className='phoneicon1' />
         <p className='meetingstext1'> meetings</p>
        </div>
        <div className='meetingbox2'>
-       {display && meetingDetails.length > 0 ? (
+       {Object.keys(meetingDetails).length > 1 ? (
         <div>
-          <h6 className='subtext'>Coaching with {meetingDetails['1'].clientName}</h6>
+          <h6 className='subtext1'>Coaching with {meetingDetails['1'].clientName} on {new Date(meetingDetails['1'].date).toISOString().substring(0, 10)} at {new Date(meetingDetails['1'].date).toISOString().substr(11, 5)}</h6>
         </div>
       ) : (
-        <h6 className='subtext'>No Upcoming Meetings</h6>
+        <h6 className='subtext1'>No Upcoming Meetings</h6>
       )}
         <img src={phonei} alt="PhoneIcon" className='phoneicon2' />
         <p className='meetingstext2'> meetings</p>
-       
+
        </div>
        <div className='third-heading'>
        Your Clients

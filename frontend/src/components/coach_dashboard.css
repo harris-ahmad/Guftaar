@@ -340,4 +340,19 @@
 
     color: #40868E;
 }
+
+.subtext1{
+    position: relative;
+    left: 20%;
+    bottom: 10px;
+    font-family: 'League Spartan';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+    color: #4C539C;
+    }
   

@@ -21,7 +21,7 @@ function NavbarAdmin(){
                 <li className='nav-item2'> <a className='nav-anchor' href='/admin/addEmployee'>add employees</a></li>
                 <li className='nav-item3'> <a className='nav-anchor' href='/admin/readReviews'>coach profiles</a></li>
                 <div className='navbar-icons'>    
-               <img src={hi} className='navbar-img-home2' onClick={GoBack}/>
+               <img src={hi} className='navbar-img-home3' onClick={GoBack}/>
                 </div>
                 <DropdownNavbar />
                 

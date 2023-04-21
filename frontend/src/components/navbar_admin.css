@@ -9,12 +9,13 @@ nav {
   z-index: 999; /* ensure navbar is on top of other elements */
 }
 
-.navbar-img-home2{
+
+.navbar-img-home3{
   width: 60%;
   height: auto;
-  position: absolute;
-  left: 545px;
-  cursor: pointer;
+  position: relative;
+  left: 240px;
+  top: 10%;
 }
 
 .nav-item2{

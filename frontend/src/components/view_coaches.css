@@ -1,6 +1,6 @@
 .main-container-view-coaches{
     /* border: solid; */
-    height: 320vh;
+    height: 360vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,7 +10,6 @@
     background-position: top left;
     background-repeat:round;
     text-align:center; 
-
     /* padding: 40px;
     padding-bottom: 250px; */
 }
@@ -19,9 +18,6 @@
     color: #4d5399;
     /* border: solid; */
 }
-
-
-
 
 .container-view-coaches{
     /* border: solid; */
@@ -49,7 +45,6 @@
     background: #FFFFFF;
     border-radius: 28.9717px;
     filter: drop-shadow(0px 4px 25px rgba(90, 84, 177, 0.2));
-
     padding: 30px;
     border: solid 2px transparent;
 }
@@ -57,8 +52,6 @@
 .card-container-view-coaches:hover{
     border-color: #4d5399; 
 }
-
-
 .img-container-view-coaches {
     display: flex;
     justify-content: center;
@@ -68,7 +61,6 @@
     width: 40%;
     border-radius: 20px;
 }
-
 .img-view-coaches{
     /* width: 50%;
     height: 30%; */
@@ -76,7 +68,6 @@
     height: auto;
     /* height: auto; */
 }
-
 .content-container-view-coaches{
     width: 70%;
     /* border-radius: 20px; */
@@ -84,7 +75,6 @@
     flex-direction: column;
     /* border: solid; */
 }
-
 .coach-card-name-view-coaches{
     /* border: solid; */
     height: 33%;
@@ -104,7 +94,6 @@
     font-weight: 400;
 }
 
-
 .highlight-div-details{
     height: 33%;
     background-color: #efefef;
@@ -113,7 +102,6 @@
     font-size: 15px;
     padding: 15px;
 }
-
 
 .highlighted-flex-wrapper{
     height: 50%;

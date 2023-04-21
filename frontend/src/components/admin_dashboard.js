@@ -73,7 +73,7 @@ function Dashboard() {
       </div>
       <div className="userbox">
         <h2>{clientCount}</h2>
-        <p>users</p>
+        <p>clients</p>
       </div>
       <div className="empbox">
         <h2>add employee</h2>

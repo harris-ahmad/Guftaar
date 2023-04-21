@@ -70,7 +70,7 @@ function NoteContainer(props) {
   };
 
   const notes = reverArray(props.notes);
-  if (!localStorage.getItem("token")){
+  if (!localStorage.getItem("coachtoken")){
     return (
       <div>
         <h1> Not Authorized</h1>

@@ -3,51 +3,65 @@
 background-color: transparent;
 margin-top: 185px;
 left: 120px;
-width: 600px;
 height: 275px;
-overflow-x: scroll;
+width: 600px; 
+  overflow-x: auto; 
+  white-space: nowrap; 
+display: flex; 
+justify-content: space-between;
+white-space: nowrap; /* prevent client boxes from wrapping */
 }
 
-.clientbox1{
-    position: absolute;
-    width: 265px;
-    height: 255px;
+.clientbox{
+    position: relative; 
+    display: inline-block;
+    min-width: 250px;
+    /* width: 200px;  */
+    margin-right: 20px; 
+    height: 250px;
 
     background: #CBEFEE;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.circularbox1{
-    position: absolute;
+.circularbox{
     width: 149px;
     height: 149px;
-    left: 55px;
-    top: 45px;
+    /* left: 55px;
+    top: 45px; */
     border-radius: 50%;
     background: rgba(70, 159, 163, 0.37);
+    display:block;
+    justify-content: center;
+    margin-top: 25px; 
 }
-.proficon1{
+.proficon{
     left: 60px;
     margin-top: 20px;
     width: 100px;
     height: 100px;
 }
-.clienttext1{
-    position: absolute;
+.clienttext{
+    /* position: absolute;
     left: 10.42%;
     right: 72.91%;
     top: 100.67%;
-    bottom: 11.04%;
+    bottom: 11.04%; */
 
     font-family: 'League Spartan';
     font-style: normal;
     font-weight: 600;
     font-size: 24.4248px;
     line-height: 22px;
-    display: flex;
+    display: block;
     align-items: center;
     text-align: center;
     letter-spacing: 0.03em;
     white-space: nowrap;
+    margin-top: 15px; 
 
     color: #469FA3;
 

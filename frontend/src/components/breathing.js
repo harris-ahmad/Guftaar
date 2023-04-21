@@ -23,7 +23,7 @@ function BreathingExercise(props) {
   const { rounds } = location.state;
 
   const handleTick = async () => {
-    navigate("/client/dailyActivities/");
+    navigate("../");
     const res = await axios.post("http://localhost:4000/client/updateBreathingExercise", {
       email: localStorage.getItem("email"),
       breathingExercise: true,

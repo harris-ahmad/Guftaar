@@ -156,15 +156,16 @@ router.post("/getStreak", async (req, res) => {
     .select("streakLastUpdated streakCount")
     .exec()
     .then(async (response) => {
-      console.log(response.streakLastUpdated);
-      console.log(response.streakCount);
+      // console.log(response.streakLastUpdated);
+      // console.log(response.streakCount);
       let lastUpdated = response.streakLastUpdated;
-      console.log(lastUpdated);
+      // console.log(lastUpdated);
       const now = new Date();
-      console.log(now.getTime());
-      console.log(lastUpdated.getTime());
+      // console.log(now.getTime());
+      // console.log(lastUpdated.getTime());
       const timeDiff = Math.abs(now.getTime() - lastUpdated.getTime());
       const diffHours = Math.ceil(timeDiff / (1000 * 60 * 60));
+      console.log("Streak on render:", response.streakCount)
       if (diffHours > 24) {
         user.streakCount = 0;
         user.activityStatus.linkLater = false;
@@ -222,22 +223,7 @@ router.post("/updateLinkLater", async (req, res) => {
   const user = await Client.Client.findOne({ email: email });
   user.activityStatus.linkLater = true;
   await user.save();
-
-  if (
-    user.activityStatus.linkLater &&
-    user.activityStatus.syllableCounting &&
-    user.activityStatus.breathingExercise
-  ) {
-    user.streakCount += 1;
-    await user.save();
-  }
-});
-
-router.post("/updateSyllableCounting", async (req, res) => {
-  const { email, syllableCounting } = req.body;
-  const user = await Client.Client.findOne({ email: email });
-  user.activityStatus.syllableCounting = true;
-  await user.save();
+  console.log("THIS LINK",user)
 
   if (
     user.activityStatus.linkLater &&
@@ -247,6 +233,28 @@ router.post("/updateSyllableCounting", async (req, res) => {
     user.streakCount += 1;
     const now = new Date();
     user.lastUpdated = now.getTime();
+    console.log("incrementing streak")
+    await user.save();
+  }
+});
+
+router.post("/updateSyllableCounting", async (req, res) => {
+  console.log("Got req")
+  const { email, syllableCounting } = req.body;
+  const user = await Client.Client.findOne({ email: email });
+  user.activityStatus.syllableCounting = true;
+  await user.save();
+  console.log("THIS",user)
+
+  if (
+    user.activityStatus.linkLater &&
+    user.activityStatus.syllableCounting &&
+    user.activityStatus.breathingExercise
+  ) {
+    user.streakCount += 1;
+    const now = new Date();
+    user.lastUpdated = now.getTime();
+    console.log("incrementing streak")
     await user.save();
   }
 });
@@ -257,35 +265,39 @@ router.post("/updateBreathingExercise", async (req, res) => {
   user.activityStatus.breathingExercise = true;
   await user.save();
 
+
   if (
     user.activityStatus.linkLater &&
     user.activityStatus.syllableCounting &&
     user.activityStatus.breathingExercise
   ) {
     user.streakCount += 1;
+    const now = new Date();
+    user.lastUpdated = now.getTime();
+    console.log("incrementing streak")
     await user.save();
   }
 });
 
 router.post("/addFeedback", (req, res) => {
   const { email, feedback } = req.body;
-  console.log("Received from client:", email, feedback);
+  // console.log("Received from client:", email, feedback);
   const newFeedback = new Feedback.Feedback({
     coachEmail: email,
     feedback: feedback,
   });
 
-  console.log(newFeedback);
+  // console.log(newFeedback);
 
   newFeedback
     .save()
     .then((response) => {
-      console.log("Succefully saved to db");
+      // console.log("Succefully saved to db");
       res.send({ status: "success", message: "response saved" });
       // next(response);
     })
     .catch((err) => {
-      console.log("Error in saving in db");
+      // console.log("Error in saving in db");
       res.send({ status: "error" });
       // console.log("in error")
     });

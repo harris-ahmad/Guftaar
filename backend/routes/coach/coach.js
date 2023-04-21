@@ -95,44 +95,6 @@ router.post("/getName", (req, res) =>  {
     });
 });
 
-// router.post("/getMeetings", (req, res) =>  {
-//   const now = new Date();
-//   const { email } = req.body;
-
-//   Meetings.Meetings.find({ coachEmail: email })
-//     .select("clientEmail meetingDate ")
-//     .exec()
-//     .then((emailResponse) => {
-//       let futureMeetings = new Array()
-
-//       emailResponse.map((elem) => {
-//         if (elem.meetingDate.getTime() > now.getTime()){
-//           futureMeetings.push(elem)
-//         }
-//       })
-//       let toSend = new Map()
-
-//       futureMeetings.map((elem, index) => {
-//         let date = elem.meetingDate;
-//         let email = elem.clientEmail
-//         console.log(date, email)
-//         Client.Client.findOne({ email: email })
-//             .select("firstName")
-//             .exec()
-//             .then((response) => {
-//               toSend.set(index, {date: date, clientName: response.firstName})
-//               console.log(toSend)
-//             })
-//             .catch((err) => {
-//               console.log("error")
-//             });
-//       })
-//       res.send(toSend)
-//     })
-//     .catch((err) => {
-//       res.send({ error: err });
-//     });
-// });
 
 router.post("/getMeetings", (req, res) =>  {
   const now = new Date();
@@ -179,5 +141,47 @@ router.post("/getMeetings", (req, res) =>  {
     });
 });
 
+router.post("/getClients", (req, res) =>  {
+  const { email } = req.body;
+
+  Meetings.Meetings.find({ coachEmail: email })
+    .select("clientEmail")
+    .exec()
+    .then((emailResponse) => {
+      let clientEmails = new Array()
+
+      emailResponse.map((elem) => {
+        if(clientEmails.includes(elem)){
+        }else{
+          clientEmails.push(elem)
+        }
+      })
+      let toSend = {}
+      console.log(clientEmails)
+
+      Promise.all(clientEmails.map((elem, index) => {
+        let email = elem.clientEmail
+        return Client.Client.findOne({ email: email })
+            .select("firstName lastName")
+            .exec()
+            .then((response) => {
+              toSend[index] = {clientName: response.firstName + " " + response.lastName}
+              console.log(toSend)
+            })
+            .catch((err) => {
+              console.log("error")
+            });
+      }))
+      .then(() => {
+        res.send(toSend);
+      })
+      .catch((err) => {
+        res.send({ error: err });
+      });
+    })
+    .catch((err) => {
+      res.send({ error: err });
+    });
+});
 
 module.exports = router;

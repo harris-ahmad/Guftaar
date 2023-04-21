@@ -63,7 +63,7 @@ function Note(props) {
     debounce(() => props.updateText(text, id));
   };
 
-  if (!localStorage.getItem("token")){
+  if (!localStorage.getItem("coachtoken")){
     return (
       <div>
         <h1> Not Authorized</h1>

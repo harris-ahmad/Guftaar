@@ -68,7 +68,7 @@ function AdminLogin(props){
                     setMessage("Invalid Credentials");
                    
                   } else {
-                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("Admintoken", res.data.token);
                     localStorage.setItem("id", res.data.id);
                     localStorage.setItem("email", res.data.email);
                     window.location = "/admin/dashboard";

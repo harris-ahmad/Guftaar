@@ -248,7 +248,7 @@ function CoachForm() {
     }
     // alert("cpass validated"); 
   }
-  if (!localStorage.getItem("token")){
+  if (!localStorage.getItem("Admintoken")){
     return (
       <div>
         <h1> Not Authorized</h1>

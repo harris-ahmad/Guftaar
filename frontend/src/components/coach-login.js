@@ -68,7 +68,7 @@ function CoachLogin(props) {
               setType("error");
               setMessage("Invalid Credentials");
             } else {
-              localStorage.setItem("token", res.data.token);
+              localStorage.setItem("coachtoken", res.data.token);
               localStorage.setItem("id", res.data.id);
               localStorage.setItem("email", res.data.email);
              navigate("/coach/dashboard")

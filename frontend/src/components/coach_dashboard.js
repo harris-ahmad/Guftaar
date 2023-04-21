@@ -50,7 +50,7 @@ function Dashboard() {
     fetchData();
   }, []);
 
-  if (!localStorage.getItem("token")){
+  if (!localStorage.getItem("coachtoken")){
     return (
       <div>
         <h1> Not Authorized</h1>
@@ -68,30 +68,23 @@ function Dashboard() {
        <div className='second-heading'>
         Upcoming Meetings
        </div>
-       <div className='meetingbox1'>
+       <div className='meeting-container'>
 
-       {Object.keys(meetingDetails).length > 0 ? (
-        <div>
-          <h6 className='subtext1'>Coaching with {meetingDetails['0'].clientName} on {new Date(meetingDetails['0'].date).toISOString().substring(0, 10)} at {new Date(meetingDetails['0'].date).toISOString().substr(11, 5)} </h6>
-        </div>
-      ) : (
-        <h6 className='subtext1'>No Upcoming Meetings</h6>
-      )}
-        <img src={phonei} alt="PhoneIcon" className='phoneicon1' />
-        <p className='meetingstext1'> meetings</p>
-       </div>
-       <div className='meetingbox2'>
-       {Object.keys(meetingDetails).length > 1 ? (
-        <div>
-          <h6 className='subtext1'>Coaching with {meetingDetails['1'].clientName} on {new Date(meetingDetails['1'].date).toISOString().substring(0, 10)} at {new Date(meetingDetails['1'].date).toISOString().substr(11, 5)}</h6>
-        </div>
-      ) : (
-        <h6 className='subtext1'>No Upcoming Meetings</h6>
-      )}
-        <img src={phonei} alt="PhoneIcon" className='phoneicon2' />
-        <p className='meetingstext2'> meetings</p>
-
-       </div>
+  {Object.keys(meetingDetails).length > 0 ? (
+    Object.keys(meetingDetails).map((key, index) => (
+      <div key={index} className='meeting-box'>
+        <h6 className='subtext1'>Coaching with {meetingDetails[key].clientName} on {new Date(meetingDetails[key].date).toISOString().substring(0, 10)} at {new Date(meetingDetails[key].date).toISOString().substr(11, 5)} </h6>
+        <img src={phonei} alt={`PhoneIcon-${index}`} className={`phoneicon1`} />
+      </div>
+    ))
+  ) : (
+    <div className='meeting-box'>
+        <h6 className='subtext3'> No upcoming meetings</h6>
+      </div>
+  )}
+  
+</div>
+    
        <div className='third-heading'>
        Your Clients
        <button type="button" className='infoicon'>

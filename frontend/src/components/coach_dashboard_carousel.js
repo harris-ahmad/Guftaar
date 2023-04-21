@@ -1,27 +1,29 @@
 import './coach_dashboard_carousel.css'
 import proficon from "../images/proficon.png"
+import CoachCard from './coachcard';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function CoachCarousel (){
+    const [clientsN, setClients] = useState([]);
+
+    useEffect(() => {
+            const fetchInfo = async function () {
+              const clients = await axios.post(
+                "http://localhost:4000/coach/getClients", {email: localStorage.getItem("email")}
+              );
+
+              const set = (Object.values(clients.data))
+              const newArr = Array.from(set);
+              setClients(newArr)
+            };
+            fetchInfo();
+          }, []);
     return (
     <div class="container">
-        <div className='clientbox1'>
-        <div className='circularbox1'>
-        <img src={proficon} alt="ProfIcon" className='proficon1' />
-        <h3 className='clienttext1'> Ali Rehman</h3>
-        </div>
-        <div className='clientbox2'>
-        <div className='circularbox1'>
-        <img src={proficon} alt="ProfIcon" className='proficon1' />
-        <h3 className='clienttext1'> Emaan Atique</h3>
-        </div>
-        <div className='clientbox3'>
-        <div className='circularbox1'>
-        <img src={proficon} alt="ProfIcon" className='proficon1' />
-        <h3 className='clienttext1'> Salman Rehman</h3>
-        </div> 
-        </div> 
-        </div>
-    </div>
+    {Object.keys(clientsN).length > 0 ? Object.keys(clientsN).map((key, index) => (
+        <CoachCard client={clientsN[key].clientName} />
+    )) : <div></div>}
     </div>
         
     );

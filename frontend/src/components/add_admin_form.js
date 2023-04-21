@@ -184,7 +184,7 @@ function AdminForm() {
       document.getElementById("error-text-cpass").style.display = "";
     }
   }
-  if (!localStorage.getItem("token")){
+  if (!localStorage.getItem("Admintoken")){
     return (
       <div>
         <h1> Not Authorized</h1>

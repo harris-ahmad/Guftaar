@@ -5,7 +5,7 @@ import coach from "../images/coachadd.png";
 import NavbarAdmin from "./navbar_admin";
 
 function add_employee() {
-  if (!localStorage.getItem("token")){
+  if (!localStorage.getItem("Admintoken")){
     return (
       <div>
         <h1> Not Authorized</h1>

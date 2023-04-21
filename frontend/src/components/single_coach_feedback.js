@@ -26,7 +26,7 @@ const SingleCoachFeedback = () => {
 
   console.log(coachData);
   console.log(all_reviews); 
-  if (!localStorage.getItem("token")){
+  if (!localStorage.getItem("Admintoken")){
     return (
       <div>
         <h1> Not Authorized</h1>

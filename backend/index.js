@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const path = require("path");
 require("dotenv").config();
 
 const clientRouter = require("./routes/client/client");
@@ -12,7 +13,7 @@ const adminRouter = require("./routes/admin/admin");
 const app = express();
 const port = process.env.PORT || 5003;
 
-app/get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200);
 })
 
@@ -31,13 +32,12 @@ app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
-
-const uri = "mongodb+srv://harrisahmad55:ladBob12@cluster0.4d91bik.mongodb.net/guftaar";
-mongoose.connect(uri, { useNewUrlParser: true });
-const connection = mongoose.connection;
-connection.once("open", () => {
-  console.log("Database connection established");
-});
+// const uri = process.env.DB;
+// mongoose.connect(uri, { useNewUrlParser: true });
+// const connection = mongoose.connection;
+// connection.once("open", () => {
+//   console.log("Database connection established");
+// });
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

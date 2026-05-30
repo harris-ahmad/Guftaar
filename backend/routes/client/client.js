@@ -109,7 +109,7 @@ router.post("/changePassword", (req, res) => {
   const id = req.body.id;
   const salted = req.body.salted;
   Client.Client.updateOne(
-    { _id: id },
+    { _id: { $eq: id } },
     { $set: { password: pass, salt: salted } }
   )
     .exec()
